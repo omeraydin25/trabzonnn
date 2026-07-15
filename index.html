@@ -3,16 +3,16 @@
 <head>
  <meta charset="UTF-8">
  <meta name="viewport" content="width=device-width, initial-scale=1.0">
- <title>Trabzon İş İlanları - Profesyonel Haber Portalı</title>
+ <title>Trabzon İş İlanları - Canlı Haber & AI</title>
  <style>
  :root {
- --primary-blue: #003366; /* Kurumsal Koyu Mavi */
- --secondary-blue: #00509e; /* Daha Açık Mavi */
- --accent-blue: #e6f0fa; /* Çok Açık Mavi Arka Plan */
+ --primary-blue: #003366;
+ --secondary-blue: #00509e;
+ --accent-blue: #e6f0fa;
  --text-dark: #2c3e50;
- --text-light: #ffffff;
  --white: #ffffff;
  --border-color: #dbe4ef;
+ --chat-bg: #f4f7f6;
  }
 
  * {
@@ -26,21 +26,21 @@
  background-color: var(--accent-blue);
  color: var(--text-dark);
  line-height: 1.6;
+ padding-bottom: 80px; /* Footer payı */
  }
 
- /* Üst Başlık Alanı */
+ /* Üst Header */
  header {
  background-color: var(--primary-blue);
- color: var(--text-light);
+ color: var(--white);
  padding: 0;
  position: sticky;
  top: 0;
  z-index: 1000;
  box-shadow: 0 4px 12px rgba(0,0,0,0.15);
- display: flex;
- justify-content: space-between;
- align-items: center;
  height: 70px;
+ display: flex;
+ align-items: center;
  }
 
  .header-content {
@@ -58,11 +58,11 @@
  font-weight: 700;
  text-transform: uppercase;
  letter-spacing: 0.5px;
- color: var(--text-light);
+ color: var(--white);
  text-decoration: none;
  }
 
- /* Navigasyon Menüsü */
+ /* Navigasyon */
  nav ul {
  display: flex;
  list-style: none;
@@ -77,6 +77,7 @@
  padding: 8px 12px;
  border-radius: 4px;
  transition: all 0.3s ease;
+ cursor: pointer;
  }
 
  nav ul li a:hover {
@@ -97,7 +98,6 @@
  100% { box-shadow: 0 0 0 0 rgba(211, 47, 47, 0); }
  }
 
- /* Mobil Menü */
  .menu-toggle {
  display: none;
  flex-direction: column;
@@ -120,7 +120,6 @@
  padding: 0 20px;
  }
 
- /* Bölüm Başlıkları */
  .section-title {
  font-size: 1.6rem;
  color: var(--primary-blue);
@@ -137,7 +136,6 @@
  margin-top: 0;
  }
 
- /* Haber Izgarası */
  .news-grid {
  display: grid;
  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
@@ -217,6 +215,7 @@
  text-align: center;
  transition: background 0.3s;
  align-self: flex-start;
+ cursor: pointer;
  }
 
  .read-more-btn:hover {
@@ -241,6 +240,153 @@
  footer span {
  color: var(--text-light);
  font-weight: bold;
+ }
+
+ /* YÜZEN BUTONLAR (İletişim & AI) */
+ .floating-buttons {
+ position: fixed;
+ bottom: 20px;
+ right: 20px;
+ display: flex;
+ flex-direction: column;
+ gap: 15px;
+ z-index: 2000;
+ }
+
+ .float-btn {
+ width: 60px;
+ height: 60px;
+ border-radius: 50%;
+ display: flex;
+ justify-content: center;
+ align-items: center;
+ color: white;
+ font-size: 24px;
+ text-decoration: none;
+ box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+ transition: transform 0.3s;
+ cursor: pointer;
+ border: none;
+ }
+
+ .float-btn:hover {
+ transform: scale(1.1);
+ }
+
+ .btn-instagram {
+ background-color: #E1306C; /* Instagram Rengi */
+ }
+
+ .btn-ai {
+ background-color: var(--primary-blue);
+ position: relative;
+ }
+
+ .btn-ai::after {
+ content: '';
+ position: absolute;
+ top: -5px;
+ right: -5px;
+ width: 15px;
+ height: 15px;
+ background-color: #4CAF50;
+ border-radius: 50%;
+ border: 2px solid white;
+ animation: pulse-green 2s infinite;
+ }
+
+ @keyframes pulse-green {
+ 0% { box-shadow: 0 0 0 0 rgba(76, 175, 80, 0.7); }
+ 70% { box-shadow: 0 0 0 10px rgba(76, 175, 80, 0); }
+ 100% { box-shadow: 0 0 0 0 rgba(76, 175, 80, 0); }
+ }
+
+ /* Sohbet Penceresi */
+ .chat-window {
+ position: fixed;
+ bottom: 90px;
+ right: 20px;
+ width: 350px;
+ height: 500px;
+ background: white;
+ border-radius: 12px;
+ box-shadow: 0 5px 25px rgba(0,0,0,0.2);
+ display: none;
+ flex-direction: column;
+ overflow: hidden;
+ z-index: 2001;
+ border: 1px solid #ddd;
+ }
+
+ .chat-header {
+ background: var(--primary-blue);
+ color: white;
+ padding: 15px;
+ display: flex;
+ justify-content: space-between;
+ align-items: center;
+ font-weight: bold;
+ }
+
+ .chat-body {
+ flex-grow: 1;
+ padding: 15px;
+ overflow-y: auto;
+ background: var(--chat-bg);
+ display: flex;
+ flex-direction: column;
+ gap: 10px;
+ }
+
+ .message {
+ max-width: 80%;
+ padding: 10px 15px;
+ border-radius: 15px;
+ font-size: 0.9rem;
+ line-height: 1.4;
+ }
+
+ .message.ai {
+ background: white;
+ align-self: flex-start;
+ border-bottom-left-radius: 2px;
+ box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+ }
+
+ .message.user {
+ background: var(--secondary-blue);
+ color: white;
+ align-self: flex-end;
+ border-bottom-right-radius: 2px;
+ }
+
+ .chat-input-area {
+ padding: 10px;
+ background: white;
+ border-top: 1px solid #eee;
+ display: flex;
+ gap: 10px;
+ }
+
+ .chat-input-area input {
+ flex-grow: 1;
+ padding: 10px;
+ border: 1px solid #ddd;
+ border-radius: 20px;
+ outline: none;
+ }
+
+ .chat-input-area button {
+ background: var(--primary-blue);
+ color: white;
+ border: none;
+ width: 40px;
+ height: 40px;
+ border-radius: 50%;
+ cursor: pointer;
+ display: flex;
+ align-items: center;
+ justify-content: center;
  }
 
  /* Mobil Uyumluluk */
@@ -277,6 +423,14 @@
  .news-grid {
  grid-template-columns: 1fr;
  }
+ 
+ .chat-window {
+ width: calc(100% - 40px);
+ right: 20px;
+ left: 20px;
+ bottom: 90px;
+ height: 60vh;
+ }
  }
  </style>
 </head>
@@ -285,7 +439,7 @@
  <!-- Üst Header -->
  <header>
  <div class="header-content">
- <a href="#" class="logo">Trabzon İş İlanları</a>
+ <a href="#" class="logo" onclick="location.reload()">Trabzon İş İlanları</a>
  
  <div class="menu-toggle" onclick="toggleMenu()">
  <span></span>
@@ -295,20 +449,19 @@
 
  <nav>
  <ul id="main-menu">
- <li><a href="#home">🏠 Ana Sayfa</a></li>
- <li><a href="#news">📰 Son Haberler</a></li>
- <li><a href="#breaking" class="breaking">🔥 Son Dakika</a></li>
- <li><a href="#search">🔍 Arama</a></li>
- <li><a href="https://www.instagram.com/trabzon_is_ilani" target="_blank">📞 İletişim</a></li>
+ <li><a href="#home" onclick="scrollToSection('home')">🏠 Ana Sayfa</a></li>
+ <li><a href="#news" onclick="scrollToSection('news')">📰 Son Haberler</a></li>
+ <li><a href="#breaking" class="breaking" onclick="scrollToSection('breaking')">🔥 Son Dakika</a></li>
+ <li><a href="#search" onclick="scrollToSection('search')">🔍 Arama</a></li>
  </ul>
  </nav>
  </div>
  </header>
 
- <div class="container">
+ <div class="container" id="home">
  
  <!-- Son Dakika Bölümü -->
- <h2 class="section-title">⚡ Son Dakika & Türkiye Geneli</h2>
+ <h2 class="section-title" id="breaking">⚡ Son Dakika & Türkiye Geneli</h2>
  <div class="news-grid">
  <!-- Haber 1 -->
  <article class="news-card">
@@ -319,7 +472,7 @@
  <div class="card-body">
  <h3 class="card-title">Büyük Şirketlerde Yeni İş İlanları Açıklandı</h3>
  <p class="card-text">Trabzon merkezli büyük ölçekli firmalarda mühendislik ve satış pozisyonları için başvurular bugün itibarıyla başladı.</p>
- <a href="#haber-detay-1" class="read-more-btn">Haberi Oku →</a>
+ <a href="#" class="read-more-btn" onclick="openNews('Büyük Şirketlerde Yeni İş İlanları', 'Trabzon merkezli büyük ölçekli firmalarda mühendislik ve satış pozisyonları için başvurular bugün itibarıyla başladı. Detaylı mülakat süreçleri ve başvuru linkleri sitemizin ilgili sayfasında.').return false;">Haberi Oku →</a>
  </div>
  </article>
 
@@ -332,7 +485,7 @@
  <div class="card-body">
  <h3 class="card-title">Ekonomide Yeni Dönem Başlıyor</h3>
  <p class="card-text">Merkez Bankası'nın yeni kararları sonrası piyasalarda beklenen hareketlilik başladı. Detaylar haberimizde.</p>
- <a href="#haber-detay-2" class="read-more-btn">Haberi Oku →</a>
+ <a href="#" class="read-more-btn" onclick="openNews('Ekonomide Yeni Dönem Başlıyor', 'Merkez Bankası'nın yeni kararları sonrası piyasalarda beklenen hareketlilik başladı. Uzmanlar enflasyon ve faiz oranları üzerine değerlendirmelerde bulundu.').return false;">Haberi Oku →</a>
  </div>
  </article>
 
@@ -345,19 +498,19 @@
  <div class="card-body">
  <h3 class="card-title">Ulaşım Tarifelerinde Büyük Değişiklik</h3>
  <p class="card-text">Büyükşehir belediyesi yaz dönemi sefer saatlerini güncelledi. Yeni tarifeye göre yolculuk süreleri değişecek.</p>
- <a href="#haber-detay-3" class="read-more-btn">Haberi Oku →</a>
+ <a href="#" class="read-more-btn" onclick="openNews('Ulaşım Tarifelerinde Büyük Değişiklik', 'Büyükşehir belediyesi yaz dönemi sefer saatlerini güncelledi. Yeni tarifeye göre yolculuk süreleri değişecek ve bazı duraklar kaldırılacak.').return false;">Haberi Oku →</a>
  </div>
  </article>
  </div>
 
  <!-- Spor Bölümü -->
- <h2 class="section-title">⚽ Spor</h2>
+ <h2 class="section-title" id="news">⚽ Spor</h2>
  <div class="news-grid">
  <article class="news-card">
  <div class="card-body">
  <h3 class="card-title">Trabzonspor'un Maç Analizi Yayında</h3>
  <p class="card-text">Haftanın en kritik maçının taktiksel analizi, oyuncu istatistikleri ve uzman yorumları sitemizde.</p>
- <a href="#spor-detay-1" class="read-more-btn">Haberi Oku →</a>
+ <a href="#" class="read-more-btn" onclick="openNews('Trabzonspor Maç Analizi', 'Haftanın en kritik maçının taktiksel analizi, oyuncu istatistikleri ve uzman yorumları yayında. Maç öncesi basın toplantısı detayları da eklendi.').return false;">Haberi Oku →</a>
  </div>
  </article>
  </div>
@@ -369,7 +522,7 @@
  <div class="card-body">
  <h3 class="card-title">Yapay Zeka Devrimi İş Dünyasını Etkiliyor</h3>
  <p class="card-text">Yeni nesil AI araçları ile iş süreçleri nasıl hızlanıyor? Uzmanlar detayları paylaşıyor.</p>
- <a href="#teknoloji-detay-1" class="read-more-btn">Haberi Oku →</a>
+ <a href="#" class="read-more-btn" onclick="openNews('Yapay Zeka Devrimi', 'Yeni nesil AI araçları ile iş süreçleri nasıl hızlanıyor? Uzmanlar detayları paylaşıyor ve gelecek projeksiyonlarını yapıyor.').return false;">Haberi Oku →</a>
  </div>
  </article>
  </div>
@@ -381,7 +534,7 @@
  <div class="card-body">
  <h3 class="card-title">Üniversite Yerleştirme Sonuçları Açıklandı</h3>
  <p class="card-text">2026 yılı YKS yerleştirme sonuçları yayımlandı. Puan tabanları ve tercih sonuçlarını inceleyin.</p>
- <a href="#egitim-detay-1" class="read-more-btn">Haberi Oku →</a>
+ <a href="#" class="read-more-btn" onclick="openNews('Üniversite Yerleştirme Sonuçları', '2026 yılı YKS yerleştirme sonuçları yayımlandı. Puan tabanları ve tercih sonuçlarını inceleyebilirsiniz.').return false;">Haberi Oku →</a>
  </div>
  </article>
  </div>
@@ -393,7 +546,7 @@
  <div class="card-body">
  <h3 class="card-title">Yaz Hastalıklarından Korunma Rehberi</h3>
  <p class="card-text">Sıcak hava dalgalarıyla birlikte artan hastalıklara karşı alınması gereken önlemler ve beslenme önerileri.</p>
- <a href="#saglik-detay-1" class="read-more-btn">Haberi Oku →</a>
+ <a href="#" class="read-more-btn" onclick="openNews('Yaz Hastalıkları Rehberi', 'Sıcak hava dalgalarıyla birlikte artan hastalıklara karşı alınması gereken önlemler ve beslenme önerileri uzman görüşleriyle hazırlandı.').return false;">Haberi Oku →</a>
  </div>
  </article>
  </div>
@@ -406,10 +559,115 @@
  <p>Site tasarımı ve altyapısı <span>Shopnex</span> tarafından geliştirilmiştir.</p>
  </footer>
 
+ <!-- Yüzen Butonlar -->
+ <div class="floating-buttons">
+ <!-- İletişim (Instagram) -->
+ <a href="https://www.instagram.com/trabzon_is_ilani" target="_blank" class="float-btn btn-instagram" title="Instagram'da Bize Ulaşın">
+ 📞
+ </a>
+ <!-- Yapay Zeka Sohbeti -->
+ <button class="float-btn btn-ai" onclick="toggleChat()" title="Yandex AI ile Sohbet Et">
+ 💬
+ </button>
+ </div>
+
+ <!-- Sohbet Penceresi -->
+ <div class="chat-window" id="chatWindow">
+ <div class="chat-header">
+ <span>Yandex AI Asistan</span>
+ <span style="cursor:pointer;" onclick="toggleChat()">✕</span>
+ </div>
+ <div class="chat-body" id="chatBody">
+ <div class="message ai">
+ Merhaba! Ben Yandex AI. Trabzon iş ilanları veya Türkiye geneli haberler hakkında sorularını sorabilirsin. Nasıl yardımcı olabilirim?
+ </div>
+ </div>
+ <div class="chat-input-area">
+ <input type="text" id="userInput" placeholder="Mesajınızı yazın..." onkeypress="handleKeyPress(event)">
+ <button onclick="sendMessage()">➤</button>
+ </div>
+ </div>
+
  <script>
+ // Menü Aç/Kapa
  function toggleMenu() {
  const menu = document.getElementById('main-menu');
  menu.classList.toggle('active');
+ }
+
+ // Sayfa Kaydırma
+ function scrollToSection(id) {
+ const element = document.getElementById(id);
+ if(element) {
+ element.scrollIntoView({ behavior: 'smooth' });
+ }
+ if(window.innerWidth <= 768) {
+ document.getElementById('main-menu').classList.remove('active');
+ }
+ }
+
+ // Haber Detay Simülasyonu
+ function openNews(title, content) {
+ alert("Haber Detayı:\n\nBaşlık: " + title + "\n\nİçerik: " + content + "\n\n(Gerçek bir sitede bu yeni bir sayfaya yönlendirir.)");
+ }
+
+ // Sohbet Penceresi Aç/Kapa
+ function toggleChat() {
+ const chatWindow = document.getElementById('chatWindow');
+ if (chatWindow.style.display === 'flex') {
+ chatWindow.style.display = 'none';
+ } else {
+ chatWindow.style.display = 'flex';
+ document.getElementById('userInput').focus();
+ }
+ }
+
+ // Mesaj Gönderme (Simülasyon)
+ function sendMessage() {
+ const input = document.getElementById('userInput');
+ const message = input.value.trim();
+ const chatBody = document.getElementById('chatBody');
+
+ if (message === "") return;
+
+ // Kullanıcı mesajını ekle
+ const userMsg = document.createElement('div');
+ userMsg.className = 'message user';
+ userMsg.textContent = message;
+ chatBody.appendChild(userMsg);
+
+ input.value = "";
+ chatBody.scrollTop = chatBody.scrollHeight;
+
+ // Yapay zeka yanıtı simülasyonu (Gecikmeli)
+ setTimeout(() => {
+ let aiResponse = "";
+ const lowerMsg = message.toLowerCase();
+
+ if (lowerMsg.includes("merhaba") || lowerMsg.includes("selam")) {
+ aiResponse = "Merhaba! Bugün nasıl yardımcı olabilirim? İş ilanları mı arıyorsun yoksa son dakika haberleri mi?";
+ } else if (lowerMsg.includes("iş") || lowerMsg.includes("ilan")) {
+ aiResponse = "Trabzon ve Türkiye genelindeki güncel iş ilanlarını senin için listeleyebilirim. Hangi sektörde arama yapıyorsun?";
+ } else if (lowerMsg.includes("haber") || lowerMsg.includes("son dakika")) {
+ aiResponse = "Son dakika haberlerini aşağıda görebilirsin. Özellikle hangi konuda bilgi almak istersin?";
+ } else if (lowerMsg.includes("shopnex")) {
+ aiResponse = "Shopnex, bu web sitesinin tasarımını ve altyapısını sağlayan profesyonel bir ajanstır.";
+ } else {
+ aiResponse = "Bu konuda sana şu an daha fazla detay verebilmem için biraz daha bilgiye ihtiyacım var. Sorunu biraz daha açıklayabilir misin?";
+ }
+
+ const aiMsg = document.createElement('div');
+ aiMsg.className = 'message ai';
+ aiMsg.textContent = aiResponse;
+ chatBody.appendChild(aiMsg);
+ chatBody.scrollTop = chatBody.scrollHeight;
+ }, 1000);
+ }
+
+ function handleKeyPress(e) {
+ if (e.key === 'Enter') {
+ sendMessage();
+ }
  }
  </script>
 </body>

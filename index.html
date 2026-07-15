@@ -3,7 +3,7 @@
 <head>
  <meta charset="UTF-8">
  <meta name="viewport" content="width=device-width, initial-scale=1.0">
- <title>Trabzon İş İlanları | Profesyonel Haber Portalı</title>
+ <title>Trabzon İş İlanları | Canlı Haber & Shopnex AI</title>
  <style>
  :root {
  --primary-blue: #003366;
@@ -21,721 +21,141 @@
  --shadow-hover: 0 10px 30px rgba(0, 68, 204, 0.15);
  }
 
- * {
- margin: 0;
- padding: 0;
- box-sizing: border-box;
- font-family: 'Segoe UI', 'Roboto', Helvetica, Arial, sans-serif;
- }
-
- body {
- background-color: var(--accent-bg);
- color: var(--text-dark);
- line-height: 1.6;
- padding-bottom: 120px;
- }
+ * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', 'Roboto', Helvetica, Arial, sans-serif; }
+ body { background-color: var(--accent-bg); color: var(--text-dark); line-height: 1.6; padding-bottom: 120px; }
 
  /* Header */
  header {
  background: linear-gradient(135deg, var(--primary-blue), var(--secondary-blue));
  color: var(--white);
- padding: 0;
- position: sticky;
- top: 0;
- z-index: 1000;
+ position: sticky; top: 0; z-index: 1000;
  box-shadow: 0 4px 15px rgba(0,0,0,0.2);
- height: 80px;
- display: flex;
- align-items: center;
+ height: 80px; display: flex; align-items: center;
  }
+ .header-content { max-width: 1200px; width: 100%; margin: 0 auto; padding: 0 20px; display: flex; justify-content: space-between; align-items: center; }
+ .logo { font-size: 1.8rem; font-weight: 800; text-transform: uppercase; letter-spacing: 1px; color: var(--white); text-decoration: none; display: flex; align-items: center; gap: 10px; }
+ .logo span { color: #ffd700; }
+ nav ul { display: flex; list-style: none; gap: 25px; }
+ nav ul li a { color: rgba(255,255,255,0.9); text-decoration: none; font-size: 1rem; font-weight: 600; padding: 8px 16px; border-radius: 20px; transition: all 0.3s; cursor: pointer; }
+ nav ul li a:hover, nav ul li a.active { background-color: rgba(255,255,255,0.2); transform: translateY(-2px); }
+ .menu-toggle { display: none; flex-direction: column; cursor: pointer; }
+ .menu-toggle span { width: 25px; height: 3px; background-color: var(--white); margin: 3px 0; transition: 0.3s; border-radius: 2px; }
 
- .header-content {
- max-width: 1200px;
- width: 100%;
- margin: 0 auto;
- padding: 0 20px;
- display: flex;
- justify-content: space-between;
- align-items: center;
+ /* Live Indicator */
+ .live-indicator {
+ display: flex; align-items: center; gap: 8px; background: rgba(0,0,0,0.3); padding: 5px 12px; border-radius: 20px; font-size: 0.8rem; font-weight: bold;
+ animation: pulse-live 2s infinite;
  }
+ @keyframes pulse-live { 0% { opacity: 1; } 50% { opacity: 0.7; } 100% { opacity: 1; } }
+ .live-dot { width: 10px; height: 10px; background-color: var(--danger); border-radius: 50%; box-shadow: 0 0 8px var(--danger); }
 
- .logo {
- font-size: 1.8rem;
- font-weight: 800;
- text-transform: uppercase;
- letter-spacing: 1px;
- color: var(--white);
- text-decoration: none;
- display: flex;
- align-items: center;
- gap: 10px;
- }
+ /* Container */
+ .container { max-width: 1200px; margin: 30px auto; padding: 0 20px; }
 
- .logo span {
- color: #ffd700;
- }
+ /* Search */
+ .search-container { position: relative; max-width: 600px; margin: 0 auto 40px auto; }
+ .search-input { width: 100%; padding: 15px 25px; font-size: 1.1rem; border: none; border-radius: 50px; box-shadow: var(--shadow-soft); outline: none; transition: all 0.3s; background: white; color: var(--text-dark); }
+ .search-input:focus { box-shadow: 0 0 0 4px rgba(0,68,204,0.2); transform: scale(1.02); }
+ .search-icon { position: absolute; right: 25px; top: 50%; transform: translateY(-50%); color: var(--primary-blue); font-size: 1.2rem; pointer-events: none; }
 
- nav ul {
- display: flex;
- list-style: none;
- gap: 25px;
- }
+ /* Sections */
+ .section-title { font-size: 1.8rem; color: var(--primary-blue); margin-bottom: 25px; margin-top: 50px; display: flex; align-items: center; gap: 15px; }
+ .section-title::after { content: ''; flex-grow: 1; height: 2px; background: linear-gradient(to right, var(--primary-blue), transparent); margin-left: 20px; opacity: 0.3; }
 
- nav ul li a {
- color: rgba(255, 255, 255, 0.9);
- text-decoration: none;
- font-size: 1rem;
- font-weight: 600;
- padding: 8px 16px;
- border-radius: 20px;
- transition: all 0.3s ease;
- cursor: pointer;
- }
-
- nav ul li a:hover, nav ul li a.active {
- background-color: rgba(255, 255, 255, 0.2);
- color: var(--white);
- transform: translateY(-2px);
- }
-
- .menu-toggle {
- display: none;
- flex-direction: column;
- cursor: pointer;
- }
-
- .menu-toggle span {
- width: 25px;
- height: 3px;
- background-color: var(--white);
- margin: 3px 0;
- transition: 0.3s;
- border-radius: 2px;
- }
-
- /* Ana İçerik */
- .container {
- max-width: 1200px;
- margin: 30px auto;
- padding: 0 20px;
- }
-
- /* Arama Çubuğu */
- .search-container {
- position: relative;
- max-width: 600px;
- margin: 0 auto 40px auto;
- }
-
- .search-input {
- width: 100%;
- padding: 15px 25px;
- font-size: 1.1rem;
- border: none;
- border-radius: 50px;
- box-shadow: var(--shadow-soft);
- outline: none;
- transition: all 0.3s;
- background: white;
- color: var(--text-dark);
- }
-
- .search-input:focus {
- box-shadow: 0 0 0 4px rgba(0, 68, 204, 0.2);
- transform: scale(1.02);
- }
-
- .search-icon {
- position: absolute;
- right: 25px;
- top: 50%;
- transform: translateY(-50%);
- color: var(--primary-blue);
- font-size: 1.2rem;
- pointer-events: none;
- }
-
- /* Bölüm Başlıkları */
- .section-title {
- font-size: 1.8rem;
- color: var(--primary-blue);
- margin-bottom: 25px;
- margin-top: 50px;
- display: flex;
- align-items: center;
- gap: 15px;
- position: relative;
- }
-
- .section-title::after {
- content: '';
- flex-grow: 1;
- height: 2px;
- background: linear-gradient(to right, var(--primary-blue), transparent);
- margin-left: 20px;
- opacity: 0.3;
- }
-
- .section-title:first-child {
- margin-top: 0;
- }
-
- /* Haber Izgarası */
- .news-grid {
- display: grid;
- grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
- gap: 30px;
- }
-
- .news-card {
- background: var(--white);
- border-radius: 12px;
- overflow: hidden;
- box-shadow: var(--shadow-soft);
- transition: all 0.4s ease;
- display: flex;
- flex-direction: column;
- position: relative;
- border: 1px solid var(--border-color);
-}
-
- .news-card:hover {
- transform: translateY(-10px);
- box-shadow: var(--shadow-hover);
- }
-
- .card-image {
- height: 200px;
- width: 100%;
- background-color: #e9ecef;
- position: relative;
- overflow: hidden;
- }
-
- .card-image img {
- width: 100%;
- height: 100%;
- object-fit: cover;
- transition: transform 0.5s ease;
- }
-
- .news-card:hover .card-image img {
- transform: scale(1.1);
- }
-
- .card-badge {
- position: absolute;
- top: 15px;
- left: 15px;
- background-color: var(--danger);
- color: white;
- padding: 5px 12px;
- border-radius: 20px;
- font-size: 0.75rem;
- font-weight: bold;
- text-transform: uppercase;
- z-index: 2;
- box-shadow: 0 2px 5px rgba(0,0,0,0.2);
- }
-
- .badge-success { background-color: var(--success); }
- .badge-warning { background-color: var(--warning); color: #333; }
- .badge-info { background-color: var(--info); }
-
- .card-category {
- position: absolute;
- top: 15px;
- right: 15px;
- background-color: rgba(0,0,0,0.7);
- color: white;
- padding: 5px 12px;
- border-radius: 20px;
- font-size: 0.75rem;
- backdrop-filter: blur(5px);
- }
-
- .card-body {
- padding: 20px;
- flex-grow: 1;
- display: flex;
- flex-direction: column;
- }
-
- .card-meta {
- font-size: 0.8rem;
- color: #888;
- margin-bottom: 10px;
- display: flex;
- align-items: center;
- gap: 10px;
- }
-
- .card-title {
- font-size: 1.3rem;
- margin-bottom: 12px;
- color: var(--primary-blue);
- line-height: 1.3;
- font-weight: 700;
- }
-
- .card-text {
- font-size: 0.95rem;
- color: var(--text-gray);
- margin-bottom: 20px;
- line-height: 1.6;
- flex-grow: 1;
- }
-
- .read-more-btn {
- display: inline-block;
- background: linear-gradient(90deg, var(--primary-blue), var(--secondary-blue));
- color: white;
- text-decoration: none;
- padding: 12px 25px;
- border-radius: 8px;
- font-size: 0.95rem;
- font-weight: 600;
- text-align: center;
- transition: all 0.3s;
- align-self: flex-start;
- border: none;
- cursor: pointer;
- }
-
- .read-more-btn:hover {
- background: linear-gradient(90deg, var(--secondary-blue), var(--primary-blue));
- box-shadow: 0 4px 10px rgba(0, 68, 204, 0.3);
- }
+ /* News Grid */
+ .news-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 25px; }
+ .news-card { background: var(--white); border-radius: 12px; overflow: hidden; box-shadow: var(--shadow-soft); transition: all 0.4s ease; display: flex; flex-direction: column; border: 1px solid var(--border-color); }
+ .news-card:hover { transform: translateY(-10px); box-shadow: var(--shadow-hover); }
+ .card-image { height: 180px; width: 100%; background-color: #e9ecef; position: relative; overflow: hidden; }
+ .card-image img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.5s ease; }
+ .news-card:hover .card-image img { transform: scale(1.1); }
+ .card-badge { position: absolute; top: 15px; left: 15px; padding: 4px 10px; border-radius: 15px; font-size: 0.7rem; font-weight: bold; text-transform: uppercase; z-index: 2; color: white; }
+ .badge-breaking { background-color: var(--danger); }
+ .badge-trending { background-color: var(--warning); color: #333; }
+ .badge-new { background-color: var(--success); }
+ .card-category { position: absolute; top: 15px; right: 15px; background-color: rgba(0,0,0,0.7); color: white; padding: 4px 10px; border-radius: 15px; font-size: 0.7rem; backdrop-filter: blur(5px); }
+ .card-body { padding: 20px; flex-grow: 1; display: flex; flex-direction: column; }
+ .card-meta { font-size: 0.8rem; color: #888; margin-bottom: 10px; display: flex; justify-content: space-between; }
+ .card-title { font-size: 1.2rem; margin-bottom: 10px; color: var(--primary-blue); line-height: 1.3; font-weight: 700; min-height: 50px; }
+ .card-text { font-size: 0.9rem; color: var(--text-gray); margin-bottom: 15px; line-height: 1.5; flex-grow: 1; display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden; }
+ .read-more-btn { display: inline-block; background: linear-gradient(90deg, var(--primary-blue), var(--secondary-blue)); color: white; text-decoration: none; padding: 10px 20px; border-radius: 8px; font-size: 0.9rem; font-weight: 600; text-align: center; transition: all 0.3s; border: none; cursor: pointer; width: 100%; }
+ .read-more-btn:hover { background: linear-gradient(90deg, var(--secondary-blue), var(--primary-blue)); box-shadow: 0 4px 10px rgba(0,68,204,0.3); }
 
  /* Footer */
- footer {
- background-color: var(--primary-blue);
- color: rgba(255,255,255,0.8);
- text-align: center;
- padding: 50px 20px;
- margin-top: 80px;
- border-top: 5px solid var(--secondary-blue);
- }
+ footer { background-color: var(--primary-blue); color: rgba(255,255,255,0.8); text-align: center; padding: 50px 20px; margin-top: 80px; border-top: 5px solid var(--secondary-blue); }
+ footer p { margin-bottom: 10px; font-size: 1rem; }
+ footer span { color: var(--white); font-weight: bold; }
 
- footer p {
- margin-bottom: 10px;
- font-size: 1rem;
- }
+ /* Floating Buttons */
+ .floating-buttons { position: fixed; bottom: 30px; right: 30px; display: flex; flex-direction: column; gap: 20px; z-index: 2000; }
+ .float-btn { width: 60px; height: 60px; border-radius: 50%; display: flex; justify-content: center; align-items: center; color: white; font-size: 24px; text-decoration: none; box-shadow: 0 6px 20px rgba(0,0,0,0.3); transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275); cursor: pointer; border: none; position: relative; }
+ .float-btn:hover { transform: scale(1.15) rotate(5deg); }
+ .btn-instagram { background: linear-gradient(45deg, #f09433, #e6683c, #dc2743, #cc2366, #bc1888); }
+ .btn-ad { background: linear-gradient(135deg, #28a745, #218838); }
+ .btn-ai { background: linear-gradient(135deg, #003366, #00509e); }
+ .btn-ai::after { content: ''; position: absolute; top: -5px; right: -5px; width: 15px; height: 15px; background-color: var(--success); border-radius: 50%; border: 3px solid white; animation: pulse-green 2s infinite; }
+ @keyframes pulse-green { 0% { box-shadow: 0 0 0 0 rgba(40,167,69,0.7); } 70% { box-shadow: 0 0 0 10px rgba(40,167,69,0); } 100% { box-shadow: 0 0 0 0 rgba(40,167,69,0); } }
 
- footer span {
- color: var(--white);
- font-weight: bold;
- font-size: 1.1rem;
- }
+ /* Chat Window */
+ .chat-window { position: fixed; bottom: 100px; right: 30px; width: 350px; height: 500px; background: white; border-radius: 20px; box-shadow: 0 10px 40px rgba(0,0,0,0.2); display: none; flex-direction: column; overflow: hidden; z-index: 2001; border: 1px solid #e0e0e0; animation: slideIn 0.3s ease-out; }
+ @keyframes slideIn { from { opacity: 0; transform: translateY(20px) scale(0.95); } to { opacity: 1; transform: translateY(0) scale(1); } }
+ .chat-header { background: linear-gradient(135deg, var(--primary-blue), var(--secondary-blue)); color: white; padding: 15px; display: flex; justify-content: space-between; align-items: center; font-weight: 700; font-size: 1rem; }
+ .chat-body { flex-grow: 1; padding: 15px; overflow-y: auto; background: #f8f9fa; display: flex; flex-direction: column; gap: 10px; scroll-behavior: smooth; }
+ .message { max-width: 85%; padding: 10px 15px; border-radius: 15px; font-size: 0.9rem; line-height: 1.4; animation: fadeIn 0.3s ease; }
+ @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+ .message.ai { background: white; align-self: flex-start; border-bottom-left-radius: 2px; box-shadow: 0 2px 5px rgba(0,0,0,0.05); border: 1px solid #eee; }
+ .message.user { background: var(--primary-blue); color: white; align-self: flex-end; border-bottom-right-radius: 2px; box-shadow: 0 2px 5px rgba(0,68,204,0.2); }
+ .chat-input-area { padding: 10px; background: white; border-top: 1px solid #eee; display: flex; gap: 10px; }
+ .chat-input-area input { flex-grow: 1; padding: 10px; border: 1px solid #ddd; border-radius: 20px; outline: none; }
+ .chat-input-area button { background: var(--primary-blue); color: white; border: none; width: 40px; height: 40px; border-radius: 50%; cursor: pointer; display: flex; align-items: center; justify-content: center; }
 
- /* Yüzen Butonlar */
- .floating-buttons {
- position: fixed;
- bottom: 30px;
- right: 30px;
- display: flex;
- flex-direction: column;
- gap: 20px;
- z-index: 2000;
- }
+ /* Modal */
+ .modal-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.6); backdrop-filter: blur(5px); z-index: 3000; display: none; justify-content: center; align-items: center; padding: 20px; animation: fadeIn 0.3s; }
+ .modal-content { background: white; width: 100%; max-width: 700px; max-height: 90vh; border-radius: 16px; overflow-y: auto; position: relative; box-shadow: 0 20px 60px rgba(0,0,0,0.3); animation: slideUp 0.4s ease-out; }
+ @keyframes slideUp { from { opacity: 0; transform: translateY(50px); } to { opacity: 1; transform: translateY(0); } }
+ .modal-header { position: relative; height: 250px; overflow: hidden; }
+ .modal-header img { width: 100%; height: 100%; object-fit: cover; }
+ .modal-close { position: absolute; top: 15px; right: 15px; background: rgba(0,0,0,0.6); color: white; border: none; width: 35px; height: 35px; border-radius: 50%; font-size: 1.2rem; cursor: pointer; display: flex; align-items: center; justify-content: center; z-index: 10; }
+ .modal-body { padding: 25px; }
+ .modal-title { font-size: 1.8rem; color: var(--primary-blue); margin-bottom: 15px; line-height: 1.2; }
+ .modal-meta { display: flex; gap: 15px; color: #666; font-size: 0.85rem; margin-bottom: 20px; padding-bottom: 15px; border-bottom: 1px solid #eee; }
+ .modal-text { font-size: 1.05rem; line-height: 1.7; color: #333; }
+ .ad-modal-content { background: white; width: 100%; max-width: 450px; padding: 25px; border-radius: 16px; box-shadow: 0 20px 60px rgba(0,0,0,0.3); }
+ .ad-form input, .ad-form textarea, .ad-form select { width: 100%; padding: 10px; margin-bottom: 12px; border: 1px solid #ddd; border-radius: 6px; font-size: 0.95rem; }
+ .ad-form button { width: 100%; padding: 10px; background: var(--primary-blue); color: white; border: none; border-radius: 6px; font-weight: bold; cursor: pointer; }
 
- .float-btn {
- width: 65px;
- height: 65px;
- border-radius: 50%;
- display: flex;
- justify-content: center;
- align-items: center;
- color: white;
- font-size: 28px;
- text-decoration: none;
- box-shadow: 0 6px 20px rgba(0,0,0,0.3);
- transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
- cursor: pointer;
- border: none;
- position: relative;
- }
-
- .float-btn:hover {
- transform: scale(1.15) rotate(5deg);
- }
-
- .btn-instagram {
- background: linear-gradient(45deg, #f09433, #e6683c, #dc2743, #cc2366, #bc1888);
- }
-
- .btn-ad {
- background: linear-gradient(135deg, #28a745, #218838);
- }
-
- .btn-ai {
- background: linear-gradient(135deg, #003366, #00509e);
- position: relative;
- }
-
- .btn-ai::after {
- content: '';
- position: absolute;
- top: -5px;
- right: -5px;
- width: 18px;
- height: 18px;
- background-color: var(--success);
- border-radius: 50%;
- border: 3px solid white;
- animation: pulse-green 2s infinite;
- }
-
- @keyframes pulse-green {
- 0% { box-shadow: 0 0 0 0 rgba(40, 167, 69, 0.7); }
- 70% { box-shadow: 0 0 0 10px rgba(40, 167, 69, 0); }
- 100% { box-shadow: 0 0 0 0 rgba(40, 167, 69, 0); }
- }
-
- /* Shopnex Sohbet Penceresi */
- .chat-window {
- position: fixed;
- bottom: 110px;
- right: 30px;
- width: 380px;
- height: 550px;
- background: white;
- border-radius: 20px;
- box-shadow: 0 10px 40px rgba(0,0,0,0.2);
- display: none;
- flex-direction: column;
- overflow: hidden;
- z-index: 2001;
- border: 1px solid #e0e0e0;
- animation: slideIn 0.3s ease-out;
- }
-
- @keyframes slideIn {
- from { opacity: 0; transform: translateY(20px) scale(0.95); }
- to { opacity: 1; transform: translateY(0) scale(1); }
- }
-
- .chat-header {
- background: linear-gradient(135deg, var(--primary-blue), var(--secondary-blue));
- color: white;
- padding: 20px;
- display: flex;
- justify-content: space-between;
- align-items: center;
- font-weight: 700;
- font-size: 1.1rem;
- }
-
- .chat-header span {
- display: flex;
- align-items: center;
- gap: 10px;
- }
-
- .chat-body {
- flex-grow: 1;
- padding: 20px;
- overflow-y: auto;
- background: #f8f9fa;
- display: flex;
- flex-direction: column;
- gap: 15px;
- scroll-behavior: smooth;
- }
-
- .message {
- max-width: 85%;
- padding: 12px 18px;
- border-radius: 18px;
- font-size: 0.95rem;
- line-height: 1.5;
- position: relative;
- animation: fadeIn 0.3s ease;
- }
-
- @keyframes fadeIn {
- from { opacity: 0; transform: translateY(10px); }
- to { opacity: 1; transform: translateY(0); }
- }
-
- .message.ai {
- background: white;
- align-self: flex-start;
- border-bottom-left-radius: 4px;
- box-shadow: 0 2px 8px rgba(0,0,0,0.05);
- border: 1px solid #eee;
- }
-
- .message.user {
- background: var(--primary-blue);
- color: white;
- align-self: flex-end;
- border-bottom-right-radius: 4px;
- box-shadow: 0 2px 8px rgba(0, 68, 204, 0.2);
- }
-
- .chat-input-area {
- padding: 15px;
- background: white;
- border-top: 1px solid #eee;
- display: flex;
- gap: 10px;
- align-items: center;
- }
-
- .chat-input-area input {
- flex-grow: 1;
- padding: 12px 15px;
- border: 1px solid #ddd;
- border-radius: 25px;
- outline: none;
- font-size: 0.95rem;
- transition: border 0.3s;
- }
-
- .chat-input-area input:focus {
- border-color: var(--primary-blue);
- }
-
- .chat-input-area button {
- background: var(--primary-blue);
- color: white;
- border: none;
- width: 45px;
- height: 45px;
- border-radius: 50%;
- cursor: pointer;
- display: flex;
- align-items: center;
- justify-content: center;
- transition: background 0.3s;
- font-size: 1.2rem;
- }
-
- .chat-input-area button:hover {
- background: var(--secondary-blue);
- }
-
- /* Haber Detay Modalı */
- .modal-overlay {
- position: fixed;
- top: 0;
- left: 0;
- width: 100%;
- height: 100%;
- background: rgba(0,0,0,0.6);
- backdrop-filter: blur(5px);
- z-index: 3000;
- display: none;
- justify-content: center;
- align-items: center;
- padding: 20px;
- animation: fadeIn 0.3s;
- }
-
- .modal-content {
- background: white;
- width: 100%;
- max-width: 800px;
- max-height: 90vh;
- border-radius: 16px;
- overflow-y: auto;
- position: relative;
- box-shadow: 0 20px 60px rgba(0,0,0,0.3);
- animation: slideUp 0.4s ease-out;
- }
-
- @keyframes slideUp {
- from { opacity: 0; transform: translateY(50px); }
- to { opacity: 1; transform: translateY(0); }
- }
-
- .modal-header {
- position: relative;
- height: 300px;
- overflow: hidden;
- }
-
- .modal-header img {
- width: 100%;
- height: 100%;
- object-fit: cover;
- }
-
- .modal-close {
- position: absolute;
- top: 20px;
- right: 20px;
- background: rgba(0,0,0,0.6);
- color: white;
- border: none;
- width: 40px;
- height: 40px;
- border-radius: 50%;
- font-size: 1.5rem;
- cursor: pointer;
- display: flex;
- align-items: center;
- justify-content: center;
- transition: background 0.3s;
- z-index: 10;
- }
-
- .modal-close:hover {
- background: var(--danger);
- }
-
- .modal-body {
- padding: 30px;
- }
-
- .modal-title {
- font-size: 2rem;
- color: var(--primary-blue);
- margin-bottom: 15px;
- line-height: 1.2;
- }
-
- .modal-meta {
- display: flex;
- gap: 20px;
- color: #666;
- font-size: 0.9rem;
- margin-bottom: 25px;
- padding-bottom: 20px;
- border-bottom: 1px solid #eee;
- }
-
- .modal-text {
- font-size: 1.1rem;
- line-height: 1.8;
- color: #333;
- margin-bottom: 20px;
- }
-
- .modal-footer {
- margin-top: 30px;
- padding-top: 20px;
- border-top: 1px solid #eee;
- text-align: center;
- color: #888;
- font-size: 0.9rem;
- }
-
- /* Reklam Form Modalı */
- .ad-modal-content {
- background: white;
- width: 100%;
- max-width: 500px;
- padding: 30px;
- border-radius: 16px;
- box-shadow: 0 20px 60px rgba(0,0,0,0.3);
- animation: slideUp 0.4s ease-out;
- }
-
- .ad-form input, .ad-form textarea, .ad-form select {
- width: 100%;
- padding: 12px;
- margin-bottom: 15px;
- border: 1px solid #ddd;
- border-radius: 8px;
- font-size: 1rem;
- }
-
- .ad-form button {
- width: 100%;
- padding: 12px;
- background: var(--primary-blue);
- color: white;
- border: none;
- border-radius: 8px;
- font-size: 1rem;
- font-weight: bold;
- cursor: pointer;
- transition: background 0.3s;
- }
-
- .ad-form button:hover {
- background: var(--secondary-blue);
- }
-
- /* Mobil Uyumluluk */
+ /* Mobile */
  @media (max-width: 768px) {
- .header-content {
- flex-wrap: wrap;
- }
- 
- nav ul {
- display: none;
- flex-direction: column;
- position: absolute;
- top: 80px;
- left: 0;
- width: 100%;
- background-color: var(--primary-blue);
- padding: 20px;
- box-shadow: 0 4px 6px rgba(0,0,0,0.1);
- z-index: 999;
- border-top: 1px solid rgba(255,255,255,0.1);
- }
-
- nav ul.active {
- display: flex;
- }
-
- .menu-toggle {
- display: flex;
- }
-
- .section-title {
- font-size: 1.5rem;
- }
- 
- .news-grid {
- grid-template-columns: 1fr;
- }
-
- .chat-window {
- width: calc(100% - 40px);
- right: 20px;
- left: 20px;
- bottom: 100px;
- height: 65vh;
- }
- 
- .floating-buttons {
- right: 20px;
- bottom: 20px;
- }
-
- .modal-header {
- height: 200px;
- }
- 
- .modal-title {
- font-size: 1.5rem;
- }
+ .header-content { flex-wrap: wrap; }
+ nav ul { display: none; flex-direction: column; position: absolute; top: 80px; left: 0; width: 100%; background-color: var(--primary-blue); padding: 20px; z-index: 999; }
+ nav ul.active { display: flex; }
+ .menu-toggle { display: flex; }
+ .section-title { font-size: 1.5rem; }
+ .news-grid { grid-template-columns: 1fr; }
+ .chat-window { width: calc(100% - 40px); right: 20px; left: 20px; bottom: 90px; height: 60vh; }
+ .floating-buttons { right: 20px; bottom: 20px; }
+ .modal-header { height: 180px; }
+ .modal-title { font-size: 1.4rem; }
  }
  </style>
 </head>
 <body>
 
- <!-- Üst Header -->
  <header>
  <div class="header-content">
  <a href="#" class="logo" onclick="location.reload()">Trabzon<span>İş</span>İlanları</a>
- 
- <div class="menu-toggle" onclick="toggleMenu()">
- <span></span>
- <span></span>
- <span></span>
+ <div class="live-indicator">
+ <div class="live-dot"></div>
+ <span>CANLI: <span id="liveCount">0</span></span>
  </div>
-
+ <div class="menu-toggle" onclick="toggleMenu()">
+ <span></span><span></span><span></span>
+ </div>
  <nav>
  <ul id="main-menu">
  <li><a href="#home" onclick="scrollToSection('home')">🏠 Ana Sayfa</a></li>
  <li><a href="#breaking" onclick="scrollToSection('breaking')">🔥 Son Dakika</a></li>
- <li><a href="#news" onclick="scrollToSection('news')">📰 Son Haberler</a></li>
+ <li><a href="#news" onclick="scrollToSection('news')">📰 Haberler</a></li>
  <li><a href="#search-section" onclick="scrollToSection('search-section')">🔍 Arama</a></li>
  </ul>
  </nav>
@@ -743,376 +163,384 @@
  </header>
 
  <div class="container" id="home">
- 
- <!-- Arama Bölümü -->
  <div class="search-container" id="search-section">
- <input type="text" class="search-input" id="searchInput" placeholder="Haberlerde ara... (Örn: Trabzon, Spor, Sağlık)" onkeyup="filterNews()">
+ <input type="text" class="search-input" id="searchInput" placeholder="100 haberi tara... (Örn: Trabzon, Spor, İş)" onkeyup="filterNews()">
  <span class="search-icon">🔍</span>
  </div>
 
- <!-- Son Dakika Bölümü -->
- <h2 class="section-title" id="breaking">⚡ Son Dakika & Türkiye Geneli</h2>
- <div class="news-grid" id="breaking-news">
- <!-- Haberler JS ile doldurulacak -->
- </div>
+ <h2 class="section-title" id="breaking">⚡ Son Dakika & Trendler</h2>
+ <div class="news-grid" id="breaking-news"></div>
 
- <!-- Diğer Kategoriler -->
- <h2 class="section-title" id="news">🎮 Teknoloji & Eğitim</h2>
- <div class="news-grid" id="tech-news"></div>
+ <h2 class="section-title" id="news">🎮 Teknoloji, Ekonomi & Yaşam</h2>
+ <div class="news-grid" id="main-news"></div>
 
- <h2 class="section-title">🏥 Sağlık & Yaşam</h2>
- <div class="news-grid" id="health-news"></div>
-
- <h2 class="section-title">⚽ Spor Dünyası</h2>
+ <h2 class="section-title">⚽ Spor & Eğitim</h2>
  <div class="news-grid" id="sport-news"></div>
-
  </div>
 
- <!-- Footer -->
  <footer>
  <p>&copy; 2026 Trabzon İş İlanları. Tüm hakları saklıdır.</p>
  <p>Site tasarımı ve akıllı asistan altyapısı <span>Shopnex</span> tarafından geliştirilmiştir.</p>
  </footer>
 
- <!-- Yüzen Butonlar -->
+ <!-- Floating Buttons -->
  <div class="floating-buttons">
- <a href="https://www.instagram.com/trabzon_is_ilani" target="_blank" class="float-btn btn-instagram" title="Instagram'da Bize Ulaşın">
- 📞
- </a>
- <button class="float-btn btn-ad" onclick="openAdModal()" title="Reklam ve İş Birliği">
- 📢
- </button>
- <button class="float-btn btn-ai" onclick="toggleChat()" title="Shopnex ile Sohbet Et">
- 💬
- </button>
+ <a href="https://www.instagram.com/trabzon_is_ilani" target="_blank" class="float-btn btn-instagram" title="Instagram">📞</a>
+ <button class="float-btn btn-ad" onclick="openAdModal()" title="Reklam & İş Birliği">📢</button>
+ <button class="float-btn btn-ai" onclick="toggleChat()" title="Shopnex AI">💬</button>
  </div>
 
- <!-- Haber Detay Modalı -->
+ <!-- News Modal -->
  <div class="modal-overlay" id="newsModal">
  <div class="modal-content">
  <button class="modal-close" onclick="closeModal('newsModal')">×</button>
- <div class="modal-header">
- <img id="modalImg" src="" alt="Haber Görseli">
- </div>
+ <div class="modal-header"><img id="modalImg" src="" alt="Haber"></div>
  <div class="modal-body">
- <h2 class="modal-title" id="modalTitle">Haber Başlığı</h2>
- <div class="modal-meta">
- <span>🕒 Şimdi</span>
- <span>📝 Editörün Seçimi</span>
- <span>👁️ <span id="modalViews">1.2K</span> Okuma</span>
- </div>
- <div class="modal-text" id="modalText">
- Haber içeriği buraya gelecek...
- </div>
- <div class="modal-footer">
- Bu haber Shopnex yapay zeka desteğiyle hazırlanmıştır.
- </div>
+ <h2 class="modal-title" id="modalTitle">Başlık</h2>
+ <div class="modal-meta"><span>🕒 Şimdi</span><span>👁️ <span id="modalViews">0</span> Okuma</span></div>
+ <div class="modal-text" id="modalText">İçerik...</div>
  </div>
  </div>
  </div>
 
- <!-- Reklam Form Modalı -->
+ <!-- Ad Modal -->
  <div class="modal-overlay" id="adModal">
  <div class="ad-modal-content">
  <button class="modal-close" style="position:absolute; top:15px; right:15px;" onclick="closeModal('adModal')">×</button>
- <h2 style="color:var(--primary-blue); margin-bottom:20px; text-align:center;">Reklam & İş Birliği</h2>
- <form class="ad-form" onsubmit="event.preventDefault(); alert('Talebiniz alındı! En kısa sürede sizinle iletişime geçeceğiz.'); closeModal('adModal');">
- <input type="text" placeholder="Şirket Adınız" required>
- <input type="email" placeholder="E-posta Adresiniz" required>
- <select>
- <option>Reklam Vermek İstiyorum</option>
- <option>İş Birliği Teklifi</option>
- <option>Haberleşme Talebi</option>
- </select>
- <textarea rows="4" placeholder="Mesajınız veya talebiniz..." required></textarea>
+ <h2 style="color:var(--primary-blue); margin-bottom:15px; text-align:center;">Reklam & İş Birliği</h2>
+ <form class="ad-form" onsubmit="event.preventDefault(); alert('Talebiniz alındı!'); closeModal('adModal');">
+ <input type="text" placeholder="Şirket Adı" required>
+ <input type="email" placeholder="E-posta" required>
+ <select><option>Reklam</option><option>İş Birliği</option></select>
+ <textarea rows="3" placeholder="Mesajınız..." required></textarea>
  <button type="submit">Gönder</button>
  </form>
  </div>
  </div>
 
- <!-- Shopnex Sohbet Penceresi -->
+ <!-- Chat Window -->
  <div class="chat-window" id="chatWindow">
- <div class="chat-header">
- <span>🤖 Shopnex Asistan</span>
- <span style="cursor:pointer; font-size:1.2rem;" onclick="toggleChat()">✕</span>
- </div>
+ <div class="chat-header"><span>🤖 Shopnex Asistan</span><span style="cursor:pointer;" onclick="toggleChat()">✕</span></div>
  <div class="chat-body" id="chatBody">
- <div class="message ai">
- Merhaba! Ben <strong>Shopnex</strong>. 😊<br>
- Trabzon iş ilanları, son dakika haberleri veya site hakkında her şeyi sorabilirsin. Nasıl yardımcı olabilirim?
- </div>
+ <div class="message ai">Merhaba! Ben <strong>Shopnex</strong>. 😊 Nasıl yardımcı olabilirim? Haberler, iş ilanları veya sadece sohbet edebiliriz!</div>
  </div>
  <div class="chat-input-area">
- <input type="text" id="userInput" placeholder="Mesajınızı yazın..." onkeypress="handleKeyPress(event)">
+ <input type="text" id="userInput" placeholder="Mesaj yazın..." onkeypress="handleKeyPress(event)">
  <button onclick="sendMessage()">➤</button>
  </div>
  </div>
 
  <script>
- // Veri Seti Oluşturma (50+ Haber)
+ // --- VERİ OLUŞTURMA (100 HABER) ---
  const categories = [
-   { name: "Son Dakika", badge: "SON DAKİKA", color: "var(--danger)", icon: "🔥" },
-   { name: "Ekonomi", badge: "EKONOMİ", color: "var(--info)", icon: "💰" },
-   { name: "Teknoloji", badge: "TEKNOLOJİ", color: "var(--info)", icon: "💻" },
-   { name: "Spor", badge: "SPOR", color: "var(--success)", icon: "⚽" },
-   { name: "Sağlık", badge: "SAĞLIK", color: "var(--success)", icon: "🏥" },
-   { name: "Eğitim", badge: "EĞİTİM", color: "var(--warning)", icon: "🎓" },
-   { name: "Trabzon", badge: "TRABZON", color: "var(--danger)", icon: "📍" }
+ { name: "Son Dakika", badge: "SON DAKİKA", cls: "badge-breaking", icon: "🔥" },
+ { name: "Ekonomi", badge: "EKONOMİ", cls: "badge-trending", icon: "💰" },
+ { name: "Teknoloji", badge: "TEKNOLOJİ", cls: "badge-new", icon: "💻" },
+ { name: "Spor", badge: "SPOR", cls: "badge-breaking", icon: "⚽" },
+ { name: "Sağlık", badge: "SAĞLIK", cls: "badge-new", icon: "🏥" },
+ { name: "Eğitim", badge: "EĞİTİM", cls: "badge-trending", icon: "🎓" },
+ { name: "Trabzon", badge: "TRABZON", cls: "badge-breaking", icon: "📍" }
  ];
 
  const images = [
-   "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&w=600&q=80",
-   "https://images.unsplash.com/photo-1526304640152-d4619684e484?auto=format&fit=crop&w=600&q=80",
-   "https://images.unsplash.com/photo-1541534741688-6078c6bfb5c5?auto=format&fit=crop&w=600&q=80",
-   "https://images.unsplash.com/photo-1519389950473-47ba0277781c?auto=format&fit=crop&w=600&q=80",
-   "https://images.unsplash.com/photo-1523240795612-9a054b0db644?auto=format&fit=crop&w=600&q=80",
-   "https://images.unsplash.com/photo-1505751172876-fa1923c5c528?auto=format&fit=crop&w=600&q=80",
-   "https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=600&q=80",
-   "https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=600&q=80"
+ "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&w=600&q=80",
+ "https://images.unsplash.com/photo-1526304640152-d4619684e484?auto=format&fit=crop&w=600&q=80",
+ "https://images.unsplash.com/photo-1541534741688-6078c6bfb5c5?auto=format&fit=crop&w=600&q=80",
+ "https://images.unsplash.com/photo-1519389950473-47ba0277781c?auto=format&fit=crop&w=600&q=80",
+ "https://images.unsplash.com/photo-1523240795612-9a054b0db644?auto=format&fit=crop&w=600&q=80",
+ "https://images.unsplash.com/photo-1505751172876-fa1923c5c528?auto=format&fit=crop&w=600&q=80",
+ "https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=600&q=80",
+ "https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=600&q=80",
+ "https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=600&q=80",
+ "https://images.unsplash.com/photo-1556761175-5973dc0f32e7?auto=format&fit=crop&w=600&q=80"
  ];
 
  const titles = [
-   "Büyük Şirketlerde Yeni İş İlanları Açıklandı",
-   "Ekonomide Yeni Dönem: Faiz Kararları Açıklandı",
-   "Trabzonspor'da Transfer Sürprizi!",
-   "Yapay Zeka Devrimi İş Dünyasını Değiştiriyor",
-   "Üniversite Yerleştirme Sonuçları Açıklandı",
-   "Yaz Hastalıklarından Korunma Rehberi",
-   "Türkiye Geneli Yeni Ulaşım Tarifeleri",
-   "Teknoloji Sektöründe Büyük Devrim",
-   "Sağlık Bakanlığı'ndan Önemli Duyuru",
-   "Trabzon'da Turizm Sezonu Açılıyor",
-   "Borsada Güne Yükselişle Başlayan Piyasalar",
-   "Yeni Nesil Elektrikli Araçlar Yollara Çıkıyor",
-   "Okulların Tatile Girmesi İçin Kalan Süre",
-   "Spor Toto Süper Lig'de Haftanın Maçları",
-   "Dijitalleşme Hızlanıyor: Yeni Uygulamalar",
-   "Kanser Erken Teşhisinde Yeni Yöntemler",
-   "Trabzon Havalimanında Yeni Terminal Projesi",
-   "Altın Fiyatlarında Son Durum",
-   "Yaz Tatili İçin En İyi Rotalar",
-   "Yerli Üretim Yazılım Projeleri Destekleniyor"
+ "Büyük Şirketlerde Yeni İş İlanları Açıklandı", "Ekonomide Yeni Dönem: Faiz Kararları Açıklandı", "Trabzonspor'da Transfer Sürprizi!",
+ "Yapay Zeka Devrimi İş Dünyasını Değiştiriyor", "Üniversite Yerleştirme Sonuçları Açıklandı", "Yaz Hastalıklarından Korunma Rehberi",
+ "Türkiye Geneli Yeni Ulaşım Tarifeleri", "Teknoloji Sektöründe Büyük Devrim", "Sağlık Bakanlığı'ndan Önemli Duyuru",
+ "Trabzon'da Turizm Sezonu Açılıyor", "Borsada Güne Yükselişle Başlayan Piyasalar", "Yeni Nesil Elektrikli Araçlar Yollara Çıkıyor",
+ "Okulların Tatile Girmesi İçin Kalan Süre", "Spor Toto Süper Lig'de Haftanın Maçları", "Dijitalleşme Hızlanıyor: Yeni Uygulamalar",
+ "Kanser Erken Teşhisinde Yeni Yöntemler", "Trabzon Havalimanında Yeni Terminal Projesi", "Altın Fiyatlarında Son Durum",
+ "Yaz Tatili İçin En İyi Rotalar", "Yerli Üretim Yazılım Projeleri Destekleniyor", "İklim Değişikliğiyle Mücadelede Yeni Adımlar",
+ "Otomotiv Sektöründe Rekor Satış", "Girişimcilere Özel Destek Paketi", "Kültür Sanat Festivali Başlıyor",
+ "Yerel Yönetimlerde Dijital Dönüşüm", "Tarım Sektöründe Modern Teknolojiler", "Enerji Tasarrufu İçin Pratik Öneriler",
+ "Sosyal Medya Düzenlemesi Tartışmaları", "Sürdürülebilir Kalkınma Hedefleri", "Genç Girişimciler Zirvesi Gerçekleştirildi",
+ "Uzaktan Çalışma Modelleri Yaygınlaşıyor", "E-Ticaret Hacmi Artışta", "Mobil Oyun Endüstrisinde Büyüme",
+ "Yapay Zeka Destekli Sağlık Taramaları", "Akıllı Şehir Projeleri Hayata Geçiyor", "Nesnelerin İnterneti (IoT) Devrimi",
+ "Blokchain Teknolojisi Finansı Değiştiriyor", "Sanal Gerçeklik Eğitimde Kullanılıyor", "Robotik Teknolojiler Üretimde Etkili",
+ "Green Energy Yatırımları Artıyor", "Dijital Paralar ve Regülasyonlar", "Veri Güvenliği Önlemleri Güçlendiriliyor",
+ "Cybersecurity Tehditleri ve Çözümler", "Big Data Analitiği İş Kararlarını Şekillendiriyor", "Cloud Computing Hizmetleri Genişliyor",
+ "5G Ağları Yaygınlaşıyor", "Drone Teknolojisi Lojistikte Devrim", "3D Yazıcılar Üretimi Kolaylaştırıyor",
+ "Nanoteknoloji Tıpta Kullanılıyor", "Biyoetik Tartışmalar Sürüyor", "Gen Tedavileri Umut Veriyor",
+ "Astrofizikte Yeni Keşifler", "Mars Keşif Projesi İlerliyor", "Uzay Turizmi Yakında Gerçek Olacak",
+ "Deniz Altı Araştırmaları Derinleşiyor", "Orman Yangınlarıyla Mücadelede Yeni Teknikler", "Su Kaynaklarının Korunması İçin Çalışmalar",
+ "Atık Yönetimi Sistemleri İyileştiriliyor", "Geri Dönüşüm Projeleri Destekleniyor", "Yeşil Binalar İnşa Ediliyor",
+ "Doğa Koruma Alanları Genişletiliyor", "Hayvan Hakları Konusunda Yeni Yasalar", "Balıkçılıkta Sürdürülebilirlik",
+ "Tarım Arazilerinin Korunması", "Organik Tarım Destekleri Artıyor", "Hibrit Araçlar Popülerlik Kazanıyor",
+ "Elektrikli Otobüs Filoları Genişliyor", "Hızlı Tren Hatları Uzatılıyor", "Denizaltı Tünelleri Planlanıyor",
+ "Metro Projeleri Tamamlanıyor", "Otopark Sorunu İçin Akıllı Çözümler", "Yaya Yolları Genişletiliyor",
+ "Bisiklet Yolları Ağı Genişliyor", "Yeşil Alanlar Arttırılıyor", "Park ve Bahçelerde Yenileme",
+ "Sokak Hayvanları İçin Barınaklar", "Çöp Toplama Robotları Test Ediliyor", "Güneş Enerjili Sokak Lambaları",
+ "Rüzgar Türbinleri Kuruluyor", "Jeotermal Enerji Santralleri", "Hidroelektrik Santralleri Yenileniyor",
+ "Nükleer Enerji Tartışmaları", "Fosil Yakıtlardan Vazgeçiş", "Karbon Ayak İzi Azaltma Kampanyaları",
+ "Sıfır Atık Hareketi Büyüyor", "Plastik Kullanımı Azaltılıyor", "Kağıtsız Ofis Çalışmaları",
+ "Dijital Okuryazarlık Eğitimleri", "Yaşlılar İçin Teknoloji Kursları", "Çocuklar İçin Kodlama Atölyeleri",
+ "Öğretmenlere Dijital Destek", "Okullarda Akıllı Tahtalar", "Üniversitelerde Uzaktan Eğitim",
+ "Araştırma Projelerine Destek", "Bilim Olimpiyatları Başlıyor", "Teknofest Hazırlıkları",
+ "Ar-Ge Merkezleri Açılıyor", "Yenilikçi Ürünler Piyasaya Çıkıyor", "Tasarım Odaklı Düşünce Eğitimi",
+ "Eleştirel Düşünme Becerileri", "Yaratıcı Yazarlık Kursları", "Sanat ve Mühendislik Buluşması"
  ];
 
  const texts = [
-   "Detaylı analizler, yazar yorumları ve güncel gelişmeler için sitemizi takip etmeye devam edin.",
-   "Uzmanlar bu konuda önemli uyarılarda bulundu. Detaylar haberimizde.",
-   "Piyasalarda beklenen hareketlilik başladı. Yatırımcılar ne diyor?",
-   "Yeni dönemde iş dünyası nasıl şekillenecek? İşte detaylar.",
-   "Öğrenciler için yeni dönem başladı. Tercih süreçleri nasıl işleyecek?",
-   "Sıcak hava dalgalarıyla birlikte dikkat edilmesi gereken hususlar.",
-   "Ulaşım kolaylığı sağlanacak. Yeni hatlar devreye giriyor.",
-   "Teknoloji dünyasında çığır açan gelişmeler yaşanıyor.",
-   "Sağlık hizmetlerinde kalite artırıldı. Detaylar belli oldu.",
-   "Turizm sezonunun açılmasıyla birlikte ekonomik hareketlilik artacak.",
-   "Borsada günün ilk yarısında yaşanan gelişmeler.",
-   "Elektrikli araç satışları rekor kırdı.",
-   "Eğitim sisteminde yeni reformlar tartışılıyor.",
-   "Haftanın en kritik maçlarının ön izlemesi.",
-   "Yazılım sektöründe yeni fırsatlar doğdu.",
-   "Erken teşhis yöntemleri hayat kurtarıyor.",
-   "Havalimanı projesiyle şehir ulaşımı hızlanacak.",
-   "Altın fiyatlarındaki son değişimler ve uzman görüşleri.",
-   "Tatil planı yapanlar için en uygun rotalar.",
-   "Yerli yazılım projelerine devlet desteği artıyor."
+ "Detaylı analizler, yazar yorumları ve güncel gelişmeler için sitemizi takip etmeye devam edin.",
+ "Uzmanlar bu konuda önemli uyarılarda bulundu. Detaylar haberimizde.",
+ "Piyasalarda beklenen hareketlilik başladı. Yatırımcılar ne diyor?",
+ "Yeni dönemde iş dünyası nasıl şekillenecek? İşte detaylar.",
+ "Öğrenciler için yeni dönem başladı. Tercih süreçleri nasıl işleyecek?",
+ "Sıcak hava dalgalarıyla birlikte dikkat edilmesi gereken hususlar.",
+ "Ulaşım kolaylığı sağlanacak. Yeni hatlar devreye giriyor.",
+ "Teknoloji dünyasında çığır açan gelişmeler yaşanıyor.",
+ "Sağlık hizmetlerinde kalite artırıldı. Detaylar belli oldu.",
+ "Turizm sezonunun açılmasıyla birlikte ekonomik hareketlilik artacak.",
+ "Borsada günün ilk yarısında yaşanan gelişmeler.",
+ "Elektrikli araç satışları rekor kırdı.",
+ "Eğitim sisteminde yeni reformlar tartışılıyor.",
+ "Haftanın en kritik maçlarının ön izlemesi.",
+ "Yazılım sektöründe yeni fırsatlar doğdu.",
+ "Erken teşhis yöntemleri hayat kurtarıyor.",
+ "Havalimanı projesiyle şehir ulaşımı hızlanacak.",
+ "Altın fiyatlarındaki son değişimler ve uzman görüşleri.",
+ "Tatil planı yapanlar için en uygun rotalar.",
+ "Yerli yazılım projelerine devlet desteği artıyor.",
+ "İklim değişikliğiyle mücadelede uluslararası işbirliği güçlendi.",
+ "Otomotiv sektöründe elektrikli araç yatırımları artıyor.",
+ "Girişimcilere özel fon desteği açıklandı.",
+ "Kültür sanat etkinlikleri yoğunlaştı.",
+ "Dijital dönüşüm yerel yönetimlerde hız kazandı.",
+ "Tarımda modern teknolojiler verimi artırıyor.",
+ "Enerji tasarrufu için evlere destek sağlanıyor.",
+ "Sosyal medya düzenlemesi mecliste görüşülüyor.",
+ "Sürdürülebilir kalkınma hedefleri doğrultusunda adımlar atıldı.",
+ "Genç girişimciler zirvesinde yenilikçi fikirler paylaşıldı.",
+ "Uzaktan çalışma modelleri şirketlerde kalıcı hale geliyor.",
+ "E-ticaret hacmi rekor seviyelere ulaştı.",
+ "Mobil oyun endüstrisi büyük büyüme kaydetti.",
+ "Yapay zeka destekli sağlık taramaları yaygınlaşıyor.",
+ "Akıllı şehir projeleri hayata geçirilmeye başlandı.",
+ "IoT cihazları günlük hayatın vazgeçilmezi haline geliyor.",
+ "Blockchain teknolojisi finans sektöründe devrim yaratıyor.",
+ "Sanal gerçeklik eğitimde kullanımı artıyor.",
+ "Robotik teknolojiler üretim hatlarında etkili.",
+ "Yeşil enerji yatırımları hızla artıyor.",
+ "Dijital paralar ve regülasyonlar tartışılıyor.",
+ "Veri güvenliği önlemleri sıkılaştırıldı.",
+ "Siber güvenlik tehditleri ve çözüm önerileri.",
+ "Big data analitiği iş kararlarını şekillendiriyor.",
+ "Cloud computing hizmetleri genişliyor.",
+ "5G ağları şehirlerde yaygınlaşıyor.",
+ "Drone teknolojisi lojistikte devrim yapıyor.",
+ "3D yazıcılar üretimi kolaylaştırıyor.",
+ "Nanoteknoloji tıpta kullanılıyor.",
+ "Biyoetik tartışmalar sürüyor.",
+ "Gen tedavileri umut veriyor.",
+ "Astrofizikte yeni keşifler yapıldı.",
+ "Mars keşif projesi ilerliyor.",
+ "Uzay turizmi yakında gerçek olacak.",
+ "Denizaltı araştırmaları derinleşiyor.",
+ "Orman yangınlarıyla mücadelede yeni teknikler.",
+ "Su kaynaklarının korunması için çalışmalar.",
+ "Atık yönetim sistemleri iyileştiriliyor.",
+ "Geri dönüşüm projeleri destekleniyor.",
+ "Yeşil binalar inşa ediliyor.",
+ "Doğa koruma alanları genişletiliyor.",
+ "Hayvan hakları konusunda yeni yasalar.",
+ "Balıkçılıkta sürdürülebilirlik.",
+ "Tarım arazilerinin korunması.",
+ "Organik tarım destekleri artıyor.",
+ "Hibrit araçlar popülerlik kazanıyor.",
+ "Elektrikli otobüs filoları genişliyor.",
+ "Hızlı tren hatları uzatılıyor.",
+ "Denizaltı tünelleri planlanıyor.",
+ "Metro projeleri tamamlanıyor.",
+ "Otopark sorunu için akıllı çözümler.",
+ "Yaya yolları genişletiliyor.",
+ "Bisiklet yolları ağı genişliyor.",
+ "Yeşil alanlar arttırılıyor.",
+ "Park ve bahçelerde yenileme.",
+ "Sokak hayvanları için barınaklar.",
+ "Çöp toplama robotları test ediliyor.",
+ "Güneş enerjili sokak lambaları.",
+ "Rüzgar türbinleri kuruluyor.",
+ "Jeotermal enerji santralleri.",
+ "Hidroelektrik santralleri yenileniyor.",
+ "Nükleer enerji tartışmaları.",
+ "Fosil yakıtlardan vazgeçiş.",
+ "Karbon ayak izi azaltma kampanyaları.",
+ "Sıfır atık hareketi büyüyor.",
+ "Plastik kullanımı azaltılıyor.",
+ "Kağıtsız ofis çalışmaları.",
+ "Dijital okuryazarlık eğitimleri.",
+ "Yaşlılar için teknoloji kursları.",
+ "Çocuklar için kodlama atölyeleri.",
+ "Öğretmenlere dijital destek.",
+ "Okullarda akıllı tahtalar.",
+ "Üniversitelerde uzaktan eğitim.",
+ "Araştırma projelerine destek.",
+ "Bilim olimpiyatları başlıyor.",
+ "Teknofest hazırlıkları.",
+ "Ar-Ge merkezleri açılıyor.",
+ "Yenilikçi ürünler piyasaya çıkıyor.",
+ "Tasarım odaklı düşünce eğitimi.",
+ "Eleştirel düşünme becerileri.",
+ "Yaratıcı yazarlık kursları.",
+ "Sanat ve mühendislik buluşması."
  ];
 
- // 50 Haber Oluşturma Fonksiyonu
- function generateNews() {
-   const newsData = ;
-   for (let i = 0; i < 50; i++) {
-     const catIndex = Math.floor(Math.random() * categories.length);
-     const imgIndex = Math.floor(Math.random() * images.length);
-     const titleIndex = Math.floor(Math.random() * titles.length);
-     const textIndex = Math.floor(Math.random() * texts.length);
-     
-     newsData.push({
-       id: i,
-       category: categories[catIndex],
-       image: images[imgIndex],
-       title: `\${titles[titleIndex]} \${i + 1}`,
-       text: `\${texts[textIndex]} \${i + 1}. haberimizde detaylı bilgi veriliyor. Trabzon ve Türkiye genelindeki gelişmeleri takip edin.`,
-       time: `\${Math.floor(Math.random() * 24)} saat önce`,
-       location: ["Trabzon", "İstanbul", "Ankara", "İzmir", "Türkiye Geneli"][Math.floor(Math.random() * 5)]
-     });
-   }
-   return newsData;
+ const locations = ["Trabzon", "İstanbul", "Ankara", "İzmir", "Antalya", "Bursa", "Adana", "Gaziantep", "Türkiye Geneli"];
+
+ // 100 Haber Oluşturma
+ const allNews = ;
+ for (let i = 0; i < 100; i++) {
+ const catIndex = Math.floor(Math.random() * categories.length);
+ const imgIndex = Math.floor(Math.random() * images.length);
+ const titleIndex = Math.floor(Math.random() * titles.length);
+ const textIndex = Math.floor(Math.random() * texts.length);
+ 
+ // Rastgele zaman (0-60 dk önce)
+ const timeMin = Math.floor(Math.random() * 60);
+ let timeStr = timeMin < 60 ? `\${timeMin} dk önce` : `\${Math.floor(timeMin/60)} saat önce`;
+
+ allNews.push({
+ id: i,
+ category: categories[catIndex],
+ image: images[imgIndex],
+ title: titles[titleIndex] + (Math.random() > 0.5 ? " " + (i+1) : ""),
+ text: texts[textIndex] + " " + (i+1) + ". haberimizde detaylı bilgi veriliyor. Trabzon ve Türkiye genelindeki gelişmeleri takip edin.",
+ time: timeStr,
+ location: locations[Math.floor(Math.random() * locations.length)],
+ views: Math.floor(Math.random() * 5000) + 100
+ });
  }
 
- const allNews = generateNews();
-
- // Haberleri Ekrana Basma
- function renderNews(data, containerId) {
-   const container = document.getElementById(containerId);
-   container.innerHTML = '';
-   
-   data.forEach(news => {
-     const card = document.createElement('article');
-     card.className = 'news-card';
-     card.innerHTML = `
-       <div class="card-image">
-         <img src="\${news.image}" alt="\${news.title}">
-         <span class="card-badge" style="background-color: \${news.category.color}">\${news.category.badge}</span>
-         <span class="card-category">\${news.category.name}</span>
-       </div>
-       <div class="card-body">
-         <div class="card-meta">🕒 \${news.time} • 📍 \${news.location}</div>
-         <h3 class="card-title">\${news.title}</h3>
-         <p class="card-text">\${news.text}</p>
-         <button class="read-more-btn" onclick="openNewsModal('\${news.title}', '\${news.text}', '\${news.image}')">Haberi Oku →</button>
-       </div>
-     `;
-     container.appendChild(card);
-   });
+ // Haberleri Dağıtma
+ function renderNews(data, containerId, limit = null) {
+ const container = document.getElementById(containerId);
+ container.innerHTML = '';
+ const items = limit ? data.slice(0, limit) : data;
+ 
+ items.forEach(news => {
+ const card = document.createElement('article');
+ card.className = 'news-card';
+ card.innerHTML = `
+ <div class="card-image">
+ <img src="\${news.image}" alt="\${news.title}">
+ <span class="card-badge \${news.category.cls}">\${news.category.badge}</span>
+ <span class="card-category">\${news.category.name}</span>
+ </div>
+ <div class="card-body">
+ <div class="card-meta"><span>🕒 \${news.time}</span><span>📍 \${news.location}</span></div>
+ <h3 class="card-title">\${news.title}</h3>
+ <p class="card-text">\${news.text}</p>
+ <button class="read-more-btn" onclick="openNewsModal('\${news.title.replace(/'/g, "\\'")}', '\${news.text.replace(/'/g, "\\'")}', '\${news.image}')">Haberi Oku →</button>
+ </div>
+ `;
+ container.appendChild(card);
+ });
  }
 
- // Haberleri Kategorilere Göre Dağıtma
- function distributeNews() {
-   renderNews(allNews.slice(0, 15), 'breaking-news'); // İlk 15 son dakika
-   renderNews(allNews.slice(15, 30), 'tech-news'); // Sonraki 15 teknoloji/ekonomi
-   renderNews(allNews.slice(30, 40), 'health-news'); // Sonraki 10 sağlık/eğitim
-   renderNews(allNews.slice(40, 50), 'sport-news'); // Son 10 spor
- }
-
- // Sayfa Yüklendiğinde Haberleri Göster
- window.onload = distributeNews;
-
- // Menü Aç/Kapa
- function toggleMenu() {
-   const menu = document.getElementById('main-menu');
-   menu.classList.toggle('active');
- }
-
- // Sayfa Kaydırma
- function scrollToSection(id) {
-   const element = document.getElementById(id);
-   if(element) {
-     element.scrollIntoView({ behavior: 'smooth' });
-   }
-   if(window.innerWidth <= 768) {
-     document.getElementById('main-menu').classList.remove('active');
-   }
- }
-
- // Haber Detay Modalı Açma
- function openNewsModal(title, text, imgUrl) {
-   document.getElementById('modalTitle').textContent = title;
-   document.getElementById('modalText').textContent = text + "\n\nDetaylı analizler, yazar yorumları ve güncel gelişmeler için sitemizi takip etmeye devam edin. Bu haberimizde yer verilen bilgiler resmi kaynaklardan derlenmiştir.";
-   document.getElementById('modalImg').src = imgUrl;
-   document.getElementById('modalViews').textContent = Math.floor(Math.random() * 5000) + 500;
-   document.getElementById('newsModal').style.display = 'flex';
-   document.body.style.overflow = 'hidden';
- }
-
- // Reklam Modalı Açma
- function openAdModal() {
-   document.getElementById('adModal').style.display = 'flex';
-   document.body.style.overflow = 'hidden';
- }
-
- // Modal Kapatma
- function closeModal(modalId) {
-   document.getElementById(modalId).style.display = 'none';
-   document.body.style.overflow = 'auto';
- }
+ // Sayfa Yüklendiğinde
+ window.onload = function() {
+ renderNews(allNews, 'breaking-news', 12); // İlk 12 son dakika
+ renderNews(allNews.slice(12, 60), 'main-news', 48); // Sonraki 48 ana haber
+ renderNews(allNews.slice(60, 100), 'sport-news', 40); // Son 40 spor/yaşam
+ 
+ // Canlı sayaç animasyonu
+ setInterval(() => {
+ const count = Math.floor(Math.random() * (100 - 10 + 1)) + 10;
+ document.getElementById('liveCount').textContent = count;
+ }, 2000);
+ };
 
  // Arama Filtreleme
  function filterNews() {
-   const input = document.getElementById('searchInput').value.toLowerCase();
-   const cards = document.querySelectorAll('.news-card');
-
-   cards.forEach(card => {
-     const title = card.querySelector('.card-title').textContent.toLowerCase();
-     const text = card.querySelector('.card-text').textContent.toLowerCase();
-     const category = card.querySelector('.card-category') ? card.querySelector('.card-category').textContent.toLowerCase() : '';
-     
-     if (title.includes(input) || text.includes(input) || category.includes(input)) {
-       card.style.display = 'flex';
-     } else {
-       card.style.display = 'none';
-     }
-   });
+ const input = document.getElementById('searchInput').value.toLowerCase();
+ const cards = document.querySelectorAll('.news-card');
+ cards.forEach(card => {
+ const title = card.querySelector('.card-title').textContent.toLowerCase();
+ const text = card.querySelector('.card-text').textContent.toLowerCase();
+ const cat = card.querySelector('.card-category').textContent.toLowerCase();
+ if (title.includes(input) || text.includes(input) || cat.includes(input)) {
+ card.style.display = 'flex';
+ } else {
+ card.style.display = 'none';
+ }
+ });
  }
 
- // Sohbet Penceresi Aç/Kapa
+ // Modal İşlemleri
+ function openNewsModal(title, text, img) {
+ document.getElementById('modalTitle').textContent = title;
+ document.getElementById('modalText').textContent = text + "\n\nDetaylı analizler, yazar yorumları ve güncel gelişmeler için sitemizi takip etmeye devam edin.";
+ document.getElementById('modalImg').src = img;
+ document.getElementById('modalViews').textContent = Math.floor(Math.random() * 5000) + 500;
+ document.getElementById('newsModal').style.display = 'flex';
+ document.body.style.overflow = 'hidden';
+ }
+ function openAdModal() { document.getElementById('adModal').style.display = 'flex'; document.body.style.overflow = 'hidden'; }
+ function closeModal(id) { document.getElementById(id).style.display = 'none'; document.body.style.overflow = 'auto'; }
+
+ // Menü ve Scroll
+ function toggleMenu() { document.getElementById('main-menu').classList.toggle('active'); }
+ function scrollToSection(id) {
+ document.getElementById(id).scrollIntoView({ behavior: 'smooth' });
+ if(window.innerWidth <= 768) document.getElementById('main-menu').classList.remove('active');
+ }
+
+ // Chatbot (Shopnex AI)
  function toggleChat() {
-   const chatWindow = document.getElementById('chatWindow');
-   if (chatWindow.style.display === 'flex') {
-     chatWindow.style.display = 'none';
-   } else {
-     chatWindow.style.display = 'flex';
-     document.getElementById('userInput').focus();
-   }
+ const w = document.getElementById('chatWindow');
+ w.style.display = w.style.display === 'flex' ? 'none' : 'flex';
+ if(w.style.display === 'flex') document.getElementById('userInput').focus();
  }
-
- // Mesaj Gönderme (Akıllı Shopnex)
  function sendMessage() {
-   const input = document.getElementById('userInput');
-   const message = input.value.trim();
-   const chatBody = document.getElementById('chatBody');
+ const input = document.getElementById('userInput');
+ const msg = input.value.trim();
+ if(!msg) return;
+ const body = document.getElementById('chatBody');
+ 
+ const userDiv = document.createElement('div');
+ userDiv.className = 'message user';
+ userDiv.textContent = msg;
+ body.appendChild(userDiv);
+ input.value = '';
+ body.scrollTop = body.scrollHeight;
 
-   if (message === "") return;
-
-   const userMsg = document.createElement('div');
-   userMsg.className = 'message user';
-   userMsg.textContent = message;
-   chatBody.appendChild(userMsg);
-
-   input.value = "";
-   chatBody.scrollTop = chatBody.scrollHeight;
-
-   setTimeout(() => {
-     let aiResponse = "";
-     const lowerMsg = message.toLowerCase();
-
-     // Duygusal ve Akıcı Cevaplar
-     if (lowerMsg.includes("merhaba") || lowerMsg.includes("selam") || lowerMsg.includes("iyi günler")) {
-       aiResponse = "Merhaba! 👋 Bugün sana nasıl yardımcı olabilirim? İş ilanları mı arıyorsun, yoksa son dakika haberlerini mi takip etmek istersin?";
-     } else if (lowerMsg.includes("nasılsın") || lowerMsg.includes("halin hatırın")) {
-       aiResponse = "Ben çok iyiyim, teşekkür ederim! 😊 Sen nasılsın? Bugün nasıl geçti? Haberlerimiz arasında gezinebilir veya iş ilanlarına bakabiliriz.";
-     } else if (lowerMsg.includes("yorgunum") || lowerMsg.includes("üzgünüm") || lowerMsg.includes("kötüyüm")) {
-       aiResponse = "Çok üzgünüm böyle hissettiğin için. 😟 Bazen dinlenmek gerekir. Belki biraz haber okumak seni rahatlatabilir veya sadece sohbet edebiliriz. Yanındayım.";
-     } else if (lowerMsg.includes("iyiyim") || lowerMsg.includes("teşekkürler")) {
-       aiResponse = "Harika! 😊 İyi olman beni mutlu etti. Bugün seni güldürecek başka bir haber bulmamı ister misin?";
-     } else if (lowerMsg.includes("iş") || lowerMsg.includes("ilan")) {
-       aiResponse = "Trabzon ve Türkiye genelindeki güncel iş ilanlarını senin için listeleyebilirim. Hangi sektörde arama yapıyorsun? Mühendislik, sağlık, satış mı?";
-     } else if (lowerMsg.includes("reklam") || lowerMsg.includes("iş birliği")) {
-       aiResponse = "Reklam veya iş birliği talepleriniz için sağ alttaki yeşil butona tıklayarak formu doldurabilirsiniz. En kısa sürede dönüş yapacağız! 📢";
-     } else if (lowerMsg.includes("haber") || lowerMsg.includes("son dakika")) {
-       aiResponse = "Son dakika haberlerini yukarıda görebilirsin. Özellikle hangi konuda bilgi almak istersin? Spor, ekonomi veya teknoloji?";
-     } else if (lowerMsg.includes("shopnex") || lowerMsg.includes("sen kimsin")) {
-       aiResponse = "Ben Shopnex! 🤖 Bu sitenin yapay zeka asistanıyım. Site tasarımı, haber akışı ve kullanıcı deneyimi konusunda seni desteklemek için buradayım.";
-     } else if (lowerMsg.includes("trabzonspor") || lowerMsg.includes("spor")) {
-       aiResponse = "Trabzonspor ile ilgili son gelişmeleri, maç analizlerini ve transfer haberlerini hemen yukarıdaki Spor bölümünde bulabilirsin! ⚽";
-     } else if (lowerMsg.includes("sağlık") || lowerMsg.includes("hastalık")) {
-       aiResponse = "Sağlık bölümümüzde yaz hastalıklarından korunma rehberi ve güncel sağlık haberleri yer alıyor. İlgilenen habere tıklayarak detaylara ulaşabilirsin.";
-     } else if (lowerMsg.includes("teşekkür") || lowerMsg.includes("teşekkürler")) {
-       aiResponse = "Rica ederim! Her zaman yanıbaşındayım. Başka bir konuda yardıma ihtiyacın olursa bana yazabilirsin. 😊";
-     } else {
-       aiResponse = "Bu konuda sana şu an daha fazla detay verebilmem için biraz daha bilgiye ihtiyacım var. Sorunu biraz daha açıklayabilir misin? Veya menüden ilgili kategoriyi seçebilirsin.";
-     }
-
-     const aiMsg = document.createElement('div');
-     aiMsg.className = 'message ai';
-     aiMsg.innerHTML = aiResponse;
-     chatBody.appendChild(aiMsg);
-     chatBody.scrollTop = chatBody.scrollHeight;
-   }, 800);
+ setTimeout(() => {
+ let reply = "";
+ const l = msg.toLowerCase();
+ if(l.includes("merhaba") || l.includes("selam")) reply = "Merhaba! 👋 Bugün sana nasıl yardımcı olabilirim?";
+ else if(l.includes("nasılsın")) reply = "Ben çok iyiyim, teşekkür ederim! 😊 Sen nasılsın?";
+ else if(l.includes("yorgunum") || l.includes("üzgünüm")) reply = "Çok üzgünüm böyle hissettiğin için. 😟 Biraz dinlenmek iyi gelebilir. Yanındayım.";
+ else if(l.includes("iyiyim") || l.includes("teşekkür")) reply = "Harika! 😊 İyi olman beni mutlu etti.";
+ else if(l.includes("iş") || l.includes("ilan")) reply = "Trabzon ve Türkiye genelindeki güncel iş ilanlarını senin için listeleyebilirim. Hangi sektörde arama yapıyorsun?";
+ else if(l.includes("reklam")) reply = "Reklam veya iş birliği için sağ alttaki yeşil butona tıklayabilirsin! 📢";
+ else if(l.includes("haber") || l.includes("son dakika")) reply = "Son dakika haberlerini yukarıda görebilirsin. Hangi konuda bilgi istersin?";
+ else if(l.includes("shopnex") || l.includes("sen kimsin")) reply = "Ben Shopnex! 🤖 Bu sitenin yapay zeka asistanıyım. Her soruna cevap vermeye çalışırım.";
+ else if(l.includes("trabzonspor")) reply = "Trabzonspor ile ilgili son gelişmeleri yukarıdaki Spor bölümünde bulabilirsin! ⚽";
+ else reply = "Bu konuda biraz daha bilgiye ihtiyacım var. Sorunu biraz daha açıklayabilir misin?";
+ 
+ const aiDiv = document.createElement('div');
+ aiDiv.className = 'message ai';
+ aiDiv.innerHTML = reply;
+ body.appendChild(aiDiv);
+ body.scrollTop = body.scrollHeight;
+ }, 800);
  }
-
- function handleKeyPress(e) {
-   if (e.key === 'Enter') {
-     sendMessage();
-   }
- }
-
- // Modal dışına tıklayınca kapatma
- window.onclick = function(event) {
-   if (event.target.classList.contains('modal-overlay')) {
-     event.target.style.display = 'none';
-     document.body.style.overflow = 'auto';
-   }
- }
+ function handleKeyPress(e) { if(e.key === 'Enter') sendMessage(); }
+ window.onclick = function(e) {
+ if(e.target.classList.contains('modal-overlay')) e.target.style.display = 'none';
+ };
  </script>
 </body>
 </html>

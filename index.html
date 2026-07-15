@@ -1,546 +1,228 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="tr">
-<head>
- <meta charset="UTF-8">
- <meta name="viewport" content="width=device-width, initial-scale=1.0">
- <title>Trabzon İş İlanları | Canlı Haber & Shopnex AI</title>
- <style>
- :root {
- --primary-blue: #003366;
- --secondary-blue: #00509e;
- --accent-bg: #f4f6f9;
- --white: #ffffff;
- --text-dark: #1a1a1a;
- --text-gray: #555555;
- --border-color: #e0e0e0;
- --success: #28a745;
- --danger: #dc3545;
- --warning: #ffc107;
- --info: #17a2b8;
- --shadow-soft: 0 4px 20px rgba(0,0,0,0.08);
- --shadow-hover: 0 10px 30px rgba(0, 68, 204, 0.15);
- }
+ <head><script>window["__codeletBootstrap__"]=JSON.parse('{"A":"A","B":"20260715-05-d05fd84"}');</script><script src="/_sdk/f432b76fb310b513.telemetry_sdk.js" integrity="sha512-9FJQ55EKmmqhyyik8BhrMVfm0+iYYfb8uOlRsjtkxJMEI97qOVEI4PnHohDjQAtvAep0IOEpdQ64eki0sz62ug=="></script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Trabzon İş İlanları Haber</title>
+  <script src="https://cdn.tailwindcss.com/3.4.17"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Work+Sans:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/lucide@0.263.0/dist/umd/lucide.min.js"></script>
+  <style>
+    body { font-family: 'Work Sans', sans-serif; }
+    .nav-overlay { transition: opacity 0.3s; }
+    .nav-panel { transition: transform 0.3s; }
+    .nav-panel.closed { transform: translateX(-100%); }
+    .chat-panel { transition: transform 0.3s, opacity 0.3s; transform: translateY(20px); opacity: 0; pointer-events: none; }
+    .chat-panel.open { transform: translateY(0); opacity: 1; pointer-events: auto; }
+  </style>
+  <script src="/_sdk/e3937a0574eb2d69.data_sdk.js" type="text/javascript" integrity="sha512-xbp/ACqEQy1aDxYMtXTrR3y5MUbzxuggRR/9sD48Gl4VhLMMCiAHsxMaFV6DTdeBpR6ymF+t2zhPKYkWM3+Jfw=="></script>
+  <script src="/_sdk/9432170dbd2ae0df.resizing_sdk.js" type="text/javascript" integrity="sha512-FeT+58sb1f9ejWPWFjCbJvTT+SDwGV+ngrHUnlO7TWEOoqwOLj6p256kO3vOL7DIWl1cIgrobiof8v2bOigwPg=="></script>
+ </head>
+ <body data-template-id="__page-root" class="w-full min-h-screen">
+  <header data-template-id="header-bar" class="canva-header sticky top-0 z-40 shadow-md">
+   <div class="flex items-center justify-between px-4 py-3 max-w-7xl mx-auto"><button id="menu-btn" class="p-2" aria-label="Menü"><i data-lucide="menu" class="w-6 h-6"></i></button>
+    <h1 data-template-id="site-title" class="canva-text font-extrabold text-lg md:text-xl"></h1><button id="search-toggle" class="p-2" aria-label="Arama"><i data-lucide="search" class="w-5 h-5"></i></button>
+   </div>
+   <div id="search-bar" class="hidden px-4 pb-3 max-w-7xl mx-auto"><input id="search-input" type="text" placeholder="Haber ara..." class="w-full px-4 py-2 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-red-500">
+   </div>
+  </header>
+  <div id="nav-overlay" class="nav-overlay fixed inset-0 bg-black/50 z-50 hidden" onclick="closeNav()"></div>
+  <nav id="nav-panel" class="nav-panel closed fixed top-0 left-0 h-full w-72 z-50 shadow-xl overflow-y-auto" role="navigation">
+   <div data-template-id="nav-bg" class="canva-sidebar h-full p-6">
+    <div class="flex justify-between items-center mb-8"><span data-template-id="nav-title" class="canva-text font-bold text-xl"></span> <button onclick="closeNav()" aria-label="Kapat"><i data-lucide="x" class="w-6 h-6"></i></button>
+    </div>
+    <ul class="space-y-4">
+     <li><a href="#" class="flex items-center gap-3 text-lg font-medium hover:opacity-80" data-template-id="nav-home">🏠 <span></span></a></li>
+     <li><a href="#son-haberler" class="flex items-center gap-3 text-lg font-medium hover:opacity-80" data-template-id="nav-latest">📰 <span></span></a></li>
+     <li><a href="#son-dakika" class="flex items-center gap-3 text-lg font-medium hover:opacity-80" data-template-id="nav-breaking">🔥 <span></span></a></li>
+     <li><a href="#" id="nav-search-btn" class="flex items-center gap-3 text-lg font-medium hover:opacity-80" data-template-id="nav-search">🔍 <span></span></a></li>
+     <li><a href="https://www.instagram.com/trabzon_is_ilani" target="_blank" rel="noopener noreferrer" class="flex items-center gap-3 text-lg font-medium hover:opacity-80" data-template-id="nav-contact">📞 <span></span></a></li>
+    </ul>
+   </div>
+  </nav>
+  <main class="w-full">
+   <section id="son-haberler" class="max-w-7xl mx-auto px-4 py-6">
+    <h2 data-template-id="section-latest-title" class="canva-text font-bold mb-4"></h2>
+    <div class="grid md:grid-cols-2 gap-4">
+     <div class="relative rounded-xl overflow-hidden shadow-lg aspect-video"><img data-template-id="hero-img" class="canva-image w-full h-full object-cover" loading="lazy">
+      <div class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/80 to-transparent p-4"><span data-template-id="hero-badge" class="canva-tag text-xs font-bold px-2 py-1 rounded"></span>
+       <h3 data-template-id="hero-headline" class="canva-text text-white font-bold mt-2"></h3>
+      </div>
+     </div>
+     <div class="grid grid-rows-2 gap-4">
+      <div class="relative rounded-xl overflow-hidden shadow-lg"><img data-template-id="news2-img" class="canva-image w-full h-full object-cover" loading="lazy">
+       <div class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/80 to-transparent p-3">
+        <h4 data-template-id="news2-headline" class="canva-text text-white font-semibold text-sm"></h4>
+       </div>
+      </div>
+      <div class="relative rounded-xl overflow-hidden shadow-lg"><img data-template-id="news3-img" class="canva-image w-full h-full object-cover" loading="lazy">
+       <div class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/80 to-transparent p-3">
+        <h4 data-template-id="news3-headline" class="canva-text text-white font-semibold text-sm"></h4>
+       </div>
+      </div>
+     </div>
+    </div>
+   </section>
+   <section id="son-dakika" class="max-w-7xl mx-auto px-4 py-6">
+    <h2 data-template-id="section-breaking-title" class="canva-text font-bold mb-4"></h2>
+    <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
+     <article data-template-id="breaking-card-1" class="canva-card rounded-xl overflow-hidden shadow-lg"><img data-template-id="breaking-1-img" class="canva-image w-full h-40 object-cover" loading="lazy">
+      <div class="p-4">
+       <h3 data-template-id="breaking-1-title" class="canva-text font-semibold"></h3>
+       <p data-template-id="breaking-1-desc" class="canva-text text-sm mt-1 opacity-70"></p>
+      </div>
+     </article>
+     <article data-template-id="breaking-card-2" class="canva-card rounded-xl overflow-hidden shadow-lg"><img data-template-id="breaking-2-img" class="canva-image w-full h-40 object-cover" loading="lazy">
+      <div class="p-4">
+       <h3 data-template-id="breaking-2-title" class="canva-text font-semibold"></h3>
+       <p data-template-id="breaking-2-desc" class="canva-text text-sm mt-1 opacity-70"></p>
+      </div>
+     </article>
+     <article data-template-id="breaking-card-3" class="canva-card rounded-xl overflow-hidden shadow-lg"><img data-template-id="breaking-3-img" class="canva-image w-full h-40 object-cover" loading="lazy">
+      <div class="p-4">
+       <h3 data-template-id="breaking-3-title" class="canva-text font-semibold"></h3>
+       <p data-template-id="breaking-3-desc" class="canva-text text-sm mt-1 opacity-70"></p>
+      </div>
+     </article>
+    </div>
+   </section>
+   <section class="max-w-7xl mx-auto px-4 py-6">
+    <h2 data-template-id="section-sports-title" class="canva-text font-bold mb-4"></h2>
+    <div class="grid sm:grid-cols-2 gap-4">
+     <article data-template-id="sport-card-1" class="canva-card rounded-xl overflow-hidden shadow-lg"><img data-template-id="sport-1-img" class="canva-image w-full h-44 object-cover" loading="lazy">
+      <div class="p-4">
+       <h3 data-template-id="sport-1-title" class="canva-text font-semibold"></h3>
+      </div>
+     </article>
+     <article data-template-id="sport-card-2" class="canva-card rounded-xl overflow-hidden shadow-lg"><img data-template-id="sport-2-img" class="canva-image w-full h-44 object-cover" loading="lazy">
+      <div class="p-4">
+       <h3 data-template-id="sport-2-title" class="canva-text font-semibold"></h3>
+      </div>
+     </article>
+    </div>
+   </section>
+   <section class="max-w-7xl mx-auto px-4 py-6">
+    <h2 data-template-id="section-tech-title" class="canva-text font-bold mb-4"></h2>
+    <article data-template-id="tech-card" class="canva-card rounded-xl overflow-hidden shadow-lg"><img data-template-id="tech-img" class="canva-image w-full h-48 object-cover" loading="lazy">
+     <div class="p-4">
+      <h3 data-template-id="tech-headline" class="canva-text font-semibold"></h3>
+      <p data-template-id="tech-desc" class="canva-text text-sm mt-1 opacity-70"></p>
+     </div>
+    </article>
+   </section>
+   <section class="max-w-7xl mx-auto px-4 py-6">
+    <h2 data-template-id="section-edu-title" class="canva-text font-bold mb-4"></h2>
+    <article data-template-id="edu-card" class="canva-card rounded-xl overflow-hidden shadow-lg"><img data-template-id="edu-img" class="canva-image w-full h-48 object-cover" loading="lazy">
+     <div class="p-4">
+      <h3 data-template-id="edu-headline" class="canva-text font-semibold"></h3>
+      <p data-template-id="edu-desc" class="canva-text text-sm mt-1 opacity-70"></p>
+     </div>
+    </article>
+   </section>
+   <section class="max-w-7xl mx-auto px-4 py-6">
+    <h2 data-template-id="section-health-title" class="canva-text font-bold mb-4"></h2>
+    <article data-template-id="health-card" class="canva-card rounded-xl overflow-hidden shadow-lg"><img data-template-id="health-img" class="canva-image w-full h-48 object-cover" loading="lazy">
+     <div class="p-4">
+      <h3 data-template-id="health-headline" class="canva-text font-semibold"></h3>
+      <p data-template-id="health-desc" class="canva-text text-sm mt-1 opacity-70"></p>
+     </div>
+    </article>
+   </section>
+  </main><!-- Footer -->
+  <footer data-template-id="footer-section" class="canva-footer w-full py-6 mt-8">
+   <p data-template-id="footer-text" class="canva-text text-center text-sm opacity-70"></p>
+   <p data-template-id="footer-copyright" class="canva-text text-center text-xs mt-2 opacity-50"></p>
+  </footer><!-- Fixed bottom buttons: Instagram + AI -->
+  <div class="fixed bottom-4 right-4 z-50 flex flex-col items-center gap-3"><a href="https://www.instagram.com/trabzon_is_ilani" target="_blank" rel="noopener noreferrer" data-template-id="instagram-btn" class="canva-button w-14 h-14 rounded-full flex items-center justify-center shadow-lg hover:scale-110 transition-transform" aria-label="Instagram">
+    <svg width="28" height="28" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+     <rect x="2" y="2" width="20" height="20" rx="5" ry="5" /><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z" /><line x1="17.5" y1="6.5" x2="17.51" y2="6.5" />
+    </svg></a> <button id="ai-toggle" data-template-id="ai-btn" class="canva-button w-16 h-16 rounded-full flex items-center justify-center shadow-xl hover:scale-110 transition-transform" aria-label="ShopNex AI">
+    <svg width="32" height="32" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+     <circle cx="12" cy="10" r="4" /><path d="M12 2v2M12 14v2M4.93 4.93l1.41 1.41M17.66 6.34l1.41-1.41M2 10h2M20 10h2M6.34 17.66l-1.41 1.41M17.66 17.66l1.41 1.41" /><rect x="8" y="16" width="8" height="5" rx="2" /><circle cx="10" cy="9" r="0.5" fill="currentColor" /><circle cx="14" cy="9" r="0.5" fill="currentColor" /><path d="M10 11.5c.83.5 3.17.5 4 0" />
+    </svg></button>
+  </div><!-- Chat Panel -->
+  <div id="chat-panel" class="chat-panel fixed bottom-24 right-4 z-50 w-80 max-w-[calc(100vw-2rem)] bg-white rounded-2xl shadow-2xl border border-gray-200 flex flex-col overflow-hidden" style="height: 420px;">
+   <div data-template-id="chat-header" class="canva-header flex items-center justify-between px-4 py-3"><span data-template-id="chat-title" class="canva-text font-bold text-sm"></span> <button id="chat-close" class="p-1 hover:opacity-70" aria-label="Kapat"><i data-lucide="x" class="w-5 h-5"></i></button>
+   </div>
+   <div id="chat-messages" class="flex-1 overflow-y-auto p-4 space-y-3">
+    <div class="bg-gray-100 rounded-xl px-3 py-2 text-sm max-w-[85%]">
+     Merhaba! Ben ShopNex AI. Size nasıl yardımcı olabilirim?
+    </div>
+   </div>
+   <form id="chat-form" class="flex items-center gap-2 p-3 border-t border-gray-100"><input id="chat-input" type="text" placeholder="Bir soru sorun..." class="flex-1 px-3 py-2 rounded-lg border border-gray-200 text-sm focus:outline-none focus:ring-2 focus:ring-red-500"> <button type="submit" class="bg-red-600 text-white p-2 rounded-lg hover:bg-red-700"><i data-lucide="send" class="w-4 h-4"></i></button>
+   </form>
+  </div>
+  <script src="/_sdk/0e8f359d3c23f6d5.editing_sdk.js" integrity="sha512-CBLuYm/olmgyMedTtPRFeqCRZcSWUh6/39ewyXAbnr1dsVHBACzZ59KGJZXvuWNHOHixfWegfuMN9JzmLEDIoA=="></script>
+  <script>
+    lucide.createIcons();
 
- * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', 'Roboto', Helvetica, Arial, sans-serif; }
- body { background-color: var(--accent-bg); color: var(--text-dark); line-height: 1.6; padding-bottom: 120px; }
+    // Nav
+    const menuBtn = document.getElementById('menu-btn');
+    const navOverlay = document.getElementById('nav-overlay');
+    const navPanel = document.getElementById('nav-panel');
+    const searchToggle = document.getElementById('search-toggle');
+    const searchBar = document.getElementById('search-bar');
 
- /* Header */
- header {
- background: linear-gradient(135deg, var(--primary-blue), var(--secondary-blue));
- color: var(--white);
- position: sticky; top: 0; z-index: 1000;
- box-shadow: 0 4px 15px rgba(0,0,0,0.2);
- height: 80px; display: flex; align-items: center;
- }
- .header-content { max-width: 1200px; width: 100%; margin: 0 auto; padding: 0 20px; display: flex; justify-content: space-between; align-items: center; }
- .logo { font-size: 1.8rem; font-weight: 800; text-transform: uppercase; letter-spacing: 1px; color: var(--white); text-decoration: none; display: flex; align-items: center; gap: 10px; }
- .logo span { color: #ffd700; }
- nav ul { display: flex; list-style: none; gap: 25px; }
- nav ul li a { color: rgba(255,255,255,0.9); text-decoration: none; font-size: 1rem; font-weight: 600; padding: 8px 16px; border-radius: 20px; transition: all 0.3s; cursor: pointer; }
- nav ul li a:hover, nav ul li a.active { background-color: rgba(255,255,255,0.2); transform: translateY(-2px); }
- .menu-toggle { display: none; flex-direction: column; cursor: pointer; }
- .menu-toggle span { width: 25px; height: 3px; background-color: var(--white); margin: 3px 0; transition: 0.3s; border-radius: 2px; }
+    menuBtn.addEventListener('click', () => { navOverlay.classList.remove('hidden'); navPanel.classList.remove('closed'); });
+    function closeNav() { navOverlay.classList.add('hidden'); navPanel.classList.add('closed'); }
+    navPanel.querySelectorAll('a[href^="#"]').forEach(a => a.addEventListener('click', closeNav));
+    document.getElementById('nav-search-btn').addEventListener('click', (e) => { e.preventDefault(); closeNav(); searchBar.classList.remove('hidden'); document.getElementById('search-input').focus(); });
+    searchToggle.addEventListener('click', () => { searchBar.classList.toggle('hidden'); if (!searchBar.classList.contains('hidden')) document.getElementById('search-input').focus(); });
 
- /* Live Indicator */
- .live-indicator {
- display: flex; align-items: center; gap: 8px; background: rgba(0,0,0,0.3); padding: 5px 12px; border-radius: 20px; font-size: 0.8rem; font-weight: bold;
- animation: pulse-live 2s infinite;
- }
- @keyframes pulse-live { 0% { opacity: 1; } 50% { opacity: 0.7; } 100% { opacity: 1; } }
- .live-dot { width: 10px; height: 10px; background-color: var(--danger); border-radius: 50%; box-shadow: 0 0 8px var(--danger); }
+    // AI Chat
+    const chatPanel = document.getElementById('chat-panel');
+    const aiToggle = document.getElementById('ai-toggle');
+    const chatClose = document.getElementById('chat-close');
+    const chatForm = document.getElementById('chat-form');
+    const chatInput = document.getElementById('chat-input');
+    const chatMessages = document.getElementById('chat-messages');
 
- /* Container */
- .container { max-width: 1200px; margin: 30px auto; padding: 0 20px; }
+    aiToggle.addEventListener('click', () => chatPanel.classList.toggle('open'));
+    chatClose.addEventListener('click', () => chatPanel.classList.remove('open'));
 
- /* Search */
- .search-container { position: relative; max-width: 600px; margin: 0 auto 40px auto; }
- .search-input { width: 100%; padding: 15px 25px; font-size: 1.1rem; border: none; border-radius: 50px; box-shadow: var(--shadow-soft); outline: none; transition: all 0.3s; background: white; color: var(--text-dark); }
- .search-input:focus { box-shadow: 0 0 0 4px rgba(0,68,204,0.2); transform: scale(1.02); }
- .search-icon { position: absolute; right: 25px; top: 50%; transform: translateY(-50%); color: var(--primary-blue); font-size: 1.2rem; pointer-events: none; }
+    const responses = {
+      'merhaba': 'Merhaba! Size nasıl yardımcı olabilirim?',
+      'selam': 'Selam! Sorunuz nedir?',
+      'trabzon': 'Trabzon, Karadeniz\'in incisi! İş ilanları ve haberler için doğru yerdesiniz.',
+      'iş': 'Güncel iş ilanlarını sitemizde takip edebilirsiniz. Instagram hesabımızdan da ilanları görebilirsiniz.',
+      'hava': 'Karadeniz bölgesinde değişken hava koşulları bekleniyor. Şemsiyenizi yanınıza alın!',
+      'trabzonspor': 'Trabzonspor taraftarı olarak gurur duymalısınız! En güncel spor haberleri sitemizde.',
+      'iletişim': 'Instagram üzerinden bize ulaşabilirsiniz: @trabzon_is_ilani',
+      'teşekkür': 'Rica ederim! Başka sorunuz varsa yardımcı olmaktan memnuniyet duyarım.',
+    };
 
- /* Sections */
- .section-title { font-size: 1.8rem; color: var(--primary-blue); margin-bottom: 25px; margin-top: 50px; display: flex; align-items: center; gap: 15px; }
- .section-title::after { content: ''; flex-grow: 1; height: 2px; background: linear-gradient(to right, var(--primary-blue), transparent); margin-left: 20px; opacity: 0.3; }
+    function getAIResponse(msg) {
+      const lower = msg.toLowerCase().trim();
+      for (const [key, val] of Object.entries(responses)) {
+        if (lower.includes(key)) return val;
+      }
+      return 'Bu konuda size yardımcı olabilirim. Daha fazla detay verir misiniz? ShopNex olarak her konuda net cevaplar sunmaya çalışıyorum.';
+    }
 
- /* News Grid */
- .news-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 25px; }
- .news-card { background: var(--white); border-radius: 12px; overflow: hidden; box-shadow: var(--shadow-soft); transition: all 0.4s ease; display: flex; flex-direction: column; border: 1px solid var(--border-color); }
- .news-card:hover { transform: translateY(-10px); box-shadow: var(--shadow-hover); }
- .card-image { height: 180px; width: 100%; background-color: #e9ecef; position: relative; overflow: hidden; }
- .card-image img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.5s ease; }
- .news-card:hover .card-image img { transform: scale(1.1); }
- .card-badge { position: absolute; top: 15px; left: 15px; padding: 4px 10px; border-radius: 15px; font-size: 0.7rem; font-weight: bold; text-transform: uppercase; z-index: 2; color: white; }
- .badge-breaking { background-color: var(--danger); }
- .badge-trending { background-color: var(--warning); color: #333; }
- .badge-new { background-color: var(--success); }
- .card-category { position: absolute; top: 15px; right: 15px; background-color: rgba(0,0,0,0.7); color: white; padding: 4px 10px; border-radius: 15px; font-size: 0.7rem; backdrop-filter: blur(5px); }
- .card-body { padding: 20px; flex-grow: 1; display: flex; flex-direction: column; }
- .card-meta { font-size: 0.8rem; color: #888; margin-bottom: 10px; display: flex; justify-content: space-between; }
- .card-title { font-size: 1.2rem; margin-bottom: 10px; color: var(--primary-blue); line-height: 1.3; font-weight: 700; min-height: 50px; }
- .card-text { font-size: 0.9rem; color: var(--text-gray); margin-bottom: 15px; line-height: 1.5; flex-grow: 1; display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden; }
- .read-more-btn { display: inline-block; background: linear-gradient(90deg, var(--primary-blue), var(--secondary-blue)); color: white; text-decoration: none; padding: 10px 20px; border-radius: 8px; font-size: 0.9rem; font-weight: 600; text-align: center; transition: all 0.3s; border: none; cursor: pointer; width: 100%; }
- .read-more-btn:hover { background: linear-gradient(90deg, var(--secondary-blue), var(--primary-blue)); box-shadow: 0 4px 10px rgba(0,68,204,0.3); }
+    chatForm.addEventListener('submit', (e) => {
+      e.preventDefault();
+      const msg = chatInput.value.trim();
+      if (!msg) return;
 
- /* Footer */
- footer { background-color: var(--primary-blue); color: rgba(255,255,255,0.8); text-align: center; padding: 50px 20px; margin-top: 80px; border-top: 5px solid var(--secondary-blue); }
- footer p { margin-bottom: 10px; font-size: 1rem; }
- footer span { color: var(--white); font-weight: bold; }
+      // User message
+      const userDiv = document.createElement('div');
+      userDiv.className = 'bg-red-600 text-white rounded-xl px-3 py-2 text-sm max-w-[85%] ml-auto';
+      userDiv.textContent = msg;
+      chatMessages.appendChild(userDiv);
 
- /* Floating Buttons */
- .floating-buttons { position: fixed; bottom: 30px; right: 30px; display: flex; flex-direction: column; gap: 20px; z-index: 2000; }
- .float-btn { width: 60px; height: 60px; border-radius: 50%; display: flex; justify-content: center; align-items: center; color: white; font-size: 24px; text-decoration: none; box-shadow: 0 6px 20px rgba(0,0,0,0.3); transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275); cursor: pointer; border: none; position: relative; }
- .float-btn:hover { transform: scale(1.15) rotate(5deg); }
- .btn-instagram { background: linear-gradient(45deg, #f09433, #e6683c, #dc2743, #cc2366, #bc1888); }
- .btn-ad { background: linear-gradient(135deg, #28a745, #218838); }
- .btn-ai { background: linear-gradient(135deg, #003366, #00509e); }
- .btn-ai::after { content: ''; position: absolute; top: -5px; right: -5px; width: 15px; height: 15px; background-color: var(--success); border-radius: 50%; border: 3px solid white; animation: pulse-green 2s infinite; }
- @keyframes pulse-green { 0% { box-shadow: 0 0 0 0 rgba(40,167,69,0.7); } 70% { box-shadow: 0 0 0 10px rgba(40,167,69,0); } 100% { box-shadow: 0 0 0 0 rgba(40,167,69,0); } }
+      chatInput.value = '';
 
- /* Chat Window */
- .chat-window { position: fixed; bottom: 100px; right: 30px; width: 350px; height: 500px; background: white; border-radius: 20px; box-shadow: 0 10px 40px rgba(0,0,0,0.2); display: none; flex-direction: column; overflow: hidden; z-index: 2001; border: 1px solid #e0e0e0; animation: slideIn 0.3s ease-out; }
- @keyframes slideIn { from { opacity: 0; transform: translateY(20px) scale(0.95); } to { opacity: 1; transform: translateY(0) scale(1); } }
- .chat-header { background: linear-gradient(135deg, var(--primary-blue), var(--secondary-blue)); color: white; padding: 15px; display: flex; justify-content: space-between; align-items: center; font-weight: 700; font-size: 1rem; }
- .chat-body { flex-grow: 1; padding: 15px; overflow-y: auto; background: #f8f9fa; display: flex; flex-direction: column; gap: 10px; scroll-behavior: smooth; }
- .message { max-width: 85%; padding: 10px 15px; border-radius: 15px; font-size: 0.9rem; line-height: 1.4; animation: fadeIn 0.3s ease; }
- @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
- .message.ai { background: white; align-self: flex-start; border-bottom-left-radius: 2px; box-shadow: 0 2px 5px rgba(0,0,0,0.05); border: 1px solid #eee; }
- .message.user { background: var(--primary-blue); color: white; align-self: flex-end; border-bottom-right-radius: 2px; box-shadow: 0 2px 5px rgba(0,68,204,0.2); }
- .chat-input-area { padding: 10px; background: white; border-top: 1px solid #eee; display: flex; gap: 10px; }
- .chat-input-area input { flex-grow: 1; padding: 10px; border: 1px solid #ddd; border-radius: 20px; outline: none; }
- .chat-input-area button { background: var(--primary-blue); color: white; border: none; width: 40px; height: 40px; border-radius: 50%; cursor: pointer; display: flex; align-items: center; justify-content: center; }
+      // AI response
+      setTimeout(() => {
+        const aiDiv = document.createElement('div');
+        aiDiv.className = 'bg-gray-100 rounded-xl px-3 py-2 text-sm max-w-[85%]';
+        aiDiv.textContent = getAIResponse(msg);
+        chatMessages.appendChild(aiDiv);
+        chatMessages.scrollTop = chatMessages.scrollHeight;
+      }, 600);
 
- /* Modal */
- .modal-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.6); backdrop-filter: blur(5px); z-index: 3000; display: none; justify-content: center; align-items: center; padding: 20px; animation: fadeIn 0.3s; }
- .modal-content { background: white; width: 100%; max-width: 700px; max-height: 90vh; border-radius: 16px; overflow-y: auto; position: relative; box-shadow: 0 20px 60px rgba(0,0,0,0.3); animation: slideUp 0.4s ease-out; }
- @keyframes slideUp { from { opacity: 0; transform: translateY(50px); } to { opacity: 1; transform: translateY(0); } }
- .modal-header { position: relative; height: 250px; overflow: hidden; }
- .modal-header img { width: 100%; height: 100%; object-fit: cover; }
- .modal-close { position: absolute; top: 15px; right: 15px; background: rgba(0,0,0,0.6); color: white; border: none; width: 35px; height: 35px; border-radius: 50%; font-size: 1.2rem; cursor: pointer; display: flex; align-items: center; justify-content: center; z-index: 10; }
- .modal-body { padding: 25px; }
- .modal-title { font-size: 1.8rem; color: var(--primary-blue); margin-bottom: 15px; line-height: 1.2; }
- .modal-meta { display: flex; gap: 15px; color: #666; font-size: 0.85rem; margin-bottom: 20px; padding-bottom: 15px; border-bottom: 1px solid #eee; }
- .modal-text { font-size: 1.05rem; line-height: 1.7; color: #333; }
- .ad-modal-content { background: white; width: 100%; max-width: 450px; padding: 25px; border-radius: 16px; box-shadow: 0 20px 60px rgba(0,0,0,0.3); }
- .ad-form input, .ad-form textarea, .ad-form select { width: 100%; padding: 10px; margin-bottom: 12px; border: 1px solid #ddd; border-radius: 6px; font-size: 0.95rem; }
- .ad-form button { width: 100%; padding: 10px; background: var(--primary-blue); color: white; border: none; border-radius: 6px; font-weight: bold; cursor: pointer; }
-
- /* Mobile */
- @media (max-width: 768px) {
- .header-content { flex-wrap: wrap; }
- nav ul { display: none; flex-direction: column; position: absolute; top: 80px; left: 0; width: 100%; background-color: var(--primary-blue); padding: 20px; z-index: 999; }
- nav ul.active { display: flex; }
- .menu-toggle { display: flex; }
- .section-title { font-size: 1.5rem; }
- .news-grid { grid-template-columns: 1fr; }
- .chat-window { width: calc(100% - 40px); right: 20px; left: 20px; bottom: 90px; height: 60vh; }
- .floating-buttons { right: 20px; bottom: 20px; }
- .modal-header { height: 180px; }
- .modal-title { font-size: 1.4rem; }
- }
- </style>
-</head>
-<body>
-
- <header>
- <div class="header-content">
- <a href="#" class="logo" onclick="location.reload()">Trabzon<span>İş</span>İlanları</a>
- <div class="live-indicator">
- <div class="live-dot"></div>
- <span>CANLI: <span id="liveCount">0</span></span>
- </div>
- <div class="menu-toggle" onclick="toggleMenu()">
- <span></span><span></span><span></span>
- </div>
- <nav>
- <ul id="main-menu">
- <li><a href="#home" onclick="scrollToSection('home')">🏠 Ana Sayfa</a></li>
- <li><a href="#breaking" onclick="scrollToSection('breaking')">🔥 Son Dakika</a></li>
- <li><a href="#news" onclick="scrollToSection('news')">📰 Haberler</a></li>
- <li><a href="#search-section" onclick="scrollToSection('search-section')">🔍 Arama</a></li>
- </ul>
- </nav>
- </div>
- </header>
-
- <div class="container" id="home">
- <div class="search-container" id="search-section">
- <input type="text" class="search-input" id="searchInput" placeholder="100 haberi tara... (Örn: Trabzon, Spor, İş)" onkeyup="filterNews()">
- <span class="search-icon">🔍</span>
- </div>
-
- <h2 class="section-title" id="breaking">⚡ Son Dakika & Trendler</h2>
- <div class="news-grid" id="breaking-news"></div>
-
- <h2 class="section-title" id="news">🎮 Teknoloji, Ekonomi & Yaşam</h2>
- <div class="news-grid" id="main-news"></div>
-
- <h2 class="section-title">⚽ Spor & Eğitim</h2>
- <div class="news-grid" id="sport-news"></div>
- </div>
-
- <footer>
- <p>&copy; 2026 Trabzon İş İlanları. Tüm hakları saklıdır.</p>
- <p>Site tasarımı ve akıllı asistan altyapısı <span>Shopnex</span> tarafından geliştirilmiştir.</p>
- </footer>
-
- <!-- Floating Buttons -->
- <div class="floating-buttons">
- <a href="https://www.instagram.com/trabzon_is_ilani" target="_blank" class="float-btn btn-instagram" title="Instagram">📞</a>
- <button class="float-btn btn-ad" onclick="openAdModal()" title="Reklam & İş Birliği">📢</button>
- <button class="float-btn btn-ai" onclick="toggleChat()" title="Shopnex AI">💬</button>
- </div>
-
- <!-- News Modal -->
- <div class="modal-overlay" id="newsModal">
- <div class="modal-content">
- <button class="modal-close" onclick="closeModal('newsModal')">×</button>
- <div class="modal-header"><img id="modalImg" src="" alt="Haber"></div>
- <div class="modal-body">
- <h2 class="modal-title" id="modalTitle">Başlık</h2>
- <div class="modal-meta"><span>🕒 Şimdi</span><span>👁️ <span id="modalViews">0</span> Okuma</span></div>
- <div class="modal-text" id="modalText">İçerik...</div>
- </div>
- </div>
- </div>
-
- <!-- Ad Modal -->
- <div class="modal-overlay" id="adModal">
- <div class="ad-modal-content">
- <button class="modal-close" style="position:absolute; top:15px; right:15px;" onclick="closeModal('adModal')">×</button>
- <h2 style="color:var(--primary-blue); margin-bottom:15px; text-align:center;">Reklam & İş Birliği</h2>
- <form class="ad-form" onsubmit="event.preventDefault(); alert('Talebiniz alındı!'); closeModal('adModal');">
- <input type="text" placeholder="Şirket Adı" required>
- <input type="email" placeholder="E-posta" required>
- <select><option>Reklam</option><option>İş Birliği</option></select>
- <textarea rows="3" placeholder="Mesajınız..." required></textarea>
- <button type="submit">Gönder</button>
- </form>
- </div>
- </div>
-
- <!-- Chat Window -->
- <div class="chat-window" id="chatWindow">
- <div class="chat-header"><span>🤖 Shopnex Asistan</span><span style="cursor:pointer;" onclick="toggleChat()">✕</span></div>
- <div class="chat-body" id="chatBody">
- <div class="message ai">Merhaba! Ben <strong>Shopnex</strong>. 😊 Nasıl yardımcı olabilirim? Haberler, iş ilanları veya sadece sohbet edebiliriz!</div>
- </div>
- <div class="chat-input-area">
- <input type="text" id="userInput" placeholder="Mesaj yazın..." onkeypress="handleKeyPress(event)">
- <button onclick="sendMessage()">➤</button>
- </div>
- </div>
-
- <script>
- // --- VERİ OLUŞTURMA (100 HABER) ---
- const categories = [
- { name: "Son Dakika", badge: "SON DAKİKA", cls: "badge-breaking", icon: "🔥" },
- { name: "Ekonomi", badge: "EKONOMİ", cls: "badge-trending", icon: "💰" },
- { name: "Teknoloji", badge: "TEKNOLOJİ", cls: "badge-new", icon: "💻" },
- { name: "Spor", badge: "SPOR", cls: "badge-breaking", icon: "⚽" },
- { name: "Sağlık", badge: "SAĞLIK", cls: "badge-new", icon: "🏥" },
- { name: "Eğitim", badge: "EĞİTİM", cls: "badge-trending", icon: "🎓" },
- { name: "Trabzon", badge: "TRABZON", cls: "badge-breaking", icon: "📍" }
- ];
-
- const images = [
- "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&w=600&q=80",
- "https://images.unsplash.com/photo-1526304640152-d4619684e484?auto=format&fit=crop&w=600&q=80",
- "https://images.unsplash.com/photo-1541534741688-6078c6bfb5c5?auto=format&fit=crop&w=600&q=80",
- "https://images.unsplash.com/photo-1519389950473-47ba0277781c?auto=format&fit=crop&w=600&q=80",
- "https://images.unsplash.com/photo-1523240795612-9a054b0db644?auto=format&fit=crop&w=600&q=80",
- "https://images.unsplash.com/photo-1505751172876-fa1923c5c528?auto=format&fit=crop&w=600&q=80",
- "https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=600&q=80",
- "https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=600&q=80",
- "https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=600&q=80",
- "https://images.unsplash.com/photo-1556761175-5973dc0f32e7?auto=format&fit=crop&w=600&q=80"
- ];
-
- const titles = [
- "Büyük Şirketlerde Yeni İş İlanları Açıklandı", "Ekonomide Yeni Dönem: Faiz Kararları Açıklandı", "Trabzonspor'da Transfer Sürprizi!",
- "Yapay Zeka Devrimi İş Dünyasını Değiştiriyor", "Üniversite Yerleştirme Sonuçları Açıklandı", "Yaz Hastalıklarından Korunma Rehberi",
- "Türkiye Geneli Yeni Ulaşım Tarifeleri", "Teknoloji Sektöründe Büyük Devrim", "Sağlık Bakanlığı'ndan Önemli Duyuru",
- "Trabzon'da Turizm Sezonu Açılıyor", "Borsada Güne Yükselişle Başlayan Piyasalar", "Yeni Nesil Elektrikli Araçlar Yollara Çıkıyor",
- "Okulların Tatile Girmesi İçin Kalan Süre", "Spor Toto Süper Lig'de Haftanın Maçları", "Dijitalleşme Hızlanıyor: Yeni Uygulamalar",
- "Kanser Erken Teşhisinde Yeni Yöntemler", "Trabzon Havalimanında Yeni Terminal Projesi", "Altın Fiyatlarında Son Durum",
- "Yaz Tatili İçin En İyi Rotalar", "Yerli Üretim Yazılım Projeleri Destekleniyor", "İklim Değişikliğiyle Mücadelede Yeni Adımlar",
- "Otomotiv Sektöründe Rekor Satış", "Girişimcilere Özel Destek Paketi", "Kültür Sanat Festivali Başlıyor",
- "Yerel Yönetimlerde Dijital Dönüşüm", "Tarım Sektöründe Modern Teknolojiler", "Enerji Tasarrufu İçin Pratik Öneriler",
- "Sosyal Medya Düzenlemesi Tartışmaları", "Sürdürülebilir Kalkınma Hedefleri", "Genç Girişimciler Zirvesi Gerçekleştirildi",
- "Uzaktan Çalışma Modelleri Yaygınlaşıyor", "E-Ticaret Hacmi Artışta", "Mobil Oyun Endüstrisinde Büyüme",
- "Yapay Zeka Destekli Sağlık Taramaları", "Akıllı Şehir Projeleri Hayata Geçiyor", "Nesnelerin İnterneti (IoT) Devrimi",
- "Blokchain Teknolojisi Finansı Değiştiriyor", "Sanal Gerçeklik Eğitimde Kullanılıyor", "Robotik Teknolojiler Üretimde Etkili",
- "Green Energy Yatırımları Artıyor", "Dijital Paralar ve Regülasyonlar", "Veri Güvenliği Önlemleri Güçlendiriliyor",
- "Cybersecurity Tehditleri ve Çözümler", "Big Data Analitiği İş Kararlarını Şekillendiriyor", "Cloud Computing Hizmetleri Genişliyor",
- "5G Ağları Yaygınlaşıyor", "Drone Teknolojisi Lojistikte Devrim", "3D Yazıcılar Üretimi Kolaylaştırıyor",
- "Nanoteknoloji Tıpta Kullanılıyor", "Biyoetik Tartışmalar Sürüyor", "Gen Tedavileri Umut Veriyor",
- "Astrofizikte Yeni Keşifler", "Mars Keşif Projesi İlerliyor", "Uzay Turizmi Yakında Gerçek Olacak",
- "Deniz Altı Araştırmaları Derinleşiyor", "Orman Yangınlarıyla Mücadelede Yeni Teknikler", "Su Kaynaklarının Korunması İçin Çalışmalar",
- "Atık Yönetimi Sistemleri İyileştiriliyor", "Geri Dönüşüm Projeleri Destekleniyor", "Yeşil Binalar İnşa Ediliyor",
- "Doğa Koruma Alanları Genişletiliyor", "Hayvan Hakları Konusunda Yeni Yasalar", "Balıkçılıkta Sürdürülebilirlik",
- "Tarım Arazilerinin Korunması", "Organik Tarım Destekleri Artıyor", "Hibrit Araçlar Popülerlik Kazanıyor",
- "Elektrikli Otobüs Filoları Genişliyor", "Hızlı Tren Hatları Uzatılıyor", "Denizaltı Tünelleri Planlanıyor",
- "Metro Projeleri Tamamlanıyor", "Otopark Sorunu İçin Akıllı Çözümler", "Yaya Yolları Genişletiliyor",
- "Bisiklet Yolları Ağı Genişliyor", "Yeşil Alanlar Arttırılıyor", "Park ve Bahçelerde Yenileme",
- "Sokak Hayvanları İçin Barınaklar", "Çöp Toplama Robotları Test Ediliyor", "Güneş Enerjili Sokak Lambaları",
- "Rüzgar Türbinleri Kuruluyor", "Jeotermal Enerji Santralleri", "Hidroelektrik Santralleri Yenileniyor",
- "Nükleer Enerji Tartışmaları", "Fosil Yakıtlardan Vazgeçiş", "Karbon Ayak İzi Azaltma Kampanyaları",
- "Sıfır Atık Hareketi Büyüyor", "Plastik Kullanımı Azaltılıyor", "Kağıtsız Ofis Çalışmaları",
- "Dijital Okuryazarlık Eğitimleri", "Yaşlılar İçin Teknoloji Kursları", "Çocuklar İçin Kodlama Atölyeleri",
- "Öğretmenlere Dijital Destek", "Okullarda Akıllı Tahtalar", "Üniversitelerde Uzaktan Eğitim",
- "Araştırma Projelerine Destek", "Bilim Olimpiyatları Başlıyor", "Teknofest Hazırlıkları",
- "Ar-Ge Merkezleri Açılıyor", "Yenilikçi Ürünler Piyasaya Çıkıyor", "Tasarım Odaklı Düşünce Eğitimi",
- "Eleştirel Düşünme Becerileri", "Yaratıcı Yazarlık Kursları", "Sanat ve Mühendislik Buluşması"
- ];
-
- const texts = [
- "Detaylı analizler, yazar yorumları ve güncel gelişmeler için sitemizi takip etmeye devam edin.",
- "Uzmanlar bu konuda önemli uyarılarda bulundu. Detaylar haberimizde.",
- "Piyasalarda beklenen hareketlilik başladı. Yatırımcılar ne diyor?",
- "Yeni dönemde iş dünyası nasıl şekillenecek? İşte detaylar.",
- "Öğrenciler için yeni dönem başladı. Tercih süreçleri nasıl işleyecek?",
- "Sıcak hava dalgalarıyla birlikte dikkat edilmesi gereken hususlar.",
- "Ulaşım kolaylığı sağlanacak. Yeni hatlar devreye giriyor.",
- "Teknoloji dünyasında çığır açan gelişmeler yaşanıyor.",
- "Sağlık hizmetlerinde kalite artırıldı. Detaylar belli oldu.",
- "Turizm sezonunun açılmasıyla birlikte ekonomik hareketlilik artacak.",
- "Borsada günün ilk yarısında yaşanan gelişmeler.",
- "Elektrikli araç satışları rekor kırdı.",
- "Eğitim sisteminde yeni reformlar tartışılıyor.",
- "Haftanın en kritik maçlarının ön izlemesi.",
- "Yazılım sektöründe yeni fırsatlar doğdu.",
- "Erken teşhis yöntemleri hayat kurtarıyor.",
- "Havalimanı projesiyle şehir ulaşımı hızlanacak.",
- "Altın fiyatlarındaki son değişimler ve uzman görüşleri.",
- "Tatil planı yapanlar için en uygun rotalar.",
- "Yerli yazılım projelerine devlet desteği artıyor.",
- "İklim değişikliğiyle mücadelede uluslararası işbirliği güçlendi.",
- "Otomotiv sektöründe elektrikli araç yatırımları artıyor.",
- "Girişimcilere özel fon desteği açıklandı.",
- "Kültür sanat etkinlikleri yoğunlaştı.",
- "Dijital dönüşüm yerel yönetimlerde hız kazandı.",
- "Tarımda modern teknolojiler verimi artırıyor.",
- "Enerji tasarrufu için evlere destek sağlanıyor.",
- "Sosyal medya düzenlemesi mecliste görüşülüyor.",
- "Sürdürülebilir kalkınma hedefleri doğrultusunda adımlar atıldı.",
- "Genç girişimciler zirvesinde yenilikçi fikirler paylaşıldı.",
- "Uzaktan çalışma modelleri şirketlerde kalıcı hale geliyor.",
- "E-ticaret hacmi rekor seviyelere ulaştı.",
- "Mobil oyun endüstrisi büyük büyüme kaydetti.",
- "Yapay zeka destekli sağlık taramaları yaygınlaşıyor.",
- "Akıllı şehir projeleri hayata geçirilmeye başlandı.",
- "IoT cihazları günlük hayatın vazgeçilmezi haline geliyor.",
- "Blockchain teknolojisi finans sektöründe devrim yaratıyor.",
- "Sanal gerçeklik eğitimde kullanımı artıyor.",
- "Robotik teknolojiler üretim hatlarında etkili.",
- "Yeşil enerji yatırımları hızla artıyor.",
- "Dijital paralar ve regülasyonlar tartışılıyor.",
- "Veri güvenliği önlemleri sıkılaştırıldı.",
- "Siber güvenlik tehditleri ve çözüm önerileri.",
- "Big data analitiği iş kararlarını şekillendiriyor.",
- "Cloud computing hizmetleri genişliyor.",
- "5G ağları şehirlerde yaygınlaşıyor.",
- "Drone teknolojisi lojistikte devrim yapıyor.",
- "3D yazıcılar üretimi kolaylaştırıyor.",
- "Nanoteknoloji tıpta kullanılıyor.",
- "Biyoetik tartışmalar sürüyor.",
- "Gen tedavileri umut veriyor.",
- "Astrofizikte yeni keşifler yapıldı.",
- "Mars keşif projesi ilerliyor.",
- "Uzay turizmi yakında gerçek olacak.",
- "Denizaltı araştırmaları derinleşiyor.",
- "Orman yangınlarıyla mücadelede yeni teknikler.",
- "Su kaynaklarının korunması için çalışmalar.",
- "Atık yönetim sistemleri iyileştiriliyor.",
- "Geri dönüşüm projeleri destekleniyor.",
- "Yeşil binalar inşa ediliyor.",
- "Doğa koruma alanları genişletiliyor.",
- "Hayvan hakları konusunda yeni yasalar.",
- "Balıkçılıkta sürdürülebilirlik.",
- "Tarım arazilerinin korunması.",
- "Organik tarım destekleri artıyor.",
- "Hibrit araçlar popülerlik kazanıyor.",
- "Elektrikli otobüs filoları genişliyor.",
- "Hızlı tren hatları uzatılıyor.",
- "Denizaltı tünelleri planlanıyor.",
- "Metro projeleri tamamlanıyor.",
- "Otopark sorunu için akıllı çözümler.",
- "Yaya yolları genişletiliyor.",
- "Bisiklet yolları ağı genişliyor.",
- "Yeşil alanlar arttırılıyor.",
- "Park ve bahçelerde yenileme.",
- "Sokak hayvanları için barınaklar.",
- "Çöp toplama robotları test ediliyor.",
- "Güneş enerjili sokak lambaları.",
- "Rüzgar türbinleri kuruluyor.",
- "Jeotermal enerji santralleri.",
- "Hidroelektrik santralleri yenileniyor.",
- "Nükleer enerji tartışmaları.",
- "Fosil yakıtlardan vazgeçiş.",
- "Karbon ayak izi azaltma kampanyaları.",
- "Sıfır atık hareketi büyüyor.",
- "Plastik kullanımı azaltılıyor.",
- "Kağıtsız ofis çalışmaları.",
- "Dijital okuryazarlık eğitimleri.",
- "Yaşlılar için teknoloji kursları.",
- "Çocuklar için kodlama atölyeleri.",
- "Öğretmenlere dijital destek.",
- "Okullarda akıllı tahtalar.",
- "Üniversitelerde uzaktan eğitim.",
- "Araştırma projelerine destek.",
- "Bilim olimpiyatları başlıyor.",
- "Teknofest hazırlıkları.",
- "Ar-Ge merkezleri açılıyor.",
- "Yenilikçi ürünler piyasaya çıkıyor.",
- "Tasarım odaklı düşünce eğitimi.",
- "Eleştirel düşünme becerileri.",
- "Yaratıcı yazarlık kursları.",
- "Sanat ve mühendislik buluşması."
- ];
-
- const locations = ["Trabzon", "İstanbul", "Ankara", "İzmir", "Antalya", "Bursa", "Adana", "Gaziantep", "Türkiye Geneli"];
-
- // 100 Haber Oluşturma
- const allNews = ;
- for (let i = 0; i < 100; i++) {
- const catIndex = Math.floor(Math.random() * categories.length);
- const imgIndex = Math.floor(Math.random() * images.length);
- const titleIndex = Math.floor(Math.random() * titles.length);
- const textIndex = Math.floor(Math.random() * texts.length);
- 
- // Rastgele zaman (0-60 dk önce)
- const timeMin = Math.floor(Math.random() * 60);
- let timeStr = timeMin < 60 ? `\${timeMin} dk önce` : `\${Math.floor(timeMin/60)} saat önce`;
-
- allNews.push({
- id: i,
- category: categories[catIndex],
- image: images[imgIndex],
- title: titles[titleIndex] + (Math.random() > 0.5 ? " " + (i+1) : ""),
- text: texts[textIndex] + " " + (i+1) + ". haberimizde detaylı bilgi veriliyor. Trabzon ve Türkiye genelindeki gelişmeleri takip edin.",
- time: timeStr,
- location: locations[Math.floor(Math.random() * locations.length)],
- views: Math.floor(Math.random() * 5000) + 100
- });
- }
-
- // Haberleri Dağıtma
- function renderNews(data, containerId, limit = null) {
- const container = document.getElementById(containerId);
- container.innerHTML = '';
- const items = limit ? data.slice(0, limit) : data;
- 
- items.forEach(news => {
- const card = document.createElement('article');
- card.className = 'news-card';
- card.innerHTML = `
- <div class="card-image">
- <img src="\${news.image}" alt="\${news.title}">
- <span class="card-badge \${news.category.cls}">\${news.category.badge}</span>
- <span class="card-category">\${news.category.name}</span>
- </div>
- <div class="card-body">
- <div class="card-meta"><span>🕒 \${news.time}</span><span>📍 \${news.location}</span></div>
- <h3 class="card-title">\${news.title}</h3>
- <p class="card-text">\${news.text}</p>
- <button class="read-more-btn" onclick="openNewsModal('\${news.title.replace(/'/g, "\\'")}', '\${news.text.replace(/'/g, "\\'")}', '\${news.image}')">Haberi Oku →</button>
- </div>
- `;
- container.appendChild(card);
- });
- }
-
- // Sayfa Yüklendiğinde
- window.onload = function() {
- renderNews(allNews, 'breaking-news', 12); // İlk 12 son dakika
- renderNews(allNews.slice(12, 60), 'main-news', 48); // Sonraki 48 ana haber
- renderNews(allNews.slice(60, 100), 'sport-news', 40); // Son 40 spor/yaşam
- 
- // Canlı sayaç animasyonu
- setInterval(() => {
- const count = Math.floor(Math.random() * (100 - 10 + 1)) + 10;
- document.getElementById('liveCount').textContent = count;
- }, 2000);
- };
-
- // Arama Filtreleme
- function filterNews() {
- const input = document.getElementById('searchInput').value.toLowerCase();
- const cards = document.querySelectorAll('.news-card');
- cards.forEach(card => {
- const title = card.querySelector('.card-title').textContent.toLowerCase();
- const text = card.querySelector('.card-text').textContent.toLowerCase();
- const cat = card.querySelector('.card-category').textContent.toLowerCase();
- if (title.includes(input) || text.includes(input) || cat.includes(input)) {
- card.style.display = 'flex';
- } else {
- card.style.display = 'none';
- }
- });
- }
-
- // Modal İşlemleri
- function openNewsModal(title, text, img) {
- document.getElementById('modalTitle').textContent = title;
- document.getElementById('modalText').textContent = text + "\n\nDetaylı analizler, yazar yorumları ve güncel gelişmeler için sitemizi takip etmeye devam edin.";
- document.getElementById('modalImg').src = img;
- document.getElementById('modalViews').textContent = Math.floor(Math.random() * 5000) + 500;
- document.getElementById('newsModal').style.display = 'flex';
- document.body.style.overflow = 'hidden';
- }
- function openAdModal() { document.getElementById('adModal').style.display = 'flex'; document.body.style.overflow = 'hidden'; }
- function closeModal(id) { document.getElementById(id).style.display = 'none'; document.body.style.overflow = 'auto'; }
-
- // Menü ve Scroll
- function toggleMenu() { document.getElementById('main-menu').classList.toggle('active'); }
- function scrollToSection(id) {
- document.getElementById(id).scrollIntoView({ behavior: 'smooth' });
- if(window.innerWidth <= 768) document.getElementById('main-menu').classList.remove('active');
- }
-
- // Chatbot (Shopnex AI)
- function toggleChat() {
- const w = document.getElementById('chatWindow');
- w.style.display = w.style.display === 'flex' ? 'none' : 'flex';
- if(w.style.display === 'flex') document.getElementById('userInput').focus();
- }
- function sendMessage() {
- const input = document.getElementById('userInput');
- const msg = input.value.trim();
- if(!msg) return;
- const body = document.getElementById('chatBody');
- 
- const userDiv = document.createElement('div');
- userDiv.className = 'message user';
- userDiv.textContent = msg;
- body.appendChild(userDiv);
- input.value = '';
- body.scrollTop = body.scrollHeight;
-
- setTimeout(() => {
- let reply = "";
- const l = msg.toLowerCase();
- if(l.includes("merhaba") || l.includes("selam")) reply = "Merhaba! 👋 Bugün sana nasıl yardımcı olabilirim?";
- else if(l.includes("nasılsın")) reply = "Ben çok iyiyim, teşekkür ederim! 😊 Sen nasılsın?";
- else if(l.includes("yorgunum") || l.includes("üzgünüm")) reply = "Çok üzgünüm böyle hissettiğin için. 😟 Biraz dinlenmek iyi gelebilir. Yanındayım.";
- else if(l.includes("iyiyim") || l.includes("teşekkür")) reply = "Harika! 😊 İyi olman beni mutlu etti.";
- else if(l.includes("iş") || l.includes("ilan")) reply = "Trabzon ve Türkiye genelindeki güncel iş ilanlarını senin için listeleyebilirim. Hangi sektörde arama yapıyorsun?";
- else if(l.includes("reklam")) reply = "Reklam veya iş birliği için sağ alttaki yeşil butona tıklayabilirsin! 📢";
- else if(l.includes("haber") || l.includes("son dakika")) reply = "Son dakika haberlerini yukarıda görebilirsin. Hangi konuda bilgi istersin?";
- else if(l.includes("shopnex") || l.includes("sen kimsin")) reply = "Ben Shopnex! 🤖 Bu sitenin yapay zeka asistanıyım. Her soruna cevap vermeye çalışırım.";
- else if(l.includes("trabzonspor")) reply = "Trabzonspor ile ilgili son gelişmeleri yukarıdaki Spor bölümünde bulabilirsin! ⚽";
- else reply = "Bu konuda biraz daha bilgiye ihtiyacım var. Sorunu biraz daha açıklayabilir misin?";
- 
- const aiDiv = document.createElement('div');
- aiDiv.className = 'message ai';
- aiDiv.innerHTML = reply;
- body.appendChild(aiDiv);
- body.scrollTop = body.scrollHeight;
- }, 800);
- }
- function handleKeyPress(e) { if(e.key === 'Enter') sendMessage(); }
- window.onclick = function(e) {
- if(e.target.classList.contains('modal-overlay')) e.target.style.display = 'none';
- };
- </script>
-</body>
+      chatMessages.scrollTop = chatMessages.scrollHeight;
+    });
+  </script>
+ </body>
 </html>

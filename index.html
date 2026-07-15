@@ -1,346 +1,416 @@
 <!DOCTYPE html>
 <html lang="tr">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Trabzon İş İlanları</title>
-    <style>
-        :root {
-            --primary-color: #d32f2f; /* Kırmızı tonu */
-            --secondary-color: #212121; /* Koyu gri */
-            --accent-color: #f5f5f5; /* Açık gri arka plan */
-            --text-color: #333;
-            --white: #ffffff;
-        }
+ <meta charset="UTF-8">
+ <meta name="viewport" content="width=device-width, initial-scale=1.0">
+ <title>Trabzon İş İlanları - Profesyonel Haber Portalı</title>
+ <style>
+ :root {
+ --primary-blue: #003366; /* Kurumsal Koyu Mavi */
+ --secondary-blue: #00509e; /* Daha Açık Mavi */
+ --accent-blue: #e6f0fa; /* Çok Açık Mavi Arka Plan */
+ --text-dark: #2c3e50;
+ --text-light: #ffffff;
+ --white: #ffffff;
+ --border-color: #dbe4ef;
+ }
 
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-        }
+ * {
+ margin: 0;
+ padding: 0;
+ box-sizing: border-box;
+ font-family: 'Segoe UI', 'Roboto', Helvetica, Arial, sans-serif;
+ }
 
-        body {
-            background-color: var(--accent-color);
-            color: var(--text-color);
-            line-height: 1.6;
-        }
+ body {
+ background-color: var(--accent-blue);
+ color: var(--text-dark);
+ line-height: 1.6;
+ }
 
-        /* Üst Başlık Alanı */
-        header {
-            background-color: var(--primary-color);
-            color: var(--white);
-            padding: 15px 20px;
-            position: sticky;
-            top: 0;
-            z-index: 1000;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
+ /* Üst Başlık Alanı */
+ header {
+ background-color: var(--primary-blue);
+ color: var(--text-light);
+ padding: 0;
+ position: sticky;
+ top: 0;
+ z-index: 1000;
+ box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+ display: flex;
+ justify-content: space-between;
+ align-items: center;
+ height: 70px;
+ }
 
-        .logo {
-            font-size: 1.5rem;
-            font-weight: bold;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-        }
+ .header-content {
+ max-width: 1200px;
+ width: 100%;
+ margin: 0 auto;
+ padding: 0 20px;
+ display: flex;
+ justify-content: space-between;
+ align-items: center;
+ }
 
-        /* Ana Navigasyon (Üstteki 3 çizgi yerine düz menü) */
-        nav ul {
-            display: flex;
-            list-style: none;
-            gap: 15px;
-        }
+ .logo {
+ font-size: 1.4rem;
+ font-weight: 700;
+ text-transform: uppercase;
+ letter-spacing: 0.5px;
+ color: var(--text-light);
+ text-decoration: none;
+ }
 
-        nav ul li a {
-            color: var(--white);
-            text-decoration: none;
-            font-size: 0.9rem;
-            font-weight: 600;
-            padding: 5px 10px;
-            border-radius: 4px;
-            transition: background 0.3s;
-        }
+ /* Navigasyon Menüsü */
+ nav ul {
+ display: flex;
+ list-style: none;
+ gap: 25px;
+ }
 
-        nav ul li a:hover {
-            background-color: rgba(255,255,255,0.2);
-        }
+ nav ul li a {
+ color: rgba(255, 255, 255, 0.9);
+ text-decoration: none;
+ font-size: 0.95rem;
+ font-weight: 500;
+ padding: 8px 12px;
+ border-radius: 4px;
+ transition: all 0.3s ease;
+ }
 
-        /* Mobil Menü İçin Hamburger İkonu (Gerekirse açılır kapanır) */
-        .menu-toggle {
-            display: none;
-            flex-direction: column;
-            cursor: pointer;
-        }
+ nav ul li a:hover {
+ background-color: rgba(255, 255, 255, 0.15);
+ color: var(--text-light);
+ }
 
-        .menu-toggle span {
-            width: 25px;
-            height: 3px;
-            background-color: white;
-            margin: 3px 0;
-            transition: 0.3s;
-        }
+ nav ul li a.breaking {
+ background-color: #d32f2f;
+ color: white;
+ font-weight: bold;
+ animation: pulse-red 2s infinite;
+ }
 
-        /* İçerik Alanı */
-        .container {
-            max-width: 1200px;
-            margin: 20px auto;
-            padding: 0 20px;
-        }
+ @keyframes pulse-red {
+ 0% { box-shadow: 0 0 0 0 rgba(211, 47, 47, 0.7); }
+ 70% { box-shadow: 0 0 0 6px rgba(211, 47, 47, 0); }
+ 100% { box-shadow: 0 0 0 0 rgba(211, 47, 47, 0); }
+ }
 
-        /* Haber Kartları */
-        .news-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 20px;
-            margin-bottom: 40px;
-        }
+ /* Mobil Menü */
+ .menu-toggle {
+ display: none;
+ flex-direction: column;
+ cursor: pointer;
+ }
 
-        .news-card {
-            background: var(--white);
-            border-radius: 8px;
-            overflow: hidden;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-            transition: transform 0.2s;
-        }
+ .menu-toggle span {
+ width: 25px;
+ height: 3px;
+ background-color: var(--text-light);
+ margin: 3px 0;
+ transition: 0.3s;
+ border-radius: 2px;
+ }
 
-        .news-card:hover {
-            transform: translateY(-5px);
-        }
+ /* Ana İçerik */
+ .container {
+ max-width: 1200px;
+ margin: 30px auto;
+ padding: 0 20px;
+ }
 
-        .card-header {
-            background-color: var(--secondary-color);
-            color: white;
-            padding: 10px;
-            font-size: 0.85rem;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
+ /* Bölüm Başlıkları */
+ .section-title {
+ font-size: 1.6rem;
+ color: var(--primary-blue);
+ border-bottom: 2px solid var(--secondary-blue);
+ padding-bottom: 10px;
+ margin-bottom: 25px;
+ margin-top: 40px;
+ display: flex;
+ align-items: center;
+ gap: 10px;
+ }
 
-        .badge-broken {
-            background-color: var(--primary-color);
-            padding: 2px 8px;
-            border-radius: 4px;
-            font-size: 0.7rem;
-            animation: pulse 1.5s infinite;
-        }
+ .section-title:first-child {
+ margin-top: 0;
+ }
 
-        @keyframes pulse {
-            0% { opacity: 1; }
-            50% { opacity: 0.7; }
-            100% { opacity: 1; }
-        }
+ /* Haber Izgarası */
+ .news-grid {
+ display: grid;
+ grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+ gap: 25px;
+ }
 
-        .card-body {
-            padding: 15px;
-        }
+ .news-card {
+ background: var(--white);
+ border-radius: 8px;
+ overflow: hidden;
+ box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+ transition: transform 0.3s ease, box-shadow 0.3s ease;
+ border: 1px solid var(--border-color);
+ display: flex;
+ flex-direction: column;
+}
 
-        .card-title {
-            font-size: 1.1rem;
-            margin-bottom: 10px;
-            color: var(--secondary-color);
-        }
+ .news-card:hover {
+ transform: translateY(-5px);
+ box-shadow: 0 8px 20px rgba(0,51,102,0.15);
+ }
 
-        .card-text {
-            font-size: 0.9rem;
-            color: #666;
-            margin-bottom: 15px;
-        }
+ .card-header {
+ background-color: #f8f9fa;
+ padding: 12px 15px;
+ font-size: 0.8rem;
+ color: #666;
+ border-bottom: 1px solid var(--border-color);
+ display: flex;
+ justify-content: space-between;
+ align-items: center;
+ }
 
-        .read-more {
-            display: inline-block;
-            color: var(--primary-color);
-            text-decoration: none;
-            font-weight: bold;
-            font-size: 0.9rem;
-        }
+ .badge-broken {
+ background-color: #d32f2f;
+ color: white;
+ padding: 3px 10px;
+ border-radius: 20px;
+ font-size: 0.7rem;
+ font-weight: bold;
+ text-transform: uppercase;
+ letter-spacing: 0.5px;
+ }
 
-        /* Kategori Başlıkları */
-        .section-title {
-            border-left: 5px solid var(--primary-color);
-            padding-left: 15px;
-            margin: 30px 0 20px 0;
-            font-size: 1.4rem;
-            color: var(--secondary-color);
-        }
+ .card-body {
+ padding: 20px;
+ flex-grow: 1;
+ display: flex;
+ flex-direction: column;
+ justify-content: space-between;
+ }
 
-        /* Footer */
-        footer {
-            background-color: var(--secondary-color);
-            color: #aaa;
-            text-align: center;
-            padding: 20px;
-            margin-top: 50px;
-            font-size: 0.9rem;
-        }
+ .card-title {
+ font-size: 1.25rem;
+ margin-bottom: 12px;
+ color: var(--primary-blue);
+ line-height: 1.3;
+ font-weight: 700;
+ }
 
-        footer span {
-            color: var(--white);
-            font-weight: bold;
-        }
+ .card-text {
+ font-size: 0.95rem;
+ color: #555;
+ margin-bottom: 20px;
+ line-height: 1.6;
+ }
 
-        /* Mobil Uyumluluk */
-        @media (max-width: 768px) {
-            nav ul {
-                display: none; /* Mobilde gizle, hamburger ile açılabilir */
-                flex-direction: column;
-                position: absolute;
-                top: 60px;
-                left: 0;
-                width: 100%;
-                background-color: var(--primary-color);
-                padding: 20px;
-                box-shadow: 0 4px 6px rgba(0,0,0,0.1);
-            }
+ .read-more-btn {
+ display: inline-block;
+ background-color: var(--secondary-blue);
+ color: var(--text-light);
+ text-decoration: none;
+ padding: 10px 20px;
+ border-radius: 4px;
+ font-size: 0.9rem;
+ font-weight: 600;
+ text-align: center;
+ transition: background 0.3s;
+ align-self: flex-start;
+ }
 
-            nav ul.active {
-                display: flex;
-            }
+ .read-more-btn:hover {
+ background-color: var(--primary-blue);
+ }
 
-            .menu-toggle {
-                display: flex;
-            }
-            
-            header {
-                flex-wrap: wrap;
-            }
-            
-            .logo {
-                width: 100%;
-                text-align: center;
-                margin-bottom: 10px;
-            }
-        }
-    </style>
+ /* Footer */
+ footer {
+ background-color: var(--primary-blue);
+ color: rgba(255,255,255,0.8);
+ text-align: center;
+ padding: 40px 20px;
+ margin-top: 60px;
+ border-top: 4px solid var(--secondary-blue);
+ }
+
+ footer p {
+ margin-bottom: 10px;
+ font-size: 0.9rem;
+ }
+
+ footer span {
+ color: var(--text-light);
+ font-weight: bold;
+ }
+
+ /* Mobil Uyumluluk */
+ @media (max-width: 768px) {
+ .header-content {
+ flex-wrap: wrap;
+ }
+ 
+ nav ul {
+ display: none;
+ flex-direction: column;
+ position: absolute;
+ top: 70px;
+ left: 0;
+ width: 100%;
+ background-color: var(--primary-blue);
+ padding: 20px;
+ box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+ z-index: 999;
+ }
+
+ nav ul.active {
+ display: flex;
+ }
+
+ .menu-toggle {
+ display: flex;
+ }
+
+ .section-title {
+ font-size: 1.4rem;
+ }
+ 
+ .news-grid {
+ grid-template-columns: 1fr;
+ }
+ }
+ </style>
 </head>
 <body>
 
-    <!-- Üst Başlık ve Menü -->
-    <header>
-        <div class="logo">Trabzon İş İlanları</div>
-        
-        <!-- Hamburger Menü İkonu (Mobil için) -->
-        <div class="menu-toggle" onclick="toggleMenu()">
-            <span></span>
-            <span></span>
-            <span></span>
-        </div>
+ <!-- Üst Header -->
+ <header>
+ <div class="header-content">
+ <a href="#" class="logo">Trabzon İş İlanları</a>
+ 
+ <div class="menu-toggle" onclick="toggleMenu()">
+ <span></span>
+ <span></span>
+ <span></span>
+ </div>
 
-        <nav>
-            <ul id="main-menu">
-                <li><a href="#home">🏠 Ana Sayfa</a></li>
-                <li><a href="#news">📰 Son Haberler</a></li>
-                <li><a href="#breaking" class="badge-link">🔥 Son Dakika</a></li>
-                <li><a href="#search">🔍 Arama</a></li>
-                <!-- Instagram Yönlendirmesi -->
-                <li><a href="https://www.instagram.com/trabzon_is_ilani" target="_blank">📞 İletişim</a></li>
-            </ul>
-        </nav>
-    </header>
+ <nav>
+ <ul id="main-menu">
+ <li><a href="#home">🏠 Ana Sayfa</a></li>
+ <li><a href="#news">📰 Son Haberler</a></li>
+ <li><a href="#breaking" class="breaking">🔥 Son Dakika</a></li>
+ <li><a href="#search">🔍 Arama</a></li>
+ <li><a href="https://www.instagram.com/trabzon_is_ilani" target="_blank">📞 İletişim</a></li>
+ </ul>
+ </nav>
+ </div>
+ </header>
 
-    <div class="container">
-        
-        <!-- Son Dakika Bölümü -->
-        <h2 class="section-title">⚡ Son Dakika & Türkiye Geneli</h2>
-        <div class="news-grid">
-            <!-- Örnek Haber Kartı 1 -->
-            <div class="news-card">
-                <div class="card-header">
-                    <span>Trabzon</span>
-                    <span class="badge-broken">SON DAKİKA</span>
-                </div>
-                <div class="card-body">
-                    <h3 class="card-title">Yeni İş İlanları Açıklandı</h3>
-                    <p class="card-text">Trabzon merkezli büyük firmalarda yeni pozisyonlar için başvurular başladı. Detaylar sitemizde.</p>
-                    <a href="#" class="read-more">Devamını Oku →</a>
-                </div>
-            </div>
+ <div class="container">
+ 
+ <!-- Son Dakika Bölümü -->
+ <h2 class="section-title">⚡ Son Dakika & Türkiye Geneli</h2>
+ <div class="news-grid">
+ <!-- Haber 1 -->
+ <article class="news-card">
+ <div class="card-header">
+ <span>Trabzon</span>
+ <span class="badge-broken">SON DAKİKA</span>
+ </div>
+ <div class="card-body">
+ <h3 class="card-title">Büyük Şirketlerde Yeni İş İlanları Açıklandı</h3>
+ <p class="card-text">Trabzon merkezli büyük ölçekli firmalarda mühendislik ve satış pozisyonları için başvurular bugün itibarıyla başladı.</p>
+ <a href="#haber-detay-1" class="read-more-btn">Haberi Oku →</a>
+ </div>
+ </article>
 
-            <!-- Örnek Haber Kartı 2 -->
-            <div class="news-card">
-                <div class="card-header">
-                    <span>Türkiye Geneli</span>
-                    <span class="badge-broken">ÖNE ÇIKAN</span>
-                </div>
-                <div class="card-body">
-                    <h3 class="card-title">Teknoloji Sektöründe Büyük Devrim</h3>
-                    <p class="card-text">Yapay zeka destekli yeni sistemler ile iş dünyası hız kazanıyor.</p>
-                    <a href="#" class="read-more">Devamını Oku →</a>
-                </div>
-            </div>
+ <!-- Haber 2 -->
+ <article class="news-card">
+ <div class="card-header">
+ <span>Türkiye Geneli</span>
+ <span class="badge-broken">ÖNE ÇIKAN</span>
+ </div>
+ <div class="card-body">
+ <h3 class="card-title">Ekonomide Yeni Dönem Başlıyor</h3>
+ <p class="card-text">Merkez Bankası'nın yeni kararları sonrası piyasalarda beklenen hareketlilik başladı. Detaylar haberimizde.</p>
+ <a href="#haber-detay-2" class="read-more-btn">Haberi Oku →</a>
+ </div>
+ </article>
 
-             <!-- Örnek Haber Kartı 3 -->
-             <div class="news-card">
-                <div class="card-header">
-                    <span>İstanbul</span>
-                    <span class="badge-broken">SON DAKİKA</span>
-                </div>
-                <div class="card-body">
-                    <h3 class="card-title">Ulaşım Tarifelerinde Değişiklik</h3>
-                    <p class="card-text">Büyükşehir belediyesi yeni sefer saatlerini açıkladı.</p>
-                    <a href="#" class="read-more">Devamını Oku →</a>
-                </div>
-            </div>
-        </div>
+ <!-- Haber 3 -->
+ <article class="news-card">
+ <div class="card-header">
+ <span>İstanbul</span>
+ <span class="badge-broken">SON DAKİKA</span>
+ </div>
+ <div class="card-body">
+ <h3 class="card-title">Ulaşım Tarifelerinde Büyük Değişiklik</h3>
+ <p class="card-text">Büyükşehir belediyesi yaz dönemi sefer saatlerini güncelledi. Yeni tarifeye göre yolculuk süreleri değişecek.</p>
+ <a href="#haber-detay-3" class="read-more-btn">Haberi Oku →</a>
+ </div>
+ </article>
+ </div>
 
-        <!-- Kategoriler -->
-        <h2 class="section-title">⚽ Spor</h2>
-        <div class="news-grid">
-            <div class="news-card">
-                <div class="card-body">
-                    <h3 class="card-title">Trabzonspor Maç Analizi</h3>
-                    <p class="card-text">Haftanın en önemli maçının detaylı incelemesi ve yorumları.</p>
-                </div>
-            </div>
-        </div>
+ <!-- Spor Bölümü -->
+ <h2 class="section-title">⚽ Spor</h2>
+ <div class="news-grid">
+ <article class="news-card">
+ <div class="card-body">
+ <h3 class="card-title">Trabzonspor'un Maç Analizi Yayında</h3>
+ <p class="card-text">Haftanın en kritik maçının taktiksel analizi, oyuncu istatistikleri ve uzman yorumları sitemizde.</p>
+ <a href="#spor-detay-1" class="read-more-btn">Haberi Oku →</a>
+ </div>
+ </article>
+ </div>
 
-        <h2 class="section-title">🎮 Teknoloji</h2>
-        <div class="news-grid">
-            <div class="news-card">
-                <div class="card-body">
-                    <h3 class="card-title">Yeni Nesil Akıllı Telefonlar</h3>
-                    <p class="card-text">Piyasaya sürülen en son modeller ve fiyat karşılaştırmaları.</p>
-                </div>
-            </div>
-        </div>
+ <!-- Teknoloji Bölümü -->
+ <h2 class="section-title">🎮 Teknoloji</h2>
+ <div class="news-grid">
+ <article class="news-card">
+ <div class="card-body">
+ <h3 class="card-title">Yapay Zeka Devrimi İş Dünyasını Etkiliyor</h3>
+ <p class="card-text">Yeni nesil AI araçları ile iş süreçleri nasıl hızlanıyor? Uzmanlar detayları paylaşıyor.</p>
+ <a href="#teknoloji-detay-1" class="read-more-btn">Haberi Oku →</a>
+ </div>
+ </article>
+ </div>
 
-        <h2 class="section-title">🎓 Eğitim</h2>
-        <div class="news-grid">
-            <div class="news-card">
-                <div class="card-body">
-                    <h3 class="card-title">Üniversite Yerleştirme Sonuçları</h3>
-                    <p class="card-text">2026 yılı tercih sonuçları açıklandı. Puan tabanları burada.</p>
-                </div>
-            </div>
-        </div>
+ <!-- Eğitim Bölümü -->
+ <h2 class="section-title">🎓 Eğitim</h2>
+ <div class="news-grid">
+ <article class="news-card">
+ <div class="card-body">
+ <h3 class="card-title">Üniversite Yerleştirme Sonuçları Açıklandı</h3>
+ <p class="card-text">2026 yılı YKS yerleştirme sonuçları yayımlandı. Puan tabanları ve tercih sonuçlarını inceleyin.</p>
+ <a href="#egitim-detay-1" class="read-more-btn">Haberi Oku →</a>
+ </div>
+ </article>
+ </div>
 
-        <h2 class="section-title">🏥 Sağlık</h2>
-        <div class="news-grid">
-            <div class="news-card">
-                <div class="card-body">
-                    <h3 class="card-title">Yaz Hastalıklarından Korunma</h3>
-                    <p class="card-text">Sıcak havalarla birlikte dikkat edilmesi gereken sağlık önerileri.</p>
-                </div>
-            </div>
-        </div>
+ <!-- Sağlık Bölümü -->
+ <h2 class="section-title">🏥 Sağlık</h2>
+ <div class="news-grid">
+ <article class="news-card">
+ <div class="card-body">
+ <h3 class="card-title">Yaz Hastalıklarından Korunma Rehberi</h3>
+ <p class="card-text">Sıcak hava dalgalarıyla birlikte artan hastalıklara karşı alınması gereken önlemler ve beslenme önerileri.</p>
+ <a href="#saglik-detay-1" class="read-more-btn">Haberi Oku →</a>
+ </div>
+ </article>
+ </div>
 
-    </div>
+ </div>
 
-    <!-- Footer -->
-    <footer>
-        <p>&copy; 2026 Trabzon İş İlanları. Tüm hakları saklıdır.</p>
-        <p style="margin-top: 10px; font-size: 0.8rem;">Site içi tasarım <span>Shopnex</span> ile yapıldı.</p>
-    </footer>
+ <!-- Footer -->
+ <footer>
+ <p>&copy; 2026 Trabzon İş İlanları. Tüm hakları saklıdır.</p>
+ <p>Site tasarımı ve altyapısı <span>Shopnex</span> tarafından geliştirilmiştir.</p>
+ </footer>
 
-    <script>
-        // Mobil menü açma/kapama fonksiyonu
-        function toggleMenu() {
-            const menu = document.getElementById('main-menu');
-            menu.classList.toggle('active');
-        }
-    </script>
+ <script>
+ function toggleMenu() {
+ const menu = document.getElementById('main-menu');
+ menu.classList.toggle('active');
+ }
+ </script>
 </body>
 </html>

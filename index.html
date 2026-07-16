@@ -6,17 +6,15 @@
  <title>Trabzon İş İlanları | Profesyonel Haber Portalı</title>
  <style>
  :root {
- --primary-blue: #003366;
- --secondary-blue: #00509e;
- --accent-bg: #f4f6f9;
+ --primary-blue: #003366; /* Kurumsal Koyu Mavi */
+ --secondary-blue: #00509e; /* Canlı Mavi */
+ --accent-bg: #f4f6f9; /* Çok açık gri-mavi zemin */
  --white: #ffffff;
  --text-dark: #1a1a1a;
  --text-gray: #555555;
  --border-color: #e0e0e0;
  --success: #28a745;
  --danger: #dc3545;
- --warning: #ffc107;
- --info: #17a2b8;
  --shadow-soft: 0 4px 20px rgba(0,0,0,0.08);
  --shadow-hover: 0 10px 30px rgba(0, 68, 204, 0.15);
  }
@@ -72,7 +70,7 @@
  }
 
  .logo span {
- color: #ffd700;
+ color: #ffd700; /* Altın vurgu */
  }
 
  nav ul {
@@ -238,10 +236,6 @@
  box-shadow: 0 2px 5px rgba(0,0,0,0.2);
  }
 
- .badge-success { background-color: var(--success); }
- .badge-warning { background-color: var(--warning); color: #333; }
- .badge-info { background-color: var(--info); }
-
  .card-category {
  position: absolute;
  top: 15px;
@@ -366,6 +360,25 @@
 
  .btn-ad {
  background: linear-gradient(135deg, #28a745, #218838);
+ }
+
+ .btn-ad::after {
+ content: '';
+ position: absolute;
+ top: -5px;
+ right: -5px;
+ width: 18px;
+ height: 18px;
+ background-color: #ffc107;
+ border-radius: 50%;
+ border: 3px solid white;
+ animation: pulse-yellow 2s infinite;
+ }
+
+ @keyframes pulse-yellow {
+ 0% { box-shadow: 0 0 0 0 rgba(255, 193, 7, 0.7); }
+ 70% { box-shadow: 0 0 0 10px rgba(255, 193, 7, 0); }
+ 100% { box-shadow: 0 0 0 0 rgba(255, 193, 7, 0); }
  }
 
  .btn-ai {
@@ -516,7 +529,7 @@
  background: var(--secondary-blue);
  }
 
- /* Haber Detay Modalı */
+ /* Haber Detay Modalı (Profesyonel Görünüm) */
  .modal-overlay {
  position: fixed;
  top: 0;
@@ -753,18 +766,97 @@
  <!-- Son Dakika Bölümü -->
  <h2 class="section-title" id="breaking">⚡ Son Dakika & Türkiye Geneli</h2>
  <div class="news-grid" id="breaking-news">
- <!-- Haberler JS ile doldurulacak -->
+ <!-- Haber 1 -->
+ <article class="news-card">
+ <div class="card-image">
+ <img src="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&w=600&q=80" alt="İnşaat">
+ <span class="card-badge">SON DAKİKA</span>
+ <span class="card-category">Trabzon</span>
+ </div>
+ <div class="card-body">
+ <div class="card-meta">🕒 10 dk önce • 📍 Trabzon</div>
+ <h3 class="card-title">Büyük İnşaat Projesi İçin 500 Kişi Alımı Başladı</h3>
+ <p class="card-text">Şehir merkezinde yapılacak yeni alışveriş merkezi için mühendis, mimar ve satış personeli arıyoruz.</p>
+ <button class="read-more-btn" onclick="openNewsModal('Büyük İnşaat Projesi', 'Trabzon merkezli büyük ölçekli inşaat projesi için başvurular başladı. Detaylar ve mülakat takvimi sitemizde.', 'https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&w=800&q=80')">Haberi Oku →</button>
+ </div>
+ </article>
+
+ <!-- Haber 2 -->
+ <article class="news-card">
+ <div class="card-image">
+ <img src="https://images.unsplash.com/photo-1526304640152-d4619684e484?auto=format&fit=crop&w=600&q=80" alt="Ekonomi">
+ <span class="card-badge">ÖNE ÇIKAN</span>
+ <span class="card-category">Türkiye Geneli</span>
+ </div>
+ <div class="card-body">
+ <div class="card-meta">🕒 30 dk önce • 📍 İstanbul</div>
+ <h3 class="card-title">Ekonomide Yeni Dönem: Faiz Kararları Açıklandı</h3>
+ <p class="card-text">Merkez Bankası'nın son toplantısı sonrası piyasalarda beklenen hareketlilik başladı. Uzmanlar yorumlarını paylaştı.</p>
+ <button class="read-more-btn" onclick="openNewsModal('Ekonomide Yeni Dönem', 'Merkez Bankası'nın yeni kararları sonrası piyasalarda beklenen hareketlilik başladı. Detaylı analiz ve uzman görüşleri.', 'https://images.unsplash.com/photo-1526304640152-d4619684e484?auto=format&fit=crop&w=800&q=80')">Haberi Oku →</button>
+ </div>
+ </article>
+
+ <!-- Haber 3 -->
+ <article class="news-card">
+ <div class="card-image">
+ <img src="https://images.unsplash.com/photo-1541534741688-6078c6bfb5c5?auto=format&fit=crop&w=600&q=80" alt="Spor">
+ <span class="card-badge">CANLI</span>
+ <span class="card-category">Spor</span>
+ </div>
+ <div class="card-body">
+ <div class="card-meta">🕒 1 saat önce • 📍 Trabzon</div>
+ <h3 class="card-title">Trabzonspor'da Transfer Sürprizi!</h3>
+ <p class="card-text">Kulüp başkanı, sezonun en büyük transferini resmen açıkladı. Taraftarlardan gelen tepkiler yoğun.</p>
+ <button class="read-more-btn" onclick="openNewsModal('Trabzonspor Transfer', 'Trabzonspor'un yeni transferi resmiyet kazandı. Oyuncunun imza töreni detayları ve röportajı.', 'https://images.unsplash.com/photo-1541534741688-6078c6bfb5c5?auto=format&fit=crop&w=800&q=80')">Haberi Oku →</button>
+ </div>
+ </article>
  </div>
 
  <!-- Diğer Kategoriler -->
  <h2 class="section-title" id="news">🎮 Teknoloji & Eğitim</h2>
- <div class="news-grid" id="tech-news"></div>
+ <div class="news-grid" id="tech-news">
+ <article class="news-card">
+ <div class="card-image">
+ <img src="https://images.unsplash.com/photo-1519389950473-47ba0277781c?auto=format&fit=crop&w=600&q=80" alt="Teknoloji">
+ <span class="card-category">Teknoloji</span>
+ </div>
+ <div class="card-body">
+ <div class="card-meta">🕒 2 saat önce • 📍 Ankara</div>
+ <h3 class="card-title">Yapay Zeka Devrimi İş Dünyasını Değiştiriyor</h3>
+ <p class="card-text">Yeni nesil AI araçları ile iş süreçleri nasıl hızlanıyor? Uzmanlar detayları paylaşıyor.</p>
+ <button class="read-more-btn" onclick="openNewsModal('Yapay Zeka Devrimi', 'Yeni nesil AI araçları ile iş süreçleri nasıl hızlanıyor? Uzmanlar detayları paylaşıyor.', 'https://images.unsplash.com/photo-1519389950473-47ba0277781c?auto=format&fit=crop&w=800&q=80')">Haberi Oku →</button>
+ </div>
+ </article>
 
- <h2 class="section-title">🏥 Sağlık & Yaşam</h2>
- <div class="news-grid" id="health-news"></div>
+ <article class="news-card">
+ <div class="card-image">
+ <img src="https://images.unsplash.com/photo-1523240795612-9a054b0db644?auto=format&fit=crop&w=600&q=80" alt="Eğitim">
+ <span class="card-category">Eğitim</span>
+ </div>
+ <div class="card-body">
+ <div class="card-meta">🕒 3 saat önce • 📍 Türkiye</div>
+ <h3 class="card-title">Üniversite Yerleştirme Sonuçları Açıklandı</h3>
+ <p class="card-text">2026 yılı YKS yerleştirme sonuçları yayımlandı. Puan tabanları ve tercih sonuçlarını inceleyin.</p>
+ <button class="read-more-btn" onclick="openNewsModal('Üniversite Sonuçları', '2026 yılı YKS yerleştirme sonuçları yayımlandı. Puan tabanları ve tercih sonuçlarını inceleyin.', 'https://images.unsplash.com/photo-1523240795612-9a054b0db644?auto=format&fit=crop&w=800&q=80')">Haberi Oku →</button>
+ </div>
+ </article>
+ </div>
 
- <h2 class="section-title">⚽ Spor Dünyası</h2>
- <div class="news-grid" id="sport-news"></div>
+ <h2 class="section-title">🏥 Sağlık</h2>
+ <div class="news-grid" id="health-news">
+ <article class="news-card">
+ <div class="card-image">
+ <img src="https://images.unsplash.com/photo-1505751172876-fa1923c5c528?auto=format&fit=crop&w=600&q=80" alt="Sağlık">
+ <span class="card-category">Sağlık</span>
+ </div>
+ <div class="card-body">
+ <div class="card-meta">🕒 5 saat önce • 📍 Trabzon</div>
+ <h3 class="card-title">Yaz Hastalıklarından Korunma Rehberi</h3>
+ <p class="card-text">Sıcak hava dalgalarıyla birlikte artan hastalıklara karşı alınması gereken önlemler ve beslenme önerileri.</p>
+ <button class="read-more-btn" onclick="openNewsModal('Yaz Hastalıkları', 'Sıcak hava dalgalarıyla birlikte artan hastalıklara karşı alınması gereken önlemler ve beslenme önerileri.', 'https://images.unsplash.com/photo-1505751172876-fa1923c5c528?auto=format&fit=crop&w=800&q=80')">Haberi Oku →</button>
+ </div>
+ </article>
+ </div>
 
  </div>
 
@@ -799,7 +891,7 @@
  <div class="modal-meta">
  <span>🕒 Şimdi</span>
  <span>📝 Editörün Seçimi</span>
- <span>👁️ <span id="modalViews">1.2K</span> Okuma</span>
+ <span>👁️ 1.2K Okuma</span>
  </div>
  <div class="modal-text" id="modalText">
  Haber içeriği buraya gelecek...
@@ -849,269 +941,127 @@
  </div>
 
  <script>
- // Veri Seti Oluşturma (50+ Haber)
- const categories = [
-   { name: "Son Dakika", badge: "SON DAKİKA", color: "var(--danger)", icon: "🔥" },
-   { name: "Ekonomi", badge: "EKONOMİ", color: "var(--info)", icon: "💰" },
-   { name: "Teknoloji", badge: "TEKNOLOJİ", color: "var(--info)", icon: "💻" },
-   { name: "Spor", badge: "SPOR", color: "var(--success)", icon: "⚽" },
-   { name: "Sağlık", badge: "SAĞLIK", color: "var(--success)", icon: "🏥" },
-   { name: "Eğitim", badge: "EĞİTİM", color: "var(--warning)", icon: "🎓" },
-   { name: "Trabzon", badge: "TRABZON", color: "var(--danger)", icon: "📍" }
- ];
-
- const images = [
-   "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&w=600&q=80",
-   "https://images.unsplash.com/photo-1526304640152-d4619684e484?auto=format&fit=crop&w=600&q=80",
-   "https://images.unsplash.com/photo-1541534741688-6078c6bfb5c5?auto=format&fit=crop&w=600&q=80",
-   "https://images.unsplash.com/photo-1519389950473-47ba0277781c?auto=format&fit=crop&w=600&q=80",
-   "https://images.unsplash.com/photo-1523240795612-9a054b0db644?auto=format&fit=crop&w=600&q=80",
-   "https://images.unsplash.com/photo-1505751172876-fa1923c5c528?auto=format&fit=crop&w=600&q=80",
-   "https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=600&q=80",
-   "https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=600&q=80"
- ];
-
- const titles = [
-   "Büyük Şirketlerde Yeni İş İlanları Açıklandı",
-   "Ekonomide Yeni Dönem: Faiz Kararları Açıklandı",
-   "Trabzonspor'da Transfer Sürprizi!",
-   "Yapay Zeka Devrimi İş Dünyasını Değiştiriyor",
-   "Üniversite Yerleştirme Sonuçları Açıklandı",
-   "Yaz Hastalıklarından Korunma Rehberi",
-   "Türkiye Geneli Yeni Ulaşım Tarifeleri",
-   "Teknoloji Sektöründe Büyük Devrim",
-   "Sağlık Bakanlığı'ndan Önemli Duyuru",
-   "Trabzon'da Turizm Sezonu Açılıyor",
-   "Borsada Güne Yükselişle Başlayan Piyasalar",
-   "Yeni Nesil Elektrikli Araçlar Yollara Çıkıyor",
-   "Okulların Tatile Girmesi İçin Kalan Süre",
-   "Spor Toto Süper Lig'de Haftanın Maçları",
-   "Dijitalleşme Hızlanıyor: Yeni Uygulamalar",
-   "Kanser Erken Teşhisinde Yeni Yöntemler",
-   "Trabzon Havalimanında Yeni Terminal Projesi",
-   "Altın Fiyatlarında Son Durum",
-   "Yaz Tatili İçin En İyi Rotalar",
-   "Yerli Üretim Yazılım Projeleri Destekleniyor"
- ];
-
- const texts = [
-   "Detaylı analizler, yazar yorumları ve güncel gelişmeler için sitemizi takip etmeye devam edin.",
-   "Uzmanlar bu konuda önemli uyarılarda bulundu. Detaylar haberimizde.",
-   "Piyasalarda beklenen hareketlilik başladı. Yatırımcılar ne diyor?",
-   "Yeni dönemde iş dünyası nasıl şekillenecek? İşte detaylar.",
-   "Öğrenciler için yeni dönem başladı. Tercih süreçleri nasıl işleyecek?",
-   "Sıcak hava dalgalarıyla birlikte dikkat edilmesi gereken hususlar.",
-   "Ulaşım kolaylığı sağlanacak. Yeni hatlar devreye giriyor.",
-   "Teknoloji dünyasında çığır açan gelişmeler yaşanıyor.",
-   "Sağlık hizmetlerinde kalite artırıldı. Detaylar belli oldu.",
-   "Turizm sezonunun açılmasıyla birlikte ekonomik hareketlilik artacak.",
-   "Borsada günün ilk yarısında yaşanan gelişmeler.",
-   "Elektrikli araç satışları rekor kırdı.",
-   "Eğitim sisteminde yeni reformlar tartışılıyor.",
-   "Haftanın en kritik maçlarının ön izlemesi.",
-   "Yazılım sektöründe yeni fırsatlar doğdu.",
-   "Erken teşhis yöntemleri hayat kurtarıyor.",
-   "Havalimanı projesiyle şehir ulaşımı hızlanacak.",
-   "Altın fiyatlarındaki son değişimler ve uzman görüşleri.",
-   "Tatil planı yapanlar için en uygun rotalar.",
-   "Yerli yazılım projelerine devlet desteği artıyor."
- ];
-
- // 50 Haber Oluşturma Fonksiyonu
- function generateNews() {
-   const newsData = ;
-   for (let i = 0; i < 50; i++) {
-     const catIndex = Math.floor(Math.random() * categories.length);
-     const imgIndex = Math.floor(Math.random() * images.length);
-     const titleIndex = Math.floor(Math.random() * titles.length);
-     const textIndex = Math.floor(Math.random() * texts.length);
-     
-     newsData.push({
-       id: i,
-       category: categories[catIndex],
-       image: images[imgIndex],
-       title: `\${titles[titleIndex]} \${i + 1}`,
-       text: `\${texts[textIndex]} \${i + 1}. haberimizde detaylı bilgi veriliyor. Trabzon ve Türkiye genelindeki gelişmeleri takip edin.`,
-       time: `\${Math.floor(Math.random() * 24)} saat önce`,
-       location: ["Trabzon", "İstanbul", "Ankara", "İzmir", "Türkiye Geneli"][Math.floor(Math.random() * 5)]
-     });
-   }
-   return newsData;
- }
-
- const allNews = generateNews();
-
- // Haberleri Ekrana Basma
- function renderNews(data, containerId) {
-   const container = document.getElementById(containerId);
-   container.innerHTML = '';
-   
-   data.forEach(news => {
-     const card = document.createElement('article');
-     card.className = 'news-card';
-     card.innerHTML = `
-       <div class="card-image">
-         <img src="\${news.image}" alt="\${news.title}">
-         <span class="card-badge" style="background-color: \${news.category.color}">\${news.category.badge}</span>
-         <span class="card-category">\${news.category.name}</span>
-       </div>
-       <div class="card-body">
-         <div class="card-meta">🕒 \${news.time} • 📍 \${news.location}</div>
-         <h3 class="card-title">\${news.title}</h3>
-         <p class="card-text">\${news.text}</p>
-         <button class="read-more-btn" onclick="openNewsModal('\${news.title}', '\${news.text}', '\${news.image}')">Haberi Oku →</button>
-       </div>
-     `;
-     container.appendChild(card);
-   });
- }
-
- // Haberleri Kategorilere Göre Dağıtma
- function distributeNews() {
-   renderNews(allNews.slice(0, 15), 'breaking-news'); // İlk 15 son dakika
-   renderNews(allNews.slice(15, 30), 'tech-news'); // Sonraki 15 teknoloji/ekonomi
-   renderNews(allNews.slice(30, 40), 'health-news'); // Sonraki 10 sağlık/eğitim
-   renderNews(allNews.slice(40, 50), 'sport-news'); // Son 10 spor
- }
-
- // Sayfa Yüklendiğinde Haberleri Göster
- window.onload = distributeNews;
-
  // Menü Aç/Kapa
  function toggleMenu() {
-   const menu = document.getElementById('main-menu');
-   menu.classList.toggle('active');
+ const menu = document.getElementById('main-menu');
+ menu.classList.toggle('active');
  }
 
  // Sayfa Kaydırma
  function scrollToSection(id) {
-   const element = document.getElementById(id);
-   if(element) {
-     element.scrollIntoView({ behavior: 'smooth' });
-   }
-   if(window.innerWidth <= 768) {
-     document.getElementById('main-menu').classList.remove('active');
-   }
+ const element = document.getElementById(id);
+ if(element) {
+ element.scrollIntoView({ behavior: 'smooth' });
+ }
+ if(window.innerWidth <= 768) {
+ document.getElementById('main-menu').classList.remove('active');
+ }
  }
 
  // Haber Detay Modalı Açma
  function openNewsModal(title, text, imgUrl) {
-   document.getElementById('modalTitle').textContent = title;
-   document.getElementById('modalText').textContent = text + "\n\nDetaylı analizler, yazar yorumları ve güncel gelişmeler için sitemizi takip etmeye devam edin. Bu haberimizde yer verilen bilgiler resmi kaynaklardan derlenmiştir.";
-   document.getElementById('modalImg').src = imgUrl;
-   document.getElementById('modalViews').textContent = Math.floor(Math.random() * 5000) + 500;
-   document.getElementById('newsModal').style.display = 'flex';
-   document.body.style.overflow = 'hidden';
+ document.getElementById('modalTitle').textContent = title;
+ document.getElementById('modalText').textContent = text + "\n\nDetaylı analizler, yazar yorumları ve güncel gelişmeler için sitemizi takip etmeye devam edin. Bu haberimizde yer verilen bilgiler resmi kaynaklardan derlenmiştir.";
+ document.getElementById('modalImg').src = imgUrl;
+ document.getElementById('newsModal').style.display = 'flex';
+ document.body.style.overflow = 'hidden';
  }
 
  // Reklam Modalı Açma
  function openAdModal() {
-   document.getElementById('adModal').style.display = 'flex';
-   document.body.style.overflow = 'hidden';
+ document.getElementById('adModal').style.display = 'flex';
+ document.body.style.overflow = 'hidden';
  }
 
  // Modal Kapatma
  function closeModal(modalId) {
-   document.getElementById(modalId).style.display = 'none';
-   document.body.style.overflow = 'auto';
+ document.getElementById(modalId).style.display = 'none';
+ document.body.style.overflow = 'auto';
  }
 
  // Arama Filtreleme
  function filterNews() {
-   const input = document.getElementById('searchInput').value.toLowerCase();
-   const cards = document.querySelectorAll('.news-card');
+ const input = document.getElementById('searchInput').value.toLowerCase();
+ const cards = document.querySelectorAll('.news-card');
 
-   cards.forEach(card => {
-     const title = card.querySelector('.card-title').textContent.toLowerCase();
-     const text = card.querySelector('.card-text').textContent.toLowerCase();
-     const category = card.querySelector('.card-category') ? card.querySelector('.card-category').textContent.toLowerCase() : '';
-     
-     if (title.includes(input) || text.includes(input) || category.includes(input)) {
-       card.style.display = 'flex';
-     } else {
-       card.style.display = 'none';
-     }
-   });
+ cards.forEach(card => {
+ const title = card.querySelector('.card-title').textContent.toLowerCase();
+ const text = card.querySelector('.card-text').textContent.toLowerCase();
+ const category = card.querySelector('.card-category') ? card.querySelector('.card-category').textContent.toLowerCase() : '';
+ 
+ if (title.includes(input) || text.includes(input) || category.includes(input)) {
+ card.style.display = 'flex';
+ } else {
+ card.style.display = 'none';
+ }
+ });
  }
 
  // Sohbet Penceresi Aç/Kapa
  function toggleChat() {
-   const chatWindow = document.getElementById('chatWindow');
-   if (chatWindow.style.display === 'flex') {
-     chatWindow.style.display = 'none';
-   } else {
-     chatWindow.style.display = 'flex';
-     document.getElementById('userInput').focus();
-   }
+ const chatWindow = document.getElementById('chatWindow');
+ if (chatWindow.style.display === 'flex') {
+ chatWindow.style.display = 'none';
+ } else {
+ chatWindow.style.display = 'flex';
+ document.getElementById('userInput').focus();
+ }
  }
 
- // Mesaj Gönderme (Akıllı Shopnex)
+ // Mesaj Gönderme
  function sendMessage() {
-   const input = document.getElementById('userInput');
-   const message = input.value.trim();
-   const chatBody = document.getElementById('chatBody');
+ const input = document.getElementById('userInput');
+ const message = input.value.trim();
+ const chatBody = document.getElementById('chatBody');
 
-   if (message === "") return;
+ if (message === "") return;
 
-   const userMsg = document.createElement('div');
-   userMsg.className = 'message user';
-   userMsg.textContent = message;
-   chatBody.appendChild(userMsg);
+ const userMsg = document.createElement('div');
+ userMsg.className = 'message user';
+ userMsg.textContent = message;
+ chatBody.appendChild(userMsg);
 
-   input.value = "";
-   chatBody.scrollTop = chatBody.scrollHeight;
+ input.value = "";
+ chatBody.scrollTop = chatBody.scrollHeight;
 
-   setTimeout(() => {
-     let aiResponse = "";
-     const lowerMsg = message.toLowerCase();
+ setTimeout(() => {
+ let aiResponse = "";
+ const lowerMsg = message.toLowerCase();
 
-     // Duygusal ve Akıcı Cevaplar
-     if (lowerMsg.includes("merhaba") || lowerMsg.includes("selam") || lowerMsg.includes("iyi günler")) {
-       aiResponse = "Merhaba! 👋 Bugün sana nasıl yardımcı olabilirim? İş ilanları mı arıyorsun, yoksa son dakika haberlerini mi takip etmek istersin?";
-     } else if (lowerMsg.includes("nasılsın") || lowerMsg.includes("halin hatırın")) {
-       aiResponse = "Ben çok iyiyim, teşekkür ederim! 😊 Sen nasılsın? Bugün nasıl geçti? Haberlerimiz arasında gezinebilir veya iş ilanlarına bakabiliriz.";
-     } else if (lowerMsg.includes("yorgunum") || lowerMsg.includes("üzgünüm") || lowerMsg.includes("kötüyüm")) {
-       aiResponse = "Çok üzgünüm böyle hissettiğin için. 😟 Bazen dinlenmek gerekir. Belki biraz haber okumak seni rahatlatabilir veya sadece sohbet edebiliriz. Yanındayım.";
-     } else if (lowerMsg.includes("iyiyim") || lowerMsg.includes("teşekkürler")) {
-       aiResponse = "Harika! 😊 İyi olman beni mutlu etti. Bugün seni güldürecek başka bir haber bulmamı ister misin?";
-     } else if (lowerMsg.includes("iş") || lowerMsg.includes("ilan")) {
-       aiResponse = "Trabzon ve Türkiye genelindeki güncel iş ilanlarını senin için listeleyebilirim. Hangi sektörde arama yapıyorsun? Mühendislik, sağlık, satış mı?";
-     } else if (lowerMsg.includes("reklam") || lowerMsg.includes("iş birliği")) {
-       aiResponse = "Reklam veya iş birliği talepleriniz için sağ alttaki yeşil butona tıklayarak formu doldurabilirsiniz. En kısa sürede dönüş yapacağız! 📢";
-     } else if (lowerMsg.includes("haber") || lowerMsg.includes("son dakika")) {
-       aiResponse = "Son dakika haberlerini yukarıda görebilirsin. Özellikle hangi konuda bilgi almak istersin? Spor, ekonomi veya teknoloji?";
-     } else if (lowerMsg.includes("shopnex") || lowerMsg.includes("sen kimsin")) {
-       aiResponse = "Ben Shopnex! 🤖 Bu sitenin yapay zeka asistanıyım. Site tasarımı, haber akışı ve kullanıcı deneyimi konusunda seni desteklemek için buradayım.";
-     } else if (lowerMsg.includes("trabzonspor") || lowerMsg.includes("spor")) {
-       aiResponse = "Trabzonspor ile ilgili son gelişmeleri, maç analizlerini ve transfer haberlerini hemen yukarıdaki Spor bölümünde bulabilirsin! ⚽";
-     } else if (lowerMsg.includes("sağlık") || lowerMsg.includes("hastalık")) {
-       aiResponse = "Sağlık bölümümüzde yaz hastalıklarından korunma rehberi ve güncel sağlık haberleri yer alıyor. İlgilenen habere tıklayarak detaylara ulaşabilirsin.";
-     } else if (lowerMsg.includes("teşekkür") || lowerMsg.includes("teşekkürler")) {
-       aiResponse = "Rica ederim! Her zaman yanıbaşındayım. Başka bir konuda yardıma ihtiyacın olursa bana yazabilirsin. 😊";
-     } else {
-       aiResponse = "Bu konuda sana şu an daha fazla detay verebilmem için biraz daha bilgiye ihtiyacım var. Sorunu biraz daha açıklayabilir misin? Veya menüden ilgili kategoriyi seçebilirsin.";
-     }
+ if (lowerMsg.includes("merhaba") || lowerMsg.includes("selam")) {
+ aiResponse = "Merhaba! 👋 Bugün sana nasıl yardımcı olabilirim? İş ilanları mı arıyorsun, yoksa son dakika haberlerini mi takip etmek istersin?";
+ } else if (lowerMsg.includes("iş") || lowerMsg.includes("ilan")) {
+ aiResponse = "Trabzon ve Türkiye genelindeki güncel iş ilanlarını senin için listeleyebilirim. Hangi sektörde arama yapıyorsun?";
+ } else if (lowerMsg.includes("reklam") || lowerMsg.includes("iş birliği")) {
+ aiResponse = "Reklam veya iş birliği talepleriniz için sağ alttaki yeşil butona tıklayarak formu doldurabilirsiniz. En kısa sürede dönüş yapacağız! 📢";
+ } else if (lowerMsg.includes("haber") || lowerMsg.includes("son dakika")) {
+ aiResponse = "Son dakika haberlerini yukarıda görebilirsin. Özellikle hangi konuda bilgi almak istersin?";
+ } else if (lowerMsg.includes("shopnex") || lowerMsg.includes("sen kimsin")) {
+ aiResponse = "Ben Shopnex! 🤖 Bu sitenin yapay zeka asistanıyım. Site tasarımı, haber akışı ve kullanıcı deneyimi konusunda seni desteklemek için buradayım.";
+ } else {
+ aiResponse = "Bu konuda sana şu an daha fazla detay verebilmem için biraz daha bilgiye ihtiyacım var. Sorunu biraz daha açıklayabilir misin?";
+ }
 
-     const aiMsg = document.createElement('div');
-     aiMsg.className = 'message ai';
-     aiMsg.innerHTML = aiResponse;
-     chatBody.appendChild(aiMsg);
-     chatBody.scrollTop = chatBody.scrollHeight;
-   }, 800);
+ const aiMsg = document.createElement('div');
+ aiMsg.className = 'message ai';
+ aiMsg.innerHTML = aiResponse;
+ chatBody.appendChild(aiMsg);
+ chatBody.scrollTop = chatBody.scrollHeight;
+ }, 800);
  }
 
  function handleKeyPress(e) {
-   if (e.key === 'Enter') {
-     sendMessage();
-   }
+ if (e.key === 'Enter') {
+ sendMessage();
+ }
  }
 
  // Modal dışına tıklayınca kapatma
  window.onclick = function(event) {
-   if (event.target.classList.contains('modal-overlay')) {
-     event.target.style.display = 'none';
-     document.body.style.overflow = 'auto';
-   }
+ if (event.target.classList.contains('modal-overlay')) {
+ event.target.style.display = 'none';
+ document.body.style.overflow = 'auto';
+ }
  }
  </script>
 </body>

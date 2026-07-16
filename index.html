@@ -8,131 +8,121 @@
   <link href="https://fonts.googleapis.com/css2?family=Work+Sans:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet">
   <script src="https://cdn.jsdelivr.net/npm/lucide@0.263.0/dist/umd/lucide.min.js"></script>
   <style>
-    body { font-family: 'Work Sans', sans-serif; }
-    .nav-overlay { transition: opacity 0.3s; }
-    .nav-panel { transition: transform 0.3s; }
-    .nav-panel.closed { transform: translateX(-100%); }
-    .chat-panel { transition: transform 0.3s, opacity 0.3s; transform: translateY(20px); opacity: 0; pointer-events: none; }
-    .chat-panel.open { transform: translateY(0); opacity: 1; pointer-events: auto; }
-  </style>
+        body { font-family: 'Work Sans', sans-serif; }
+        .chat-panel { transition: transform 0.3s, opacity 0.3s; transform: translateY(20px); opacity: 0; pointer-events: none; }
+        .chat-panel.open { transform: translateY(0); opacity: 1; pointer-events: auto; }
+        html { scroll-behavior: smooth; }
+    </style>
   <script src="/_sdk/e3937a0574eb2d69.data_sdk.js" type="text/javascript" integrity="sha512-xbp/ACqEQy1aDxYMtXTrR3y5MUbzxuggRR/9sD48Gl4VhLMMCiAHsxMaFV6DTdeBpR6ymF+t2zhPKYkWM3+Jfw=="></script>
   <script src="/_sdk/9432170dbd2ae0df.resizing_sdk.js" type="text/javascript" integrity="sha512-FeT+58sb1f9ejWPWFjCbJvTT+SDwGV+ngrHUnlO7TWEOoqwOLj6p256kO3vOL7DIWl1cIgrobiof8v2bOigwPg=="></script>
  </head>
  <body data-template-id="__page-root" class="w-full min-h-screen">
-  <header data-template-id="header-bar" class="canva-header sticky top-0 z-40 shadow-md">
-   <div class="flex items-center justify-between px-4 py-3 max-w-7xl mx-auto"><button id="menu-btn" class="p-2" aria-label="Menü"><i data-lucide="menu" class="w-6 h-6"></i></button>
-    <h1 data-template-id="site-title" class="canva-text font-extrabold text-lg md:text-xl"></h1><button id="search-toggle" class="p-2" aria-label="Arama"><i data-lucide="search" class="w-5 h-5"></i></button>
+  <header data-template-id="header-bar" class="canva-header sticky top-0 z-40 shadow-lg">
+   <div class="max-w-7xl mx-auto px-4 py-4">
+    <div class="flex items-center justify-between">
+     <h1 data-template-id="site-title" class="canva-text font-extrabold text-lg md:text-2xl"></h1><button id="search-toggle" class="p-2 hover:opacity-80" aria-label="Arama"><i data-lucide="search" class="w-5 h-5"></i></button>
+    </div>
+    <nav class="flex items-center gap-4 mt-3 overflow-x-auto text-sm font-medium" role="navigation"><a href="#son-haberler" data-template-id="nav-home" class="canva-link whitespace-nowrap hover:opacity-80"></a> <a href="#son-haberler" data-template-id="nav-latest" class="canva-link whitespace-nowrap hover:opacity-80"></a> <a href="#son-dakika" data-template-id="nav-breaking" class="canva-link whitespace-nowrap hover:opacity-80"></a> <a href="#spor" data-template-id="nav-sports" class="canva-link whitespace-nowrap hover:opacity-80"></a> <a href="#teknoloji" data-template-id="nav-tech" class="canva-link whitespace-nowrap hover:opacity-80"></a> <a href="https://www.instagram.com/trabzon_is_ilani" target="_blank" rel="noopener noreferrer" data-template-id="nav-contact" class="canva-link whitespace-nowrap hover:opacity-80"></a>
+    </nav>
    </div>
    <div id="search-bar" class="hidden px-4 pb-3 max-w-7xl mx-auto"><input id="search-input" type="text" placeholder="Haber ara..." class="w-full px-4 py-2 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-red-500">
    </div>
   </header>
-  <div id="nav-overlay" class="nav-overlay fixed inset-0 bg-black/50 z-50 hidden" onclick="closeNav()"></div>
-  <nav id="nav-panel" class="nav-panel closed fixed top-0 left-0 h-full w-72 z-50 shadow-xl overflow-y-auto" role="navigation">
-   <div data-template-id="nav-bg" class="canva-sidebar h-full p-6">
-    <div class="flex justify-between items-center mb-8"><span data-template-id="nav-title" class="canva-text font-bold text-xl"></span> <button onclick="closeNav()" aria-label="Kapat"><i data-lucide="x" class="w-6 h-6"></i></button>
-    </div>
-    <ul class="space-y-4">
-     <li><a href="#" class="flex items-center gap-3 text-lg font-medium hover:opacity-80" data-template-id="nav-home">🏠 <span></span></a></li>
-     <li><a href="#son-haberler" class="flex items-center gap-3 text-lg font-medium hover:opacity-80" data-template-id="nav-latest">📰 <span></span></a></li>
-     <li><a href="#son-dakika" class="flex items-center gap-3 text-lg font-medium hover:opacity-80" data-template-id="nav-breaking">🔥 <span></span></a></li>
-     <li><a href="#" id="nav-search-btn" class="flex items-center gap-3 text-lg font-medium hover:opacity-80" data-template-id="nav-search">🔍 <span></span></a></li>
-     <li><a href="https://www.instagram.com/trabzon_is_ilani" target="_blank" rel="noopener noreferrer" class="flex items-center gap-3 text-lg font-medium hover:opacity-80" data-template-id="nav-contact">📞 <span></span></a></li>
-    </ul>
-   </div>
-  </nav>
   <main class="w-full">
-   <section id="son-haberler" class="max-w-7xl mx-auto px-4 py-6">
-    <h2 data-template-id="section-latest-title" class="canva-text font-bold mb-4"></h2>
-    <div class="grid md:grid-cols-2 gap-4">
-     <div class="relative rounded-xl overflow-hidden shadow-lg aspect-video"><img data-template-id="hero-img" class="canva-image w-full h-full object-cover" loading="lazy">
-      <div class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/80 to-transparent p-4"><span data-template-id="hero-badge" class="canva-tag text-xs font-bold px-2 py-1 rounded"></span>
+   <section id="son-haberler" class="max-w-7xl mx-auto px-4 py-8">
+    <h2 data-template-id="section-latest-title" class="canva-text font-bold mb-5"></h2>
+    <div class="grid md:grid-cols-2 gap-5">
+     <div class="relative rounded-2xl overflow-hidden shadow-xl aspect-video group"><img data-template-id="hero-img" class="canva-image w-full h-full object-cover transition-transform duration-300 group-hover:scale-105" loading="lazy">
+      <div class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/80 to-transparent p-5"><span data-template-id="hero-badge" class="canva-tag text-xs font-bold px-2 py-1 rounded"></span>
        <h3 data-template-id="hero-headline" class="canva-text text-white font-bold mt-2"></h3>
       </div>
      </div>
-     <div class="grid grid-rows-2 gap-4">
-      <div class="relative rounded-xl overflow-hidden shadow-lg"><img data-template-id="news2-img" class="canva-image w-full h-full object-cover" loading="lazy">
-       <div class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/80 to-transparent p-3">
+     <div class="grid grid-rows-2 gap-5">
+      <div class="relative rounded-2xl overflow-hidden shadow-xl group"><img data-template-id="news2-img" class="canva-image w-full h-full object-cover transition-transform duration-300 group-hover:scale-105" loading="lazy">
+       <div class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/80 to-transparent p-4">
         <h4 data-template-id="news2-headline" class="canva-text text-white font-semibold text-sm"></h4>
        </div>
       </div>
-      <div class="relative rounded-xl overflow-hidden shadow-lg"><img data-template-id="news3-img" class="canva-image w-full h-full object-cover" loading="lazy">
-       <div class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/80 to-transparent p-3">
+      <div class="relative rounded-2xl overflow-hidden shadow-xl group"><img data-template-id="news3-img" class="canva-image w-full h-full object-cover transition-transform duration-300 group-hover:scale-105" loading="lazy">
+       <div class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/80 to-transparent p-4">
         <h4 data-template-id="news3-headline" class="canva-text text-white font-semibold text-sm"></h4>
        </div>
       </div>
      </div>
     </div>
    </section>
-   <section id="son-dakika" class="max-w-7xl mx-auto px-4 py-6">
-    <h2 data-template-id="section-breaking-title" class="canva-text font-bold mb-4"></h2>
-    <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
-     <article data-template-id="breaking-card-1" class="canva-card rounded-xl overflow-hidden shadow-lg"><img data-template-id="breaking-1-img" class="canva-image w-full h-40 object-cover" loading="lazy">
-      <div class="p-4">
+   <section id="son-dakika" class="max-w-7xl mx-auto px-4 py-8">
+    <h2 data-template-id="section-breaking-title" class="canva-text font-bold mb-5"></h2>
+    <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
+     <article data-template-id="breaking-card-1" class="canva-card rounded-2xl overflow-hidden shadow-lg hover:shadow-xl transition-shadow"><img data-template-id="breaking-1-img" class="canva-image w-full h-44 object-cover" loading="lazy">
+      <div class="p-5">
        <h3 data-template-id="breaking-1-title" class="canva-text font-semibold"></h3>
-       <p data-template-id="breaking-1-desc" class="canva-text text-sm mt-1 opacity-70"></p>
+       <p data-template-id="breaking-1-desc" class="canva-text text-sm mt-2 opacity-70"></p>
       </div>
      </article>
-     <article data-template-id="breaking-card-2" class="canva-card rounded-xl overflow-hidden shadow-lg"><img data-template-id="breaking-2-img" class="canva-image w-full h-40 object-cover" loading="lazy">
-      <div class="p-4">
+     <article data-template-id="breaking-card-2" class="canva-card rounded-2xl overflow-hidden shadow-lg hover:shadow-xl transition-shadow"><img data-template-id="breaking-2-img" class="canva-image w-full h-44 object-cover" loading="lazy">
+      <div class="p-5">
        <h3 data-template-id="breaking-2-title" class="canva-text font-semibold"></h3>
-       <p data-template-id="breaking-2-desc" class="canva-text text-sm mt-1 opacity-70"></p>
+       <p data-template-id="breaking-2-desc" class="canva-text text-sm mt-2 opacity-70"></p>
       </div>
      </article>
-     <article data-template-id="breaking-card-3" class="canva-card rounded-xl overflow-hidden shadow-lg"><img data-template-id="breaking-3-img" class="canva-image w-full h-40 object-cover" loading="lazy">
-      <div class="p-4">
+     <article data-template-id="breaking-card-3" class="canva-card rounded-2xl overflow-hidden shadow-lg hover:shadow-xl transition-shadow"><img data-template-id="breaking-3-img" class="canva-image w-full h-44 object-cover" loading="lazy">
+      <div class="p-5">
        <h3 data-template-id="breaking-3-title" class="canva-text font-semibold"></h3>
-       <p data-template-id="breaking-3-desc" class="canva-text text-sm mt-1 opacity-70"></p>
+       <p data-template-id="breaking-3-desc" class="canva-text text-sm mt-2 opacity-70"></p>
       </div>
      </article>
     </div>
    </section>
-   <section class="max-w-7xl mx-auto px-4 py-6">
-    <h2 data-template-id="section-sports-title" class="canva-text font-bold mb-4"></h2>
-    <div class="grid sm:grid-cols-2 gap-4">
-     <article data-template-id="sport-card-1" class="canva-card rounded-xl overflow-hidden shadow-lg"><img data-template-id="sport-1-img" class="canva-image w-full h-44 object-cover" loading="lazy">
-      <div class="p-4">
+   <section id="spor" class="max-w-7xl mx-auto px-4 py-8">
+    <h2 data-template-id="section-sports-title" class="canva-text font-bold mb-5"></h2>
+    <div class="grid sm:grid-cols-2 gap-5">
+     <article data-template-id="sport-card-1" class="canva-card rounded-2xl overflow-hidden shadow-lg hover:shadow-xl transition-shadow"><img data-template-id="sport-1-img" class="canva-image w-full h-48 object-cover" loading="lazy">
+      <div class="p-5">
        <h3 data-template-id="sport-1-title" class="canva-text font-semibold"></h3>
       </div>
      </article>
-     <article data-template-id="sport-card-2" class="canva-card rounded-xl overflow-hidden shadow-lg"><img data-template-id="sport-2-img" class="canva-image w-full h-44 object-cover" loading="lazy">
-      <div class="p-4">
+     <article data-template-id="sport-card-2" class="canva-card rounded-2xl overflow-hidden shadow-lg hover:shadow-xl transition-shadow"><img data-template-id="sport-2-img" class="canva-image w-full h-48 object-cover" loading="lazy">
+      <div class="p-5">
        <h3 data-template-id="sport-2-title" class="canva-text font-semibold"></h3>
       </div>
      </article>
     </div>
    </section>
-   <section class="max-w-7xl mx-auto px-4 py-6">
-    <h2 data-template-id="section-tech-title" class="canva-text font-bold mb-4"></h2>
-    <article data-template-id="tech-card" class="canva-card rounded-xl overflow-hidden shadow-lg"><img data-template-id="tech-img" class="canva-image w-full h-48 object-cover" loading="lazy">
-     <div class="p-4">
+   <section id="teknoloji" class="max-w-7xl mx-auto px-4 py-8">
+    <h2 data-template-id="section-tech-title" class="canva-text font-bold mb-5"></h2>
+    <article data-template-id="tech-card" class="canva-card rounded-2xl overflow-hidden shadow-lg hover:shadow-xl transition-shadow"><img data-template-id="tech-img" class="canva-image w-full h-52 object-cover" loading="lazy">
+     <div class="p-5">
       <h3 data-template-id="tech-headline" class="canva-text font-semibold"></h3>
-      <p data-template-id="tech-desc" class="canva-text text-sm mt-1 opacity-70"></p>
+      <p data-template-id="tech-desc" class="canva-text text-sm mt-2 opacity-70"></p>
      </div>
     </article>
    </section>
-   <section class="max-w-7xl mx-auto px-4 py-6">
-    <h2 data-template-id="section-edu-title" class="canva-text font-bold mb-4"></h2>
-    <article data-template-id="edu-card" class="canva-card rounded-xl overflow-hidden shadow-lg"><img data-template-id="edu-img" class="canva-image w-full h-48 object-cover" loading="lazy">
-     <div class="p-4">
+   <section id="egitim" class="max-w-7xl mx-auto px-4 py-8">
+    <h2 data-template-id="section-edu-title" class="canva-text font-bold mb-5"></h2>
+    <article data-template-id="edu-card" class="canva-card rounded-2xl overflow-hidden shadow-lg hover:shadow-xl transition-shadow"><img data-template-id="edu-img" class="canva-image w-full h-52 object-cover" loading="lazy">
+     <div class="p-5">
       <h3 data-template-id="edu-headline" class="canva-text font-semibold"></h3>
-      <p data-template-id="edu-desc" class="canva-text text-sm mt-1 opacity-70"></p>
+      <p data-template-id="edu-desc" class="canva-text text-sm mt-2 opacity-70"></p>
      </div>
     </article>
    </section>
-   <section class="max-w-7xl mx-auto px-4 py-6">
-    <h2 data-template-id="section-health-title" class="canva-text font-bold mb-4"></h2>
-    <article data-template-id="health-card" class="canva-card rounded-xl overflow-hidden shadow-lg"><img data-template-id="health-img" class="canva-image w-full h-48 object-cover" loading="lazy">
-     <div class="p-4">
+   <section id="saglik" class="max-w-7xl mx-auto px-4 py-8">
+    <h2 data-template-id="section-health-title" class="canva-text font-bold mb-5"></h2>
+    <article data-template-id="health-card" class="canva-card rounded-2xl overflow-hidden shadow-lg hover:shadow-xl transition-shadow"><img data-template-id="health-img" class="canva-image w-full h-52 object-cover" loading="lazy">
+     <div class="p-5">
       <h3 data-template-id="health-headline" class="canva-text font-semibold"></h3>
-      <p data-template-id="health-desc" class="canva-text text-sm mt-1 opacity-70"></p>
+      <p data-template-id="health-desc" class="canva-text text-sm mt-2 opacity-70"></p>
      </div>
     </article>
    </section>
-  </main><!-- Footer -->
-  <footer data-template-id="footer-section" class="canva-footer w-full py-6 mt-8">
-   <p data-template-id="footer-text" class="canva-text text-center text-sm opacity-70"></p>
-   <p data-template-id="footer-copyright" class="canva-text text-center text-xs mt-2 opacity-50"></p>
-  </footer><!-- Fixed bottom buttons: Instagram + AI -->
+  </main>
+  <footer data-template-id="footer-section" class="canva-footer w-full py-8 mt-10">
+   <div class="max-w-7xl mx-auto px-4 text-center">
+    <p data-template-id="footer-text" class="canva-text text-sm opacity-70"></p>
+    <p data-template-id="footer-copyright" class="canva-text text-xs mt-2 opacity-50"></p>
+   </div>
+  </footer><!-- Fixed bottom buttons -->
   <div class="fixed bottom-4 right-4 z-50 flex flex-col items-center gap-3"><a href="https://www.instagram.com/trabzon_is_ilani" target="_blank" rel="noopener noreferrer" data-template-id="instagram-btn" class="canva-button w-14 h-14 rounded-full flex items-center justify-center shadow-lg hover:scale-110 transition-transform" aria-label="Instagram">
     <svg width="28" height="28" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
      <rect x="2" y="2" width="20" height="20" rx="5" ry="5" /><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z" /><line x1="17.5" y1="6.5" x2="17.51" y2="6.5" />
@@ -154,75 +144,58 @@
   </div>
   <script src="/_sdk/0e8f359d3c23f6d5.editing_sdk.js" integrity="sha512-CBLuYm/olmgyMedTtPRFeqCRZcSWUh6/39ewyXAbnr1dsVHBACzZ59KGJZXvuWNHOHixfWegfuMN9JzmLEDIoA=="></script>
   <script>
-    lucide.createIcons();
+        lucide.createIcons();
 
-    // Nav
-    const menuBtn = document.getElementById('menu-btn');
-    const navOverlay = document.getElementById('nav-overlay');
-    const navPanel = document.getElementById('nav-panel');
-    const searchToggle = document.getElementById('search-toggle');
-    const searchBar = document.getElementById('search-bar');
+        const searchToggle = document.getElementById('search-toggle');
+        const searchBar = document.getElementById('search-bar');
+        searchToggle.addEventListener('click', () => {
+            searchBar.classList.toggle('hidden');
+            if (!searchBar.classList.contains('hidden')) document.getElementById('search-input').focus();
+        });
 
-    menuBtn.addEventListener('click', () => { navOverlay.classList.remove('hidden'); navPanel.classList.remove('closed'); });
-    function closeNav() { navOverlay.classList.add('hidden'); navPanel.classList.add('closed'); }
-    navPanel.querySelectorAll('a[href^="#"]').forEach(a => a.addEventListener('click', closeNav));
-    document.getElementById('nav-search-btn').addEventListener('click', (e) => { e.preventDefault(); closeNav(); searchBar.classList.remove('hidden'); document.getElementById('search-input').focus(); });
-    searchToggle.addEventListener('click', () => { searchBar.classList.toggle('hidden'); if (!searchBar.classList.contains('hidden')) document.getElementById('search-input').focus(); });
+        // AI Chat
+        const chatPanel = document.getElementById('chat-panel');
+        document.getElementById('ai-toggle').addEventListener('click', () => chatPanel.classList.toggle('open'));
+        document.getElementById('chat-close').addEventListener('click', () => chatPanel.classList.remove('open'));
 
-    // AI Chat
-    const chatPanel = document.getElementById('chat-panel');
-    const aiToggle = document.getElementById('ai-toggle');
-    const chatClose = document.getElementById('chat-close');
-    const chatForm = document.getElementById('chat-form');
-    const chatInput = document.getElementById('chat-input');
-    const chatMessages = document.getElementById('chat-messages');
+        const responses = {
+            'merhaba': 'Merhaba! Ben ShopNex AI\'yım. Size nasıl yardımcı olabilirim?',
+            'selam': 'Selam! Hangi konuda yardımcı olmamı istersiniz?',
+            'trabzon': 'Trabzon, Karadeniz\'in incisi! İş ilanları ve haberler için doğru yerdesiniz.',
+            'iş': 'Güncel iş ilanları için Instagram: @trabzon_is_ilani',
+            'trabzonspor': 'Trabzonspor haberleri için spor bölümümüze göz atın!',
+            'iletişim': 'Instagram: @trabzon_is_ilani üzerinden bize ulaşın.',
+            'teşekkür': 'Rica ederim! Başka sorunuz varsa yardımcı olmaktan memnuniyet duyarım.',
+            'shopnex': 'Ben ShopNex AI! Her konuda net cevaplar vermeyi hedefliyorum.',
+        };
 
-    aiToggle.addEventListener('click', () => chatPanel.classList.toggle('open'));
-    chatClose.addEventListener('click', () => chatPanel.classList.remove('open'));
+        function getAIResponse(msg) {
+            const lower = msg.toLowerCase().trim();
+            for (const [key, val] of Object.entries(responses)) {
+                if (lower.includes(key)) return val;
+            }
+            return 'Sorunuzu biraz daha açıklayabilir misiniz? İş ilanları, haberler, spor veya teknoloji hakkında yardımcı olabilirim.';
+        }
 
-    const responses = {
-      'merhaba': 'Merhaba! Size nasıl yardımcı olabilirim?',
-      'selam': 'Selam! Sorunuz nedir?',
-      'trabzon': 'Trabzon, Karadeniz\'in incisi! İş ilanları ve haberler için doğru yerdesiniz.',
-      'iş': 'Güncel iş ilanlarını sitemizde takip edebilirsiniz. Instagram hesabımızdan da ilanları görebilirsiniz.',
-      'hava': 'Karadeniz bölgesinde değişken hava koşulları bekleniyor. Şemsiyenizi yanınıza alın!',
-      'trabzonspor': 'Trabzonspor taraftarı olarak gurur duymalısınız! En güncel spor haberleri sitemizde.',
-      'iletişim': 'Instagram üzerinden bize ulaşabilirsiniz: @trabzon_is_ilani',
-      'teşekkür': 'Rica ederim! Başka sorunuz varsa yardımcı olmaktan memnuniyet duyarım.',
-    };
-
-    function getAIResponse(msg) {
-      const lower = msg.toLowerCase().trim();
-      for (const [key, val] of Object.entries(responses)) {
-        if (lower.includes(key)) return val;
-      }
-      return 'Bu konuda size yardımcı olabilirim. Daha fazla detay verir misiniz? ShopNex olarak her konuda net cevaplar sunmaya çalışıyorum.';
-    }
-
-    chatForm.addEventListener('submit', (e) => {
-      e.preventDefault();
-      const msg = chatInput.value.trim();
-      if (!msg) return;
-
-      // User message
-      const userDiv = document.createElement('div');
-      userDiv.className = 'bg-red-600 text-white rounded-xl px-3 py-2 text-sm max-w-[85%] ml-auto';
-      userDiv.textContent = msg;
-      chatMessages.appendChild(userDiv);
-
-      chatInput.value = '';
-
-      // AI response
-      setTimeout(() => {
-        const aiDiv = document.createElement('div');
-        aiDiv.className = 'bg-gray-100 rounded-xl px-3 py-2 text-sm max-w-[85%]';
-        aiDiv.textContent = getAIResponse(msg);
-        chatMessages.appendChild(aiDiv);
-        chatMessages.scrollTop = chatMessages.scrollHeight;
-      }, 600);
-
-      chatMessages.scrollTop = chatMessages.scrollHeight;
-    });
-  </script>
+        document.getElementById('chat-form').addEventListener('submit', (e) => {
+            e.preventDefault();
+            const msg = document.getElementById('chat-input').value.trim();
+            if (!msg) return;
+            const chatMessages = document.getElementById('chat-messages');
+            const userDiv = document.createElement('div');
+            userDiv.className = 'bg-red-600 text-white rounded-xl px-3 py-2 text-sm max-w-[85%] ml-auto';
+            userDiv.textContent = msg;
+            chatMessages.appendChild(userDiv);
+            document.getElementById('chat-input').value = '';
+            setTimeout(() => {
+                const aiDiv = document.createElement('div');
+                aiDiv.className = 'bg-gray-100 rounded-xl px-3 py-2 text-sm max-w-[85%]';
+                aiDiv.textContent = getAIResponse(msg);
+                chatMessages.appendChild(aiDiv);
+                chatMessages.scrollTop = chatMessages.scrollHeight;
+            }, 600);
+            chatMessages.scrollTop = chatMessages.scrollHeight;
+        });
+    </script>
  </body>
 </html>
